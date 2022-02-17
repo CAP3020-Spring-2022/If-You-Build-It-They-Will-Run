@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
 
 
         //Debug.Log("velocityY = " + velocityY);
-        //Debug.Log("isGrounded = " + controller.isGrounded);
+        Debug.Log("isGrounded = " + controller.isGrounded);
 
         //animation
         float animationSpeedPercent = currentSpeed/walkSpeed * .5f;
@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
         animationSpeedPercent = animationSpeedPercent * inputDir.magnitude;
         animator.SetFloat("speedPercent", animationSpeedPercent, speedSmoothTime, Time.deltaTime);
     }
-
+//TODO: ANIMATION GROUNDED
     void Move(Vector2 inputDir, bool running)
     {
         if(inputDir != Vector2.zero)
@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
         currentSpeed = new Vector2(controller.velocity.x, controller.velocity.z).magnitude;
 
         if(controller.isGrounded)
-            velocityY = 0;
+            velocityY = -1;
     }
 
     void Jump()
