@@ -14,14 +14,18 @@ public class Debugger : MonoBehaviour
     void Start()
     {
         text = GetComponent<Text>();
-        text.text = "Current Speed: " + playerController.GetCurrentSpeed() +
+        text.text = /* "Current Speed: " + playerController.GetCurrentSpeed() + */
+                    "Stamina: " + Mathf.RoundToInt(playerController.GetStamina()) +
+                    "Momentum: " + Mathf.RoundToInt(playerController.GetMomentum()) +
                     "\nOn Ground: " + playerController.IsOnGround();
     }
 
     // Update is called once per frame
     void Update()
     {
-        text.text = "Current Speed: " + playerController.GetCurrentSpeed() +
+        text.text = /* "Current Speed: " + playerController.GetCurrentSpeed() + */
+                    "\nStamina: " + Mathf.RoundToInt(playerController.GetStamina()) +
+                    "\nMomentum: " + Mathf.RoundToInt(playerController.GetMomentum()) +
                     "\nOn Ground: " + playerController.IsOnGround();
     }
 }
