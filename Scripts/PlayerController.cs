@@ -8,6 +8,9 @@ public class PlayerController : MonoBehaviour
     public float runSpeed = 6;
     public float gravity = -12;
     public float jumpHeight = 1;
+    private float jumpVelocity;
+
+    bool running;
     [Range(0,1)]
     public float airControlPercent;
 
@@ -16,8 +19,11 @@ public class PlayerController : MonoBehaviour
 
     public float speedSmoothTime = .1f;
     float speedSmoothVelocity;
-    float currentSpeed;
     float velocityY;
+
+    private float currentSpeed;
+    private float animationSpeedPercent;
+    private float animationJumpPercent;
 
     Animator animator;
     Transform cameraT;
@@ -29,6 +35,8 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator> ();
         cameraT = Camera.main.transform;
         controller = GetComponent<CharacterController> ();
+
+        jumpVelocity = Mathf.Sqrt(-2 * gravity * jumpHeight);
     }
 
     // Update is called once per frame
@@ -37,26 +45,16 @@ public class PlayerController : MonoBehaviour
         //input
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 inputDir = input.normalized;
-        bool running = Input.GetKey(KeyCode.LeftShift);
+        running = Input.GetKey(KeyCode.LeftShift);
 
         Move(inputDir, running);
 
         if(Input.GetKeyDown(KeyCode.Space))
             Jump();
 
-
-
-        //Debug.Log("velocityY = " + velocityY);
-        Debug.Log("isGrounded = " + controller.isGrounded);
-
-        //animation
-        float animationSpeedPercent = currentSpeed/walkSpeed * .5f;
-        if(running)
-            animationSpeedPercent = currentSpeed/runSpeed;
-        animationSpeedPercent = animationSpeedPercent * inputDir.magnitude;
-        animator.SetFloat("speedPercent", animationSpeedPercent, speedSmoothTime, Time.deltaTime);
+        Animate(inputDir);        
     }
-//TODO: ANIMATION GROUNDED
+
     void Move(Vector2 inputDir, bool running)
     {
         if(inputDir != Vector2.zero)
@@ -96,5 +94,22 @@ public class PlayerController : MonoBehaviour
         if(airControlPercent == 0)
             return float.MaxValue;
         return smoothTime / airControlPercent;
+    }
+//TODO: LOOK UP JUMPING ANIMATION TUTORIAL
+    void Animate(Vector2 inputDir)
+    {
+        //horizontal
+        animationSpeedPercent = currentSpeed/walkSpeed * .5f;
+        if(running)
+            animationSpeedPercent = currentSpeed/runSpeed;
+        animationSpeedPercent = animationSpeedPercent * inputDir.magnitude;
+        animator.SetFloat("speedPercent", animationSpeedPercent, speedSmoothTime, Time.deltaTime);
+
+        //vertical
+        animationJumpPercent = 0;
+        if(velocityY > 0)
+            animationJumpPercent = 1;
+
+        animator.SetFloat("jumpPercent", animationJumpPercent, speedSmoothTime, Time.deltaTime);
     }
 }
