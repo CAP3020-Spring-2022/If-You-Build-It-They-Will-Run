@@ -4,28 +4,32 @@ using UnityEngine;
 
 public class LevelGeneration : MonoBehaviour
 {
-	
 	public GameObject[] objects;
 	List<float> positionsX = new List<float>();
 	List<float> positionsY = new List<float>();
+	List<float> positionsZ = new List<float>();
 	public float[,] bluenoise;
 	int objectCount = 0;
-	int objectMax = 20;
+	int objectMax = 25;
+	float platformHeight = 50f;
+	float endHeightModifier = 0;
 
-    // Start is called before the first frame update
     void Start()
     {
+		while ( (endHeightModifier < 0.6f && endHeightModifier >= 0f) || (endHeightModifier > -0.6 && endHeightModifier < 0))
+			endHeightModifier = Random.Range(-1f,1f);
+		//print(endHeightModifier);
 		generatePositions();
 		
 		for (int i = 0; i < objectMax; i++) {
-			Instantiate(objects[i], new Vector3(positionsX[i],15f,positionsY[i]), Quaternion.identity);
+			Instantiate(objects[i], new Vector3(positionsX[i], positionsY[i], positionsZ[i]), Quaternion.identity);
 		}
     }
 	
 	void generatePositions() {
-		int width = 200;
-		int height = 200;
-		int R = 6;
+		int width = 300;
+		int height = 300;
+		int R = 12;
 		
 		bluenoise = new float[width,height];
 		
@@ -39,27 +43,24 @@ public class LevelGeneration : MonoBehaviour
 		}
 		
 		for (int yc = 0; yc < height; yc++) {
-		  for (int xc = 0; xc < width; xc++) {
-			float max = 0;
-			for (int yn = yc - R; yn <= yc + R; yn++) {
-			  for (int xn = xc - R; xn <= xc + R; xn++) {
-				if (0 <= yn && yn < height && 0 <= xn && xn < width) {
-				  float e = bluenoise[yn,xn];
-				  if (e > max) { max = e; }
+			for (int xc = 0; xc < width; xc++) {
+				float max = 0;
+				for (int yn = yc - R; yn <= yc + R; yn++) {
+					for (int xn = xc - R; xn <= xc + R; xn++) {
+						if (0 <= yn && yn < height && 0 <= xn && xn < width) {
+						float e = bluenoise[yn,xn];
+						if (e > max) { max = e; }
 				}
 			  }
 			}
 			if (objectCount < objectMax && bluenoise[yc,xc] == max) {
-			  print("Object " + objectCount + ": placing platform at " + xc + ", " + yc + "\n");
-			  positionsX.Add(xc-100f);
-			  positionsY.Add(yc);
+			  positionsX.Add(xc-((float)width/2f));
+			  positionsY.Add(platformHeight*2 + (platformHeight * xc / (float)width * endHeightModifier * 1.1f) + (Random.Range(-platformHeight, platformHeight) * 0.1f));
+			  positionsZ.Add(yc);
+			  print("Object " + objectCount + ": placing platform at " + positionsX[objectCount] + ", " + positionsY[objectCount] + ", " + positionsZ[objectCount] + "\n");
 			  objectCount++;
 			}
 		  }
 		}
-		
-		print("we are here.");
-		
 	}
-
 }
