@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class Stam : MonoBehaviour
 {
-    public int curHealth = 0;
-    public int maxHealth = 100;
+    public int curStam = 0;
+    public int maxStam = 100;
 
-    public HealthBar healthBar;
+    public StamBar stamBar;
 
     void Start()
     {
-        curHealth = maxHealth;
+        curStam = maxStam;
     }
 
     void Update()
@@ -24,8 +24,8 @@ public class Health : MonoBehaviour
 
     public void DamagePlayer( int damage )
     {
-        curHealth -= damage;
+        curStam -= damage;
 
-        healthBar.SetHealth( curHealth );
+        stamBar.SetStam( curStam );
     }
 }
