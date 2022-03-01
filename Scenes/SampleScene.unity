@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 92067955}
   - component: {fileID: 92067954}
   - component: {fileID: 92067957}
+  - component: {fileID: 92067958}
   m_Layer: 5
   m_Name: L Crate Button
   m_TagString: Untagged
@@ -237,10 +238,10 @@ RectTransform:
   m_Father: {fileID: 1814774120}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -400, y: -225}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &92067954
 MonoBehaviour:
@@ -350,6 +351,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yourButton: {fileID: 0}
   sampleObject: {fileID: 1499589339}
+  triggerKey: 50
+--- !u!114 &92067958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92067952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5af42599ad6da347bbbb3c025baa98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quantity: 0
 --- !u!1 &219089242
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,6 +378,7 @@ GameObject:
   - component: {fileID: 219089246}
   - component: {fileID: 219089245}
   - component: {fileID: 219089244}
+  - component: {fileID: 219089248}
   m_Layer: 5
   m_Name: Z Crate Button
   m_TagString: Untagged
@@ -385,10 +401,10 @@ RectTransform:
   m_Father: {fileID: 1814774120}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 300, y: -225}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &219089244
 MonoBehaviour:
@@ -404,6 +420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yourButton: {fileID: 219089245}
   sampleObject: {fileID: 1662920833}
+  triggerKey: 53
 --- !u!114 &219089245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,6 +515,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 219089242}
   m_CullTransparentMesh: 1
+--- !u!114 &219089248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219089242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5af42599ad6da347bbbb3c025baa98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quantity: 0
 --- !u!1 &242778971
 GameObject:
   m_ObjectHideFlags: 0
@@ -773,6 +803,7 @@ GameObject:
   - component: {fileID: 536334773}
   - component: {fileID: 536334772}
   - component: {fileID: 536334775}
+  - component: {fileID: 536334776}
   m_Layer: 5
   m_Name: Skull Pillar Button
   m_TagString: Untagged
@@ -795,10 +826,10 @@ RectTransform:
   m_Father: {fileID: 1814774120}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -50, y: -225}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &536334772
 MonoBehaviour:
@@ -908,6 +939,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yourButton: {fileID: 0}
   sampleObject: {fileID: 1164242387}
+  triggerKey: 51
+--- !u!114 &536334776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536334770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5af42599ad6da347bbbb3c025baa98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quantity: 0
 --- !u!1 &601415063
 GameObject:
   m_ObjectHideFlags: 0
@@ -1867,6 +1912,7 @@ GameObject:
   - component: {fileID: 1814774119}
   - component: {fileID: 1814774118}
   - component: {fileID: 1814774117}
+  - component: {fileID: 1814774121}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1959,6 +2005,30 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1814774121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814774116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 5
+    m_Right: 5
+    m_Top: 5
+    m_Bottom: 5
+  m_ChildAlignment: 7
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 75, y: 75}
+  m_Spacing: {x: 5, y: 5}
+  m_Constraint: 0
+  m_ConstraintCount: 2
 --- !u!1 &1907533060
 GameObject:
   m_ObjectHideFlags: 0
@@ -1972,6 +2042,7 @@ GameObject:
   - component: {fileID: 1907533064}
   - component: {fileID: 1907533063}
   - component: {fileID: 1907533062}
+  - component: {fileID: 1907533066}
   m_Layer: 5
   m_Name: Staircase Crate Button
   m_TagString: Untagged
@@ -1994,10 +2065,10 @@ RectTransform:
   m_Father: {fileID: 1814774120}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 125, y: -225}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1907533062
 MonoBehaviour:
@@ -2013,6 +2084,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yourButton: {fileID: 1907533063}
   sampleObject: {fileID: 2100178087}
+  triggerKey: 52
 --- !u!114 &1907533063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2107,6 +2179,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1907533060}
   m_CullTransparentMesh: 1
+--- !u!114 &1907533066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907533060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5af42599ad6da347bbbb3c025baa98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quantity: 0
 --- !u!1 &2029996781
 GameObject:
   m_ObjectHideFlags: 0
@@ -2120,6 +2205,7 @@ GameObject:
   - component: {fileID: 2029996784}
   - component: {fileID: 2029996783}
   - component: {fileID: 2029996786}
+  - component: {fileID: 2029996787}
   m_Layer: 5
   m_Name: Big L Crate Button
   m_TagString: Untagged
@@ -2142,10 +2228,10 @@ RectTransform:
   m_Father: {fileID: 1814774120}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -225, y: -225}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2029996783
 MonoBehaviour:
@@ -2255,6 +2341,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yourButton: {fileID: 2029996783}
   sampleObject: {fileID: 1167924691}
+  triggerKey: 49
+--- !u!114 &2029996787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029996781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5af42599ad6da347bbbb3c025baa98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quantity: 0
 --- !u!1 &2100178087 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5fdd77600604af641b94b7cf9ee5d850, type: 3}
