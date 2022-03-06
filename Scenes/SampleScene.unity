@@ -499,7 +499,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &273196408
 Transform:
   m_ObjectHideFlags: 0
@@ -1631,7 +1631,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1841775886297808995, guid: e90ffe3b7ae85fa4fb88905b33c03a8e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8376145514430690846, guid: e90ffe3b7ae85fa4fb88905b33c03a8e, type: 3}
       propertyPath: m_RootOrder
@@ -2163,6 +2163,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 36b2b48a10aa1d448b9287f2cdf890cb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 36b2b48a10aa1d448b9287f2cdf890cb, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -2319,7 +2323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam1: {fileID: 1472608350}
   cam2: {fileID: 963194225}
-  PlayerMovementScript: {fileID: 494760243}
+  Player: {fileID: 494760243}
   counter: 0
 --- !u!4 &1338443358
 Transform:
@@ -2394,7 +2398,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1841775886297808995, guid: e90ffe3b7ae85fa4fb88905b33c03a8e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8376145514430690846, guid: e90ffe3b7ae85fa4fb88905b33c03a8e, type: 3}
       propertyPath: m_RootOrder
@@ -2538,7 +2542,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1487829942
 Transform:
   m_ObjectHideFlags: 0
@@ -2920,7 +2924,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam1: {fileID: 1472608350}
   cam2: {fileID: 963194225}
-  PlayerMovementScript: {fileID: 0}
+  Player: {fileID: 0}
   counter: 0
 --- !u!114 &1966822593
 MonoBehaviour:
