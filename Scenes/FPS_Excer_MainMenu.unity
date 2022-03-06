@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -361,7 +361,7 @@ RectTransform:
   m_GameObject: {fileID: 794635907}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.8313799, y: 1.8313799, z: 1.8313799}
+  m_LocalScale: {x: 1.6223463, y: 1.6223463, z: 1.6223463}
   m_Children: []
   m_Father: {fileID: 281217059}
   m_RootOrder: 0
@@ -444,7 +444,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1, y: -389}
+  m_AnchoredPosition: {x: -1, y: -272}
   m_SizeDelta: {x: 346, y: 143}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &977393166
@@ -568,7 +568,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a7a00df62cb7c4f3bb2a730a03b0d5b5, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a99dcf34f70554c8793fca9eb1a55cb0, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
