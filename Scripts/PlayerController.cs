@@ -6,7 +6,7 @@ using PlayerData;
 public class PlayerController : MonoBehaviour
 {
     /* ActionHandler actionHandler; */
-    [SerializeField] Transform orientation;
+    /* [SerializeField] Transform orientation; */
     Animator animator;
     Transform cameraT;
     // As far as I know, CharacterController is a barebones movement/collision system, should change into a rigidbody at some point
@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 inputDir = input.normalized;
 
-        player.SetOrientation(orientation.transform);
+        /* player.SetOrientation(orientation.transform); */
 
         if(Input.GetKeyDown(KeyCode.LeftShift)) {
             player.SetSprinting(!player.IsSprinting());
