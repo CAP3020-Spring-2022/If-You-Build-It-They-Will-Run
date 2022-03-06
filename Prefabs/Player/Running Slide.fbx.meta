@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 8984f9b30e105b04b80a4c11be5e313e
+guid: 2c73f20cc48180d4685a5584b726ead7
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: jump
+    second: slide_running
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: jump
+      name: slide_running
       takeName: mixamo.com
       internalID: 0
-      firstFrame: 5
-      lastFrame: 40
+      firstFrame: 0
+      lastFrame: 46
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

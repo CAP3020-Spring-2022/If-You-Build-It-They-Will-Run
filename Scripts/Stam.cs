@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Also deprecated, never used now that player has its own class
 public class Stam : MonoBehaviour
 {
-    public int curStam = 0;
+    /* public int curStam = 0;
     public int maxStam = 100;
 
     public StamBar stamBar;
@@ -27,5 +28,5 @@ public class Stam : MonoBehaviour
         curStam -= damage;
 
         stamBar.SetStam( curStam );
-    }
+    } */
 }

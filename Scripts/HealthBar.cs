@@ -2,21 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using PlayerData;
 
 public class HealthBar : MonoBehaviour
 {
-    public Slider healthBar;
-    public Health playerHealth;
+    Slider healthBar;
+    /* public Health playerHealth; */
+    // player data struct can handle this data without another
+    Player player;
 
-    private void Start()
+    void Start()
     {
-        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
+        /* playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>(); */
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().GetPlayer();
         healthBar = GetComponent<Slider>();
-        healthBar.maxValue = playerHealth.maxHealth;
-        healthBar.value = playerHealth.maxHealth;
+        healthBar.maxValue = 100.0f;
+        healthBar.value = 100.0f;
     }
 
-    public void SetHealth(int hp)
+    void Update() {
+        SetHealth(player.GetStamina());
+    }
+
+    void SetHealth(float hp)
     {
         healthBar.value = hp;
     }

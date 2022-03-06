@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Deprecated class, never used.
 public class Health : MonoBehaviour
 {
-    public int curHealth = 0;
+    /* public int curHealth = 0;
     public int maxHealth = 100;
 
     public HealthBar healthBar;
@@ -27,5 +28,5 @@ public class Health : MonoBehaviour
         curHealth -= damage;
 
         healthBar.SetHealth( curHealth );
-    }
+    } */
 }
