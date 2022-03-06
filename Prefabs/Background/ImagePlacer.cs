@@ -53,7 +53,7 @@ public class ImagePlacer : MonoBehaviour
         {
             i.transform.localScale = new Vector3(width, height, 1f);
             float imageLength = images[0].GetComponent<SpriteRenderer>().bounds.size.x;
-            distance = imageLength / 2f + (Mathf.Sqrt(2) / 2) * imageLength;
+            distance = (imageLength / 2f + (Mathf.Sqrt(2) / 2) * imageLength) - 10f;
             i.transform.position = distance * i.transform.forward;
         }
     }
