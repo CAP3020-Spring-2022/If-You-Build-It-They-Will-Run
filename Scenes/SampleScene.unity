@@ -447,7 +447,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d352a8e3a1db0eb40bebfa3e6468ffb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orientation: {fileID: 196606875}
 --- !u!143 &494760247
 CharacterController:
   m_ObjectHideFlags: 0
@@ -466,36 +465,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.9, z: 0.1}
---- !u!114 &494760248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 494760243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fafebaa16fdb4c9bb5db5b0944659d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  curHealth: 0
-  maxHealth: 100
-  healthBar: {fileID: 1828607918}
---- !u!114 &494760249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 494760243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4142baa5b67c46db90751dbb44c5258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  curStam: 0
-  maxStam: 100
-  stamBar: {fileID: 1582819071}
 --- !u!114 &494760250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1505,8 +1474,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e27ce72fa8cd2419ab5153df1aa2c1d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 0}
-  playerHealth: {fileID: 0}
 --- !u!114 &1582819070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1570,8 +1537,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da9271d3a9b8b460a8ed4d5db47ba67f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stamBar: {fileID: 0}
-  playerStam: {fileID: 0}
 --- !u!1 &1828607915
 GameObject:
   m_ObjectHideFlags: 0
@@ -1674,8 +1639,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e27ce72fa8cd2419ab5153df1aa2c1d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 0}
-  playerHealth: {fileID: 0}
 --- !u!1 &1957578726
 GameObject:
   m_ObjectHideFlags: 0
