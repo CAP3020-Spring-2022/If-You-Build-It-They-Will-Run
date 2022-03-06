@@ -372,6 +372,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 306.29974
       objectReference: {fileID: 0}
+    - target: {fileID: 490911408085263825, guid: fef5cb564984ec54e8934afe66171913, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -6.2997513
+      objectReference: {fileID: 0}
     - target: {fileID: 490911408355342332, guid: fef5cb564984ec54e8934afe66171913, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2856,7 +2860,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 29162178}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -2877,7 +2881,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam1: {fileID: 1472608350}
   cam2: {fileID: 963194225}
-  Player: {fileID: 0}
+  Player: {fileID: 494760243}
   counter: 0
 --- !u!114 &1966822593
 MonoBehaviour:

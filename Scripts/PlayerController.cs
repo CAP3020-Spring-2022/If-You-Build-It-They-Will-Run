@@ -45,6 +45,8 @@ public class PlayerController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         cameraT = Camera.main.transform;
+        if(!cameraT.gameObject.activeSelf)
+            this.gameObject.SetActive(false);
         body = GetComponent<CharacterController>();
         /* actionHandler = GetComponent<ActionHandler>(); */
     }
