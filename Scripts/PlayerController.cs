@@ -44,11 +44,6 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
             Jump();
 
-
-
-        //Debug.Log("velocityY = " + velocityY);
-        //Debug.Log("isGrounded = " + controller.isGrounded);
-
         //animation
         float animationSpeedPercent = currentSpeed/walkSpeed * .5f;
         if(running)
@@ -79,7 +74,11 @@ public class PlayerController : MonoBehaviour
         currentSpeed = new Vector2(controller.velocity.x, controller.velocity.z).magnitude;
 
         if(controller.isGrounded)
-            velocityY = 0;
+            velocityY = -1;
+
+        //Debug.Log("velocityY = " + velocityY);
+        Debug.Log("isGrounded = " + controller.isGrounded);
+
     }
 
     void Jump()
