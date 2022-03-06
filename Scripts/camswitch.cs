@@ -7,11 +7,11 @@ public class camswitch : MonoBehaviour
 
     public GameObject cam1;
     public GameObject cam2;
-    public GameObject Player;
+    public GameObject Player; //TODO: Can use playerController? has transform to use SetPositionAndRoation()
     public int counter = 0;
 
     // Update is called once per frame
-    public async void HitButton()
+    public void HitButton()
     {
 
         if (counter % 2 == 0)
