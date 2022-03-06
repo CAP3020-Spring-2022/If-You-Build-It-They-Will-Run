@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Debugger : MonoBehaviour
 {
-
     [SerializeField] PlayerController playerController;
     /* float refSpeed;
     bool onGround; */
@@ -20,8 +19,9 @@ public class Debugger : MonoBehaviour
     void Update()
     {
         text.text = /* "Current Speed: " + playerController.GetCurrentSpeed() + */
-                    "\nStamina: " + Mathf.RoundToInt(playerController.GetPlayer().GetStamina()) +
+                    "Stamina: " + Mathf.RoundToInt(playerController.GetPlayer().GetStamina()) +
                     "\nMomentum: " + Mathf.RoundToInt(playerController.GetPlayer().GetMomentum());
         text.text += "\nAction: " + playerController.GetPlayer().GetAction();
+        text.text += "\nCurrent Speed: " + playerController.GetPlayer().GetSpeed();
     }
 }

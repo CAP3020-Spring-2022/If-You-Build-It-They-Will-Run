@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PlayerData
-{
-	public class Player
-	{
-		Vector3 velocity;
+/** Joseph **/
+// Data Strcuture for player object. Has important vals like action, stamina, position, etc.
+namespace PlayerData {
+
+    public class Player {
+
+        Vector3 velocity;
 		Vector3 position;
 
 		bool sprinting;
@@ -19,6 +21,8 @@ namespace PlayerData
 		float momentum;
 		float speed;
 
+		Transform orientation;
+
 		ActionHandler.ActionType action;
 		// Start is called before the first frame update
 
@@ -29,6 +33,15 @@ namespace PlayerData
 			velocity = Vector3.zero;
 			position = Vector3.zero;
 			action = ActionHandler.ActionType.WALK_RUN;
+			orientation = null;
+		}
+
+		public Transform GetOrientation() {
+			return orientation;
+		}
+
+		public void SetOrientation(Transform newOrientation) {
+			orientation = newOrientation;
 		}
 
 		public float GetSpeed() {
@@ -126,5 +139,5 @@ namespace PlayerData
 		public void SetAction(ActionHandler.ActionType newAction) {
 			action = newAction;	
 		}
-	}
+    }
 }

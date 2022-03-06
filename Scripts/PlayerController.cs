@@ -1,163 +1,169 @@
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 using PlayerData;
 
-// TODO: It may be a good idea to make an approximate function that checks a range around a number instead of just some
-// floating-point value. Ex: check values from 99.995f to 100.005f if looking for value of 100.0f
-
 public class PlayerController : MonoBehaviour
 {
-    Player player = new Player();
-    CharacterController body;
+    /* ActionHandler actionHandler; */
+    [SerializeField] Transform orientation;
     Animator animator;
-    [SerializeField] float walkSpeed;
-    [SerializeField] float runSpeed;
-    float currentSpeed;
-    float speedSmoothTime = .01f;
+    Transform cameraT;
+    // As far as I know, CharacterController is a barebones movement/collision system, should change into a rigidbody at some point
+    // for more complex movement. CharacterController seems pretty limited (and filled with bugs)
+    CharacterController body;
+    /* Rigidbody rb; */
+
+    Player player = new Player();
+
+    float walkSpeed = 2;
+    float runSpeed = 6;
+    float gravity = -12;
+    float jumpHeight = 1;
+
+    [Range(0,1)]
+    float airControlPercent;
+
+    float turnSmoothTime = .2f;
+    float turnSmoothVelocity;
+
+    float speedSmoothTime = .1f;
     float speedSmoothVelocity;
+    /* float currentSpeed; */
+    float velocityY;
 
-    [SerializeField] float gravity = -12f;
-    /* [SerializeField] float jumpHeight = 1f; */
-    [Range(0,1)] float airControlPercent;
+    // Wallrunning stuff
+    LayerMask walls;
+    float wallrunForce;
+    float maxWallrunTime;
+    float maxWallrunSpeed;
+    bool isWallRight, isWallLeft;
+    bool canJump;
 
-    [SerializeField] Transform groundCheck;
-    [SerializeField] float checkRadius;
-    [SerializeField] LayerMask groundLayer;
-
-    [SerializeField] ActionHandler actionHandler;
-
-    float velocityY = 0.0f;
-    float distToGround = 0.0f;
-
-    void Start() {
+    // Start is called before the first frame update
+    void Start()
+    {
         animator = GetComponent<Animator>();
+        cameraT = Camera.main.transform;
         body = GetComponent<CharacterController>();
-        // attach player to actionhandler 
-        actionHandler = GetComponent<ActionHandler>();
+        /* actionHandler = GetComponent<ActionHandler>(); */
     }
 
-    void Update() {
-        Vector3 currentVelocity = Vector3.zero;
+    // Update is called once per frame
+    void Update()
+    {
+        //input
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 inputDir = input.normalized;
-        
-        // Always check if player is on ground first
-        CheckGround();
 
-        // Check if player is sprinting and grounded
-        if(Input.GetKeyDown(KeyCode.LeftShift))
+        player.SetOrientation(orientation.transform);
+
+        if(Input.GetKeyDown(KeyCode.LeftShift)) {
             player.SetSprinting(!player.IsSprinting());
+        }
 
-        // calc speed
-        player.SetSpeed(CalculateSpeed(inputDir, player.IsSprinting()));
-        //OrientPlayer();
+        // CheckWall();
 
-        /* if(player.GetPosition().y > 0) {
-            float deltaY = gravity * Time.deltaTime;
-            velocityY += deltaY;
-        } */
+        Move(inputDir);
 
-        /* velocityY = Mathf.Clamp(velocityY, 0, velocityY); */
-
-
-        // Check jumping
-        if(Input.GetKeyDown(KeyCode.Space)) {
+        if(Input.GetKeyDown(KeyCode.Space) && player.GetStamina() >= 15.0f) {
             player.SetAction(ActionHandler.ActionType.JUMP);
+            /* Jump(); */
         }
 
-        /* if(Input.GetKeyDown(KeyCode.LeftControl)) {
-            player.SetSliding(true);
-            Slide();
+        if(Input.GetKeyDown(KeyCode.LeftControl) && player.GetMomentum() >= 15.0f) {
+            player.SetSprinting(false);
+            player.SetAction(ActionHandler.ActionType.SLIDE);
+        }
+
+        if(player.GetStamina() <= 10.0f) { // if you have no stamina, no more sprinting and change action to WALK_RUN
+            player.SetSprinting(false);
+            player.SetAction(ActionHandler.ActionType.WALK_RUN);
+        }
+
+        /* if(Input.GetMouseButtonDown(1) && (isWallRight || isWallLeft)) {
+            player.SetAction(ActionHandler.ActionType.WALLRUN);
+            canJump = true;
         }else{
-            player.SetSliding(false);
+            canJump = false;
         } */
 
-        // calc velocity (this seems to work, but need to edit animations)
-        velocityY += Time.deltaTime * gravity;
-        currentVelocity = transform.right * inputDir.x + transform.forward * inputDir.y + Vector3.up * velocityY;
-        switch (player.GetAction()) {
+        switch(player.GetAction()) {
             case ActionHandler.ActionType.WALK_RUN:
-                break; // case is handled by default
+                break; // default handled
             case ActionHandler.ActionType.JUMP:
-                currentVelocity += transform.up * Mathf.Sqrt(-2 * gravity * Time.deltaTime) * 3.0f;
+                Jump();
                 break;
+            case ActionHandler.ActionType.SLIDE:
+                Slide();
+                break;
+            /* case ActionHandler.ActionType.WALLRUN:
+                Wallrun();
+                break; */
         }
-        player.SetVelocity(currentVelocity);
-        body.Move(transform.position + player.GetVelocity() * player.GetSpeed() * Time.deltaTime);
 
-        // Animations
-        /* float animationSpeedPercent = currentSpeed/walkSpeed * .5f;
-        if(player.IsSprinting())
-            animationSpeedPercent = currentSpeed/runSpeed;
-        //TODO: Sliding animation
-        animationSpeedPercent = animationSpeedPercent * inputDir.magnitude;
-        animator.SetFloat("speedPercent", animationSpeedPercent, speedSmoothTime, Time.deltaTime); */
+        UpdateMomentum();
+        UpdateStamina();
 
-        // Calculate stamina/momentum at end of update (PostUpdate function??)
-        normalizeStamina();
-        normalizeMomentum();
+        //Debug.Log("velocityY = " + velocityY);
+        //Debug.Log("isGrounded = " + controller.isGrounded);
+
+        //animations moved to actionHandler
     }
 
-    float CalculateSpeed(Vector2 vec, bool running) {
-        float targetSpeed;
-        if(running) 
+    void Move(Vector2 inputDir)
+    {
+        if(inputDir != Vector2.zero)
+        {
+            float targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + cameraT.eulerAngles.y;
+            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, GetModifiedSmoothTime(turnSmoothTime));
+        }
+
+        float targetSpeed = walkSpeed;
+        if(player.IsSprinting() || player.GetAction() == ActionHandler.ActionType.SLIDE)
             targetSpeed = runSpeed;
-        else
-            targetSpeed = walkSpeed;
-        targetSpeed *= vec.magnitude;
+        targetSpeed = targetSpeed * inputDir.magnitude;
 
-        float curSpeed = /* player.GetMomentum()/10 + */ Mathf.SmoothDamp(player.GetSpeed(), targetSpeed, ref speedSmoothVelocity, GetModifiedSmoothTime(speedSmoothTime));
-        if(curSpeed > 35f)
-            curSpeed = 35f;
-        return curSpeed;
-    }
+        player.SetSpeed(/* (1.0f + player.GetMomentum()/100) *  */Mathf.SmoothDamp(player.GetSpeed(), targetSpeed, ref speedSmoothVelocity, GetModifiedSmoothTime(speedSmoothTime)));
+        /* if(player.GetSpeed() > 35.0f)
+            player.SetSpeed(35.0f); */
 
-    // TODO: Figure out some way to turn the player for sliding? Probably just make a sliding animation
-    /* void OrientPlayer() {
-        if(sliding && player.rotation.x != 90.0f) {
-            player.transform.Rotate(new Vector3(-90.0f, 0.0f, 0.0f), Space.Self);
-        }else if(player.rotation.x != 0.0f) {
-            player.transform.Rotate(new Vector3(90.0f, 0.0f, 0.0f), Space.Self);
-        }
-    } */
+        /* if(player.GetSpeed() < 1.0f && player.GetAction() == ActionHandler.ActionType.SLIDE)
+            player.SetAction(ActionHandler.ActionType.WALK_RUN); */
 
-    // TODO: Figure out good interaction if sliding AND running, messes with momentum/stamina right now
-    void Slide() {
-        if(player.IsSliding()) {
-            currentSpeed *= 0.95f;
-        }
-        if(currentSpeed == 0.0f) {
-            player.SetSliding(false);
+        if(player.GetAction() != ActionHandler.ActionType.WALLRUN)
+            velocityY += Time.deltaTime * gravity;
+
+        player.SetVelocity(transform.forward * player.GetSpeed() + Vector3.up * velocityY);
+
+        body.Move(player.GetVelocity() * Time.deltaTime);
+        player.SetSpeed(new Vector2(body.velocity.x, body.velocity.z).magnitude);
+
+        if((body.isGrounded || transform.position.y < 0.1f)
+            && player.GetAction() != ActionHandler.ActionType.SLIDE) {
+
+            velocityY = 0;
+            player.SetAction(ActionHandler.ActionType.WALK_RUN);
         }
     }
 
-    /* void Jump() {
-        // TODO: Probably a better calc for this, goes a little too vertical and not horizontal enough
-        // Also weirdly dependent on speed (probably vector calculation issue)
-        if(player.IsOnGround())
-            velocityY = Mathf.Sqrt(-2 * gravity * jumpHeight);
-    } */
+    void UpdateMomentum() {
 
-    /* int slideInstance = -1;
-    int slideCount = 0; */
-    void normalizeMomentum() {
-        // If you are stationary, or walking with momentum
-        if((player.GetVelocity() == Vector3.zero || (!player.IsSprinting() && player.GetMomentum() > 10)) && !player.IsSliding()) { // You should still keep some momentum if you're walking
+        // If you are stationary, or walking with momentum (and not sliding)
+        if((player.GetVelocity() == Vector3.zero || (!player.IsSprinting() && player.GetMomentum() > 10)) && player.GetAction() != ActionHandler.ActionType.SLIDE) { // You should still keep some momentum if you're walking
             player.SetMomentum(player.GetMomentum() - 0.1f); // TODO: tweak
         }
 
         // If you are running and moving
         if(player.IsSprinting() && player.GetVelocity() != Vector3.zero && player.GetMomentum() <= 100.0f) {
-            player.SetMomentum(player.GetMomentum() + 1.0f);
+            player.SetMomentum(player.GetMomentum() + 0.05f);
         }
 
         // if sliding
-        if(player.IsSliding()) {
+        if(player.GetAction() == ActionHandler.ActionType.SLIDE) {
             if(player.GetMomentum() >= 100.0f) // weird bug with floating-points
                 player.SetMomentum(99.9999f);
-            player.SetMomentum(player.GetMomentum() + 1.0f);
+            player.SetMomentum(player.GetMomentum() - 0.01f);
             // This block doesn't work for some reason, come back to it maybe if you can't find a better solution
             // TODO: Want sliding to have a short period before reducing momentum
             // Temporary fix is to just half the usual momentum decrease
@@ -188,26 +194,29 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void normalizeStamina() {
+    void UpdateStamina() {
+
         // If not running or jumping, and don't have max stamina
         if(!player.IsSprinting() && velocityY == 0 && player.GetStamina() < 100f) {
-            player.SetStamina(player.GetStamina() + 0.2f); // TODO: gonna have to tweak all these numbers in the future
+            player.SetStamina(player.GetStamina() + 0.15f); // TODO: gonna have to tweak all these numbers in the future
         }
 
         // If running and moving (can have run enabled and not be moving)
-        if(player.IsSprinting() && player.GetVelocity() != Vector3.zero && player.GetStamina() > 0 && !player.IsSliding()) {
-            player.SetStamina(player.GetStamina() - 0.2f);
+        if(player.IsSprinting() && player.GetVelocity() != Vector3.zero && player.GetStamina() > 0 && player.GetAction() != ActionHandler.ActionType.SLIDE) {
+            player.SetStamina(player.GetStamina() - 0.05f);
         }
         
         // If sliding, gain stamina
-        if(player.IsSliding()) {
+        if(player.GetAction() == ActionHandler.ActionType.SLIDE) {
             player.SetStamina(player.GetStamina() + 0.5f);
         }
 
         // low stamina, no running
-        if(player.GetStamina() < 20f) { // TODO: should add jump check too
+        // moved to update function for better timing
+        /* if(player.GetStamina() < 20f) { // TODO: should add jump check too
             player.SetSprinting(false);
-        }
+            player.SetAction(ActionHandler.ActionType.WALK_RUN);
+        } */
 
         // Range checking. Sometimes the math makes it over/under flow
         if(player.GetStamina() < 0.0f) {
@@ -217,13 +226,47 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    /* public float GetCurrentSpeed() {
-        return currentSpeed;
+    void Jump()
+    {
+        if((body.isGrounded || transform.position.y < .1 || canJump) && player.GetAction() == ActionHandler.ActionType.JUMP) {
+            velocityY = Mathf.Sqrt(-2 * gravity * jumpHeight);
+        }
+    }
+
+    void Slide() {
+        if(body.isGrounded || transform.position.y < 0.1f && player.GetAction() == ActionHandler.ActionType.SLIDE) {
+            player.SetSpeed(/* player.GetMomentum()/10 *  */player.GetSpeed() * 0.9f);
+        }
+    }
+
+    /* void Wallrun() {
+        if(player.GetVelocity().magnitude <= maxWallrunSpeed) {
+            rb.AddForce(orientation.forward * wallrunForce * Time.deltaTime);
+
+            if(isWallRight)
+                rb.AddForce(orientation.right * wallrunForce / 5 * Time.deltaTime); // better name for wallrunForce is probably wallrunStickiness
+            else
+                rb.AddForce(-orientation.right * wallrunForce / 5 * Time.deltaTime);
+        }
+    }
+
+    void WallrunEnd() {
+        player.SetAction(ActionHandler.ActionType.WALK_RUN);
+    }
+
+    void CheckWall() {
+        isWallRight = Physics.Raycast(transform.position, player.GetOrientation().right, 1f, walls);
+        isWallLeft = Physics.Raycast(transform.position, -player.GetOrientation().right, 1f, walls);
+
+        if(!isWallRight && !isWallLeft)
+            WallrunEnd();
+        if(isWallRight || isWallLeft)
+            canJump = true;
     } */
 
     float GetModifiedSmoothTime(float smoothTime)
     {
-        if(player.OnGround())
+        if(body.isGrounded)
             return smoothTime;
 
         if(airControlPercent == 0)
@@ -231,37 +274,8 @@ public class PlayerController : MonoBehaviour
         return smoothTime / airControlPercent;
     }
 
-    void CheckGround() {
-        bool check = body.isGrounded; /* Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f); */
-        if(check) {
-            player.SetOnGround(true);
-            /* player.SetAction(ActionHandler.ActionType.WALK_RUN);
-            animator.SetBool("onGround", true); */
-            velocityY = 0.0f;
-        }else{
-            player.SetOnGround(false);
-            /* if(!player.IsJumping()) {
-                player.SetAction(ActionHandler.ActionType.FALLING);
-            }
-            animator.SetBool("onGround", false); */
-        }
-        /* Collider[] colliders = Physics.OverlapSphere(groundCheck.position, checkRadius, groundLayer);
-        if(colliders.Length > 0)
-            player.SetOnGround(true);
-        else
-            player.SetOnGround(false);
-
-        if((player.GetAction() == ActionHandler.ActionType.JUMP) && player.OnGround()) {
-            player.SetAction(ActionHandler.ActionType.WALK_RUN);
-        } */
-    }
-
     public Player GetPlayer() {
         return player;
-    }
-
-    public Animator GetAnimator() {
-        return animator;
     }
 
     public float GetWalkSpeed() {
@@ -270,5 +284,9 @@ public class PlayerController : MonoBehaviour
 
     public float GetRunSpeed() {
         return runSpeed;
+    }
+
+    public Animator GetAnimator() {
+        return animator;
     }
 }
