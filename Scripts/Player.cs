@@ -9,9 +9,9 @@ namespace PlayerData
 		Vector3 velocity;
 		Vector3 position;
 
-		bool sprinting = false;
-		bool sliding = false;
-		bool jumping = false;
+		bool sprinting;
+		bool sliding;
+		bool jumping;
 
 		bool onGround;
 
@@ -109,7 +109,7 @@ namespace PlayerData
 			jumping = flag;
 		}
 
-		public bool IsOnGround()
+		public bool OnGround()
 		{
 			return onGround;
 		}

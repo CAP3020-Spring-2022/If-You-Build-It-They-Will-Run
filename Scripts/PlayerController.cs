@@ -10,7 +10,7 @@ using PlayerData;
 public class PlayerController : MonoBehaviour
 {
     Player player = new Player();
-    Rigidbody body;
+    CharacterController body;
     Animator animator;
     [SerializeField] float walkSpeed;
     [SerializeField] float runSpeed;
@@ -18,8 +18,8 @@ public class PlayerController : MonoBehaviour
     float speedSmoothTime = .01f;
     float speedSmoothVelocity;
 
-    /* [SerializeField] float gravity = -12f; */
-    [SerializeField] float jumpHeight = 1f;
+    [SerializeField] float gravity = -12f;
+    /* [SerializeField] float jumpHeight = 1f; */
     [Range(0,1)] float airControlPercent;
 
     [SerializeField] Transform groundCheck;
@@ -29,10 +29,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] ActionHandler actionHandler;
 
     float velocityY = 0.0f;
+    float distToGround = 0.0f;
 
     void Start() {
         animator = GetComponent<Animator>();
-        body = GetComponent<Rigidbody>();
+        body = GetComponent<CharacterController>();
         // attach player to actionhandler 
         actionHandler = GetComponent<ActionHandler>();
     }
@@ -41,9 +42,15 @@ public class PlayerController : MonoBehaviour
         Vector3 currentVelocity = Vector3.zero;
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 inputDir = input.normalized;
-        if(Input.GetKeyDown(KeyCode.LeftShift)) // made a toggle
+        
+        // Always check if player is on ground first
+        CheckGround();
+
+        // Check if player is sprinting and grounded
+        if(Input.GetKeyDown(KeyCode.LeftShift))
             player.SetSprinting(!player.IsSprinting());
 
+        // calc speed
         player.SetSpeed(CalculateSpeed(inputDir, player.IsSprinting()));
         //OrientPlayer();
 
@@ -54,6 +61,8 @@ public class PlayerController : MonoBehaviour
 
         /* velocityY = Mathf.Clamp(velocityY, 0, velocityY); */
 
+
+        // Check jumping
         if(Input.GetKeyDown(KeyCode.Space)) {
             player.SetAction(ActionHandler.ActionType.JUMP);
         }
@@ -66,11 +75,19 @@ public class PlayerController : MonoBehaviour
         } */
 
         // calc velocity (this seems to work, but need to edit animations)
-        player.SetVelocity(transform.right * inputDir.x + transform.forward * inputDir.y/*  + Vector3.up * velocityY */);
-        body.MovePosition(transform.position + player.GetVelocity().normalized * player.GetSpeed() * Time.deltaTime);
+        velocityY += Time.deltaTime * gravity;
+        currentVelocity = transform.right * inputDir.x + transform.forward * inputDir.y + Vector3.up * velocityY;
+        switch (player.GetAction()) {
+            case ActionHandler.ActionType.WALK_RUN:
+                break; // case is handled by default
+            case ActionHandler.ActionType.JUMP:
+                currentVelocity += transform.up * Mathf.Sqrt(-2 * gravity * Time.deltaTime) * 3.0f;
+                break;
+        }
+        player.SetVelocity(currentVelocity);
+        body.Move(transform.position + player.GetVelocity() * player.GetSpeed() * Time.deltaTime);
 
         // Animations
-
         /* float animationSpeedPercent = currentSpeed/walkSpeed * .5f;
         if(player.IsSprinting())
             animationSpeedPercent = currentSpeed/runSpeed;
@@ -91,7 +108,7 @@ public class PlayerController : MonoBehaviour
             targetSpeed = walkSpeed;
         targetSpeed *= vec.magnitude;
 
-        float curSpeed = player.GetMomentum()/10 + Mathf.SmoothDamp(player.GetSpeed(), targetSpeed, ref speedSmoothVelocity, GetModifiedSmoothTime(speedSmoothTime));
+        float curSpeed = /* player.GetMomentum()/10 + */ Mathf.SmoothDamp(player.GetSpeed(), targetSpeed, ref speedSmoothVelocity, GetModifiedSmoothTime(speedSmoothTime));
         if(curSpeed > 35f)
             curSpeed = 35f;
         return curSpeed;
@@ -200,13 +217,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public float GetCurrentSpeed() {
+    /* public float GetCurrentSpeed() {
         return currentSpeed;
-    }
+    } */
 
     float GetModifiedSmoothTime(float smoothTime)
     {
-        if(player.IsOnGround())
+        if(player.OnGround())
             return smoothTime;
 
         if(airControlPercent == 0)
@@ -214,12 +231,29 @@ public class PlayerController : MonoBehaviour
         return smoothTime / airControlPercent;
     }
 
-    public void CheckGround() {
-        Collider[] colliders = Physics.OverlapSphere(groundCheck.position, checkRadius, groundLayer);
+    void CheckGround() {
+        bool check = body.isGrounded; /* Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f); */
+        if(check) {
+            player.SetOnGround(true);
+            /* player.SetAction(ActionHandler.ActionType.WALK_RUN);
+            animator.SetBool("onGround", true); */
+            velocityY = 0.0f;
+        }else{
+            player.SetOnGround(false);
+            /* if(!player.IsJumping()) {
+                player.SetAction(ActionHandler.ActionType.FALLING);
+            }
+            animator.SetBool("onGround", false); */
+        }
+        /* Collider[] colliders = Physics.OverlapSphere(groundCheck.position, checkRadius, groundLayer);
         if(colliders.Length > 0)
             player.SetOnGround(true);
         else
             player.SetOnGround(false);
+
+        if((player.GetAction() == ActionHandler.ActionType.JUMP) && player.OnGround()) {
+            player.SetAction(ActionHandler.ActionType.WALK_RUN);
+        } */
     }
 
     public Player GetPlayer() {
