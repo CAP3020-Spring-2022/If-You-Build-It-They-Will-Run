@@ -67,7 +67,7 @@ public class LevelGeneration : MonoBehaviour
 			  positionsX.Add(xc-((float)width/2f));
 			  positionsY.Add(platformHeight*2 + (platformHeight * xc / (float)width * endHeightModifier * 1.1f) + (Random.Range(-platformHeight, platformHeight) * 0.1f));
 			  positionsZ.Add(yc);
-			  print("Object " + objectCount + ": placing platform at " + positionsX[objectCount] + ", " + positionsY[objectCount] + ", " + positionsZ[objectCount] + "\n");
+			  //print("Object " + objectCount + ": placing platform at " + positionsX[objectCount] + ", " + positionsY[objectCount] + ", " + positionsZ[objectCount] + "\n");
 			  objectCount++;
 			}
 		  }
