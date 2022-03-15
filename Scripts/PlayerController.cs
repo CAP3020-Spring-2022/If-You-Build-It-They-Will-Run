@@ -144,7 +144,7 @@ public class PlayerController : MonoBehaviour
         if((body.isGrounded || transform.position.y < 0.1f)
             && player.GetAction() != ActionHandler.ActionType.SLIDE) {
 
-            velocityY = 0;
+            velocityY = -1;
             player.SetAction(ActionHandler.ActionType.WALK_RUN);
         }
     }
