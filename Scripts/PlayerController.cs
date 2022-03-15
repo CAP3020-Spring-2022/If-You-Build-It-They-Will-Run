@@ -199,7 +199,7 @@ public class PlayerController : MonoBehaviour
     void UpdateStamina() {
 
         // If not running or jumping, and don't have max stamina
-        if(!player.IsSprinting() && velocityY == 0 && player.GetStamina() < 100f) {
+        if(!player.IsSprinting() && velocityY < 1 && player.GetStamina() < 100f) {
             player.SetStamina(player.GetStamina() + 0.15f); // TODO: gonna have to tweak all these numbers in the future
         }
 
