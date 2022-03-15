@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1013,6 +1013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d352a8e3a1db0eb40bebfa3e6468ffb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CamSwitchObject: {fileID: 1338443356}
 --- !u!143 &494760247
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2512,6 +2513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add7ad9d804fc40e39af1537c7b54430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildphase: 0
   cam1: {fileID: 1472608350}
   cam2: {fileID: 963194225}
   Player: {fileID: 494760243}
@@ -3164,6 +3166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add7ad9d804fc40e39af1537c7b54430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildphase: 0
   cam1: {fileID: 1472608350}
   cam2: {fileID: 963194225}
   Player: {fileID: 494760243}

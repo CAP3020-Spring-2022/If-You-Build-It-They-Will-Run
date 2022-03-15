@@ -40,9 +40,16 @@ public class PlayerController : MonoBehaviour
     bool isWallRight, isWallLeft;
     bool canJump;
 
+    // build/run phase switching stuff
+    public GameObject CamSwitchObject;
+    camswitch camSwitch;
+
     // Start is called before the first frame update
     void Start()
     {
+        // build/run switch stuff
+        camSwitch = CamSwitchObject.GetComponent<camswitch>();
+
         animator = GetComponent<Animator>();
         cameraT = Camera.main.transform;
         if(!cameraT.gameObject.activeSelf)
@@ -66,7 +73,10 @@ public class PlayerController : MonoBehaviour
 
         // CheckWall();
 
-        Move(inputDir);
+        if (!camSwitch.buildphase)
+        {
+            Move(inputDir);
+        }
 
         if(Input.GetKeyDown(KeyCode.Space) && player.GetStamina() >= 15.0f) {
             player.SetAction(ActionHandler.ActionType.JUMP);
