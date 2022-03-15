@@ -23,12 +23,26 @@ public class PlayerController : MonoBehaviour
     Transform cameraT;
     CharacterController controller;
 
+    // build/run phase switching
+    public GameObject CamSwitchObject;
+    camswitch camSwitch;
+
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator> ();
         cameraT = Camera.main.transform;
+<<<<<<< Updated upstream
         controller = GetComponent<CharacterController> ();
+=======
+        if(!cameraT.gameObject.activeSelf)
+            this.gameObject.SetActive(false);
+        body = GetComponent<CharacterController>();
+        /* actionHandler = GetComponent<ActionHandler>(); */
+
+        // build/run stuff
+        camSwitch = CamSwitchObject.GetComponent<camswitch>();
+>>>>>>> Stashed changes
     }
 
     // Update is called once per frame
@@ -39,7 +53,27 @@ public class PlayerController : MonoBehaviour
         Vector2 inputDir = input.normalized;
         bool running = Input.GetKey(KeyCode.LeftShift);
 
+<<<<<<< Updated upstream
         Move(inputDir, running);
+=======
+        /* player.SetOrientation(orientation.transform); */
+
+        if(Input.GetKeyDown(KeyCode.LeftShift)) {
+            player.SetSprinting(!player.IsSprinting());
+        }
+
+        // CheckWall();
+
+        if (!camSwitch.buildphase)
+        {
+            Move(inputDir);
+        }
+        
+        if(Input.GetKeyDown(KeyCode.Space) && player.GetStamina() >= 15.0f) {
+            player.SetAction(ActionHandler.ActionType.JUMP);
+            /* Jump(); */
+        }
+>>>>>>> Stashed changes
 
         if(Input.GetKeyDown(KeyCode.Space))
             Jump();
