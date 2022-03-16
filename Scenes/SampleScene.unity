@@ -1013,7 +1013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d352a8e3a1db0eb40bebfa3e6468ffb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CamSwitchObject: {fileID: 1338443356}
+  Camswitch: {fileID: 1966822590}
 --- !u!143 &494760247
 CharacterController:
   m_ObjectHideFlags: 0

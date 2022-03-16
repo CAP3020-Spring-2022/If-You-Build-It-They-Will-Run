@@ -41,14 +41,14 @@ public class PlayerController : MonoBehaviour
     bool canJump;
 
     // build/run phase switching stuff
-    public GameObject CamSwitchObject;
+    public GameObject Camswitch;
     camswitch camSwitch;
 
     // Start is called before the first frame update
     void Start()
     {
         // build/run switch stuff
-        camSwitch = CamSwitchObject.GetComponent<camswitch>();
+        camSwitch = Camswitch.GetComponent<camswitch>();
 
         animator = GetComponent<Animator>();
         cameraT = Camera.main.transform;

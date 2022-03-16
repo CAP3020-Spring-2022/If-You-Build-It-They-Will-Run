@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class camswitch : MonoBehaviour
 {
-    public bool buildphase = false;
+    public bool buildphase;
     public GameObject cam1;
     public GameObject cam2;
     public GameObject Player; //TODO: Can use playerController? has transform to use SetPositionAndRoation()
@@ -16,10 +16,14 @@ public class camswitch : MonoBehaviour
 
     public int counter = 0;
 
+    public void Awake()
+    {
+        buildphase = false;
+    }
+
     // Update is called once per frame
     public void HitButton()
     {
-
         if (counter % 2 == 0) // build cam
                 {
                     buildphase = true;
