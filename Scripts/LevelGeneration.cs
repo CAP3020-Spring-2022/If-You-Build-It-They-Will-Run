@@ -10,7 +10,7 @@ public class LevelGeneration : MonoBehaviour
 	List<float> positionsZ = new List<float>();
 	public float[,] bluenoise;
 	int objectCount = 0;
-	int objectMax = 20;
+	int objectMax = 60;
 	float platformHeight = 50f;
 	float endHeightModifier = 0;
 
@@ -23,23 +23,23 @@ public class LevelGeneration : MonoBehaviour
 		
 		for (int i = 0; i < objectMax; i++) {
 			//Instantiate(objects[i], new Vector3(positionsX[i], positionsY[i], positionsZ[i]), Quaternion.Euler(-90, 90, 90));
-			if(objects[i].name == "newisland")
-				Instantiate(objects[i], new Vector3(positionsX[i], 50f, positionsZ[i]), Quaternion.Euler(-90, 90, 90));
+			if(objects[i].name == "FloatingIslandFlatTop")
+				Instantiate(objects[i], new Vector3(positionsX[i], 48f, positionsZ[i]), Quaternion.Euler(0, 0, 0));
 			else if(objects[i].name == "L-crate" || objects[i].name == "Staircase-Crate" || objects[i].name == "Big-L-Crate")
-				Instantiate(objects[i], new Vector3(positionsX[i], 50f, positionsZ[i]), Quaternion.Euler(-90, 0, 90));
+				Instantiate(objects[i], new Vector3(positionsX[i], 45f, positionsZ[i]), Quaternion.Euler(-90, 0, 90));
 			else if(objects[i].name == "Skull-Pillar")
 				Instantiate(objects[i], new Vector3(positionsX[i], 0f, positionsZ[i]), Quaternion.Euler(-90, 0, 90));
 			else if(objects[i].name == "Wall-Run")
-				Instantiate(objects[i], new Vector3(positionsX[i], 60f, positionsZ[i]), Quaternion.Euler(0, 90, 0));
-			else if(objects[i].name == "Slide-Obstacle")
 				Instantiate(objects[i], new Vector3(positionsX[i], 50f, positionsZ[i]), Quaternion.Euler(0, 90, 0));
+			else if(objects[i].name == "Slide-Obstacle")
+				Instantiate(objects[i], new Vector3(positionsX[i], 45f, positionsZ[i]), Quaternion.Euler(0, 90, 0));
 		}
     }
 	
 	void generatePositions() {
-		int width = 300;
-		int height = 300;
-		int R = 12;
+		int width = 320;
+		int height = 320;
+		int R = 4;
 		
 		bluenoise = new float[width,height];
 		
