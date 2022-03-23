@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -685,7 +685,7 @@ MeshCollider:
   m_GameObject: {fileID: 307017406}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -1018,8 +1018,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d352a8e3a1db0eb40bebfa3e6468ffb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!143 &494760247
-CharacterController:
+  grounded: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 128
+--- !u!65 &494760247
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1029,13 +1036,8 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.8
-  m_Radius: 0.3
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.9, z: 0.1}
+  m_Size: {x: 0.31166077, y: 0.111701965, z: 0.28840178}
+  m_Center: {x: 0.0039749146, y: 0.04680252, z: 0.036949232}
 --- !u!114 &494760248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1048,7 +1050,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dfa5b4466790b249b0899a7769fc649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerText: {fileID: 1106749810}
+--- !u!54 &494760249
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494760243}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 1
 --- !u!1 &584610693
 GameObject:
   m_ObjectHideFlags: 0
@@ -3020,9 +3037,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1359649428}
     m_Modifications:
+    - target: {fileID: 1209363729234412104, guid: e90ffe3b7ae85fa4fb88905b33c03a8e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1841775886297808995, guid: e90ffe3b7ae85fa4fb88905b33c03a8e, type: 3}
       propertyPath: m_Name
       value: Starting Island
+      objectReference: {fileID: 0}
+    - target: {fileID: 1841775886297808995, guid: e90ffe3b7ae85fa4fb88905b33c03a8e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1841775886297808995, guid: e90ffe3b7ae85fa4fb88905b33c03a8e, type: 3}
       propertyPath: m_IsActive
