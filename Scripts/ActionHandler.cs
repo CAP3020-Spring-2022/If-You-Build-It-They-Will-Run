@@ -10,7 +10,7 @@ namespace PlayerData {
         Player player;
         PlayerController playerController;
 
-        public Text timerText;
+        //public Text timerText;
         string slidingBooleanText = "false";
         string slideTimeText;
         string state = "NO_STATE";
@@ -95,7 +95,7 @@ namespace PlayerData {
                     break;
             }
 
-            timerText.text = state + " " + slideTimeText + " " + slidingBooleanText;
+            //timerText.text = state + " " + slideTimeText + " " + slidingBooleanText;
 
         }
 
