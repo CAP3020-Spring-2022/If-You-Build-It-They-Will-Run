@@ -1200,6 +1200,11 @@ Transform:
   m_Father: {fileID: 1303135695}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!223 &899331964 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 490911409386048419, guid: fef5cb564984ec54e8934afe66171913, type: 3}
+  m_PrefabInstance: {fileID: 140371402}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &960239882
 GameObject:
   m_ObjectHideFlags: 0
@@ -1940,15 +1945,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8479394345649451139, guid: cc3edb2c443b40847b6715b166bcf798, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10
+      value: 171
       objectReference: {fileID: 0}
     - target: {fileID: 8479394345649451139, guid: cc3edb2c443b40847b6715b166bcf798, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 42
+      value: 64.4
       objectReference: {fileID: 0}
     - target: {fileID: 8479394345649451139, guid: cc3edb2c443b40847b6715b166bcf798, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: -4.8
       objectReference: {fileID: 0}
     - target: {fileID: 8479394345649451139, guid: cc3edb2c443b40847b6715b166bcf798, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1980,6 +1985,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc3edb2c443b40847b6715b166bcf798, type: 3}
+--- !u!1 &1472608350 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8479394345649451136, guid: cc3edb2c443b40847b6715b166bcf798, type: 3}
+  m_PrefabInstance: {fileID: 1472608349}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1536543162
 GameObject:
   m_ObjectHideFlags: 0
@@ -2170,6 +2180,26 @@ PrefabInstance:
       propertyPath: sampleObject
       value: 
       objectReference: {fileID: 762884443}
+    - target: {fileID: 8751578261102544383, guid: af86a87820e644534bd394d4c2af7113, type: 3}
+      propertyPath: cam1
+      value: 
+      objectReference: {fileID: 1472608350}
+    - target: {fileID: 8751578261102544383, guid: af86a87820e644534bd394d4c2af7113, type: 3}
+      propertyPath: cam2
+      value: 
+      objectReference: {fileID: 963194225}
+    - target: {fileID: 8751578261102544383, guid: af86a87820e644534bd394d4c2af7113, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 494760243}
+    - target: {fileID: 8751578261102544383, guid: af86a87820e644534bd394d4c2af7113, type: 3}
+      propertyPath: staminaBar
+      value: 
+      objectReference: {fileID: 899331964}
+    - target: {fileID: 8751578261102544383, guid: af86a87820e644534bd394d4c2af7113, type: 3}
+      propertyPath: momentumBar
+      value: 
+      objectReference: {fileID: 1787576272}
     - target: {fileID: 8751578262990731913, guid: af86a87820e644534bd394d4c2af7113, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2413,6 +2443,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!223 &1787576272 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 4265440525373980409, guid: 8dfbef05240be0e4c891c2020dad9a98, type: 3}
+  m_PrefabInstance: {fileID: 29162177}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1958235543
 GameObject:
   m_ObjectHideFlags: 0
