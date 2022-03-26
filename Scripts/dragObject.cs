@@ -18,10 +18,12 @@ public class dragObject : MonoBehaviour
     bool canMove = false;
     // Used to prevent object from snapping to mouse pos. when move key is released
     bool keyedMove = false;
+    bool canRotate = true;
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
+            canRotate = true;
             canMove = true;
         }
         if(Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Y) || Input.GetKeyDown(KeyCode.Z))
@@ -86,6 +88,10 @@ public class dragObject : MonoBehaviour
             mouse = GetMouseWorldPos() + mOffset;
             position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, Mathf.RoundToInt(mouse.z / this.gridSize.z) * this.gridSize.z);
             this.transform.position = position;
+        }
+        else if(Input.GetKey(KeyCode.R) && canRotate) {
+            this.gameObject.transform.Rotate(0, 0, 90);
+            canRotate = false;
         }
         else if(!keyedMove)
         {

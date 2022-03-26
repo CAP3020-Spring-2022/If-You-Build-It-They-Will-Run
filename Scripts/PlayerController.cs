@@ -40,9 +40,16 @@ public class PlayerController : MonoBehaviour
     bool isWallRight, isWallLeft;
     bool canJump;
 
+    // build/run phase switching stuff
+    public GameObject Camswitch;
+    camswitch camSwitch;
+
     // Start is called before the first frame update
     void Start()
     {
+        // build/run switch stuff
+        camSwitch = Camswitch.GetComponent<camswitch>();
+
         animator = GetComponent<Animator>();
         cameraT = Camera.main.transform;
         if(!cameraT.gameObject.activeSelf)
@@ -66,12 +73,18 @@ public class PlayerController : MonoBehaviour
 
         // CheckWall();
 
-        Move(inputDir);
+        if (!camSwitch.buildphase)
+        {
+            Move(inputDir);
+        }
 
         if(Input.GetKeyDown(KeyCode.Space) && player.GetStamina() >= 15.0f) {
             player.SetAction(ActionHandler.ActionType.JUMP);
             /* Jump(); */
         }
+
+        if(player.GetVelocity().y <= -1.5)
+            player.SetAction(ActionHandler.ActionType.FALLING);
 
         if(Input.GetKeyDown(KeyCode.LeftControl) && player.GetMomentum() >= 15.0f) {
             player.SetSprinting(false);
@@ -141,10 +154,9 @@ public class PlayerController : MonoBehaviour
         body.Move(player.GetVelocity() * Time.deltaTime);
         player.SetSpeed(new Vector2(body.velocity.x, body.velocity.z).magnitude);
 
-        if((body.isGrounded || transform.position.y < 0.1f)
-            && player.GetAction() != ActionHandler.ActionType.SLIDE) {
+        if((body.isGrounded || transform.position.y < 0.1f) && player.GetAction() != ActionHandler.ActionType.SLIDE) {
 
-            velocityY = 0;
+            velocityY = -1;
             player.SetAction(ActionHandler.ActionType.WALK_RUN);
         }
     }
@@ -199,7 +211,7 @@ public class PlayerController : MonoBehaviour
     void UpdateStamina() {
 
         // If not running or jumping, and don't have max stamina
-        if(!player.IsSprinting() && velocityY == 0 && player.GetStamina() < 100f) {
+        if(!player.IsSprinting() && velocityY < 1 && player.GetStamina() < 100f) {
             player.SetStamina(player.GetStamina() + 0.15f); // TODO: gonna have to tweak all these numbers in the future
         }
 
@@ -228,6 +240,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+// LEO TODO: FINISH WATCHING ANIMATION VIDEOS
+/*
+    BUGS
+    SLIDE -> STUCK ANIMATION
+    PLAYER MOVEMENT RANDOMLY STUCK, BUT FIXES WITH FIDGETING
+*/
     void Jump()
     {
         if((body.isGrounded || transform.position.y < .1 || canJump) && player.GetAction() == ActionHandler.ActionType.JUMP) {
