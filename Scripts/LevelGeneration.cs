@@ -10,8 +10,8 @@ public class LevelGeneration : MonoBehaviour
 	List<float> positionsZ = new List<float>();
 	public float[,] bluenoise;
 	int objectCount = 0;
-	int objectMax = 60;
-	float platformHeight = 50f;
+	int objectMax = 10;
+	float platformHeight = -350f;
 	float endHeightModifier = 0;
 
     void Start()
@@ -24,22 +24,22 @@ public class LevelGeneration : MonoBehaviour
 		for (int i = 0; i < objectMax; i++) {
 			//Instantiate(objects[i], new Vector3(positionsX[i], positionsY[i], positionsZ[i]), Quaternion.Euler(-90, 90, 90));
 			if(objects[i].name == "FloatingIslandFlatTop")
-				Instantiate(objects[i], new Vector3(positionsX[i], 48f, positionsZ[i]), Quaternion.Euler(0, 0, 0));
+				Instantiate(objects[i], new Vector3(positionsX[i], platformHeight - 2f, positionsZ[i]), Quaternion.Euler(0, 0, 0));
 			else if(objects[i].name == "L-crate" || objects[i].name == "Staircase-Crate" || objects[i].name == "Big-L-Crate")
-				Instantiate(objects[i], new Vector3(positionsX[i], 45f, positionsZ[i]), Quaternion.Euler(-90, 0, 90));
+				Instantiate(objects[i], new Vector3(positionsX[i], platformHeight - 5f, positionsZ[i]), Quaternion.Euler(-90, 0, 90));
 			else if(objects[i].name == "Skull-Pillar")
-				Instantiate(objects[i], new Vector3(positionsX[i], 0f, positionsZ[i]), Quaternion.Euler(-90, 0, 90));
+				Instantiate(objects[i], new Vector3(positionsX[i], platformHeight - 50f, positionsZ[i]), Quaternion.Euler(-90, 0, 90));
 			else if(objects[i].name == "Wall-Run")
-				Instantiate(objects[i], new Vector3(positionsX[i], 50f, positionsZ[i]), Quaternion.Euler(0, 90, 0));
+				Instantiate(objects[i], new Vector3(positionsX[i], platformHeight, positionsZ[i]), Quaternion.Euler(0, 90, 0));
 			else if(objects[i].name == "Slide-Obstacle")
-				Instantiate(objects[i], new Vector3(positionsX[i], 45f, positionsZ[i]), Quaternion.Euler(0, 90, 0));
+				Instantiate(objects[i], new Vector3(positionsX[i], platformHeight - 5f, positionsZ[i]), Quaternion.Euler(0, 90, 0));
 		}
     }
 	
 	void generatePositions() {
-		int width = 320;
-		int height = 320;
-		int R = 4;
+		int width = 60;
+		int height = 60;
+		int R = 7;
 		
 		bluenoise = new float[width,height];
 		
