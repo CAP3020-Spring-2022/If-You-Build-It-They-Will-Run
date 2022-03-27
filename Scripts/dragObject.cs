@@ -18,13 +18,15 @@ public class dragObject : MonoBehaviour
     bool canMove = false;
     // Used to prevent object from snapping to mouse pos. when move key is released
     bool keyedMove = false;
+    bool canRotate = true;
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
+            canRotate = true;
             canMove = true;
         }
-        if(Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Y) || Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Y) || Input.GetKeyDown(KeyCode.Z))
         {
             keyedMove = true;
         }
@@ -40,7 +42,7 @@ public class dragObject : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        if(!cam1.active)
+        if (!cam1.active)
         {
             return;
         }
@@ -69,29 +71,34 @@ public class dragObject : MonoBehaviour
             return;
         }
         var position = new Vector3(0, 0, 0);
-        if(Input.GetKey(KeyCode.X))
+        if (Input.GetKey(KeyCode.X))
         {
             mouse = GetMouseWorldPos() + mOffset;
             position = new Vector3(Mathf.RoundToInt(mouse.x / this.gridSize.x) * this.gridSize.x, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
             this.transform.position = position;
         }
-        else if(Input.GetKey(KeyCode.Y))
+        else if (Input.GetKey(KeyCode.Y))
         {
             mouse = GetMouseWorldPos() + mOffset;
             position = new Vector3(this.gameObject.transform.position.x, Mathf.RoundToInt(mouse.y / this.gridSize.y) * this.gridSize.y, this.gameObject.transform.position.z);
             this.transform.position = position;
         }
-        else if(Input.GetKey(KeyCode.Z))
+        else if (Input.GetKey(KeyCode.Z))
         {
             mouse = GetMouseWorldPos() + mOffset;
             position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, Mathf.RoundToInt(mouse.z / this.gridSize.z) * this.gridSize.z);
             this.transform.position = position;
         }
-        else if(!keyedMove)
+        else if (Input.GetKey(KeyCode.R) && canRotate)
         {
-                transform.position = GetMouseWorldPos() + mOffset;
-                position = new Vector3(Mathf.RoundToInt(this.transform.position.x / this.gridSize.x) * this.gridSize.x, (Mathf.RoundToInt(this.transform.position.y / this.gridSize.y) * this.gridSize.y), (Mathf.RoundToInt(this.transform.position.z / this.gridSize.z) * this.gridSize.z));
-                this.transform.position = position;
+            this.gameObject.transform.Rotate(0, 0, 90);
+            canRotate = false;
+        }
+        else if (!keyedMove)
+        {
+            transform.position = GetMouseWorldPos() + mOffset;
+            position = new Vector3(Mathf.RoundToInt(this.transform.position.x / this.gridSize.x) * this.gridSize.x, (Mathf.RoundToInt(this.transform.position.y / this.gridSize.y) * this.gridSize.y), (Mathf.RoundToInt(this.transform.position.z / this.gridSize.z) * this.gridSize.z));
+            this.transform.position = position;
 
         }
     }
