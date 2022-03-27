@@ -10,12 +10,14 @@ public class LevelGeneration : MonoBehaviour
 	List<float> positionsZ = new List<float>();
 	public float[,] bluenoise;
 	int objectCount = 0;
-	int objectMax = 10;
+	int objectMax = 0;
 	float platformHeight = -350f;
 	float endHeightModifier = 0;
 
     void Start()
     {
+		objectMax = objects.Length;
+		
 		while ( (endHeightModifier < 0.6f && endHeightModifier >= 0f) || (endHeightModifier > -0.6 && endHeightModifier < 0))
 			endHeightModifier = Random.Range(-1f,1f);
 		//print(endHeightModifier);
