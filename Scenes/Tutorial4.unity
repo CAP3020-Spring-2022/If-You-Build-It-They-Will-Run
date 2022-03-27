@@ -2289,7 +2289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9a3425e25764abdb807bd357e260a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToLoad: 3
+  levelToLoad: 5
 --- !u!65 &1774493957
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2558,6 +2558,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 55667890359837690, guid: 1a3831af0ff204b54a921eb429529a0a, type: 3}
+      propertyPath: cam1
+      value: 
+      objectReference: {fileID: 963194225}
+    - target: {fileID: 55667890359837690, guid: 1a3831af0ff204b54a921eb429529a0a, type: 3}
+      propertyPath: cam2
+      value: 
+      objectReference: {fileID: 1472608350}
+    - target: {fileID: 1124930619368071021, guid: 1a3831af0ff204b54a921eb429529a0a, type: 3}
+      propertyPath: cam1
+      value: 
+      objectReference: {fileID: 963194225}
+    - target: {fileID: 1124930619368071021, guid: 1a3831af0ff204b54a921eb429529a0a, type: 3}
+      propertyPath: cam2
+      value: 
+      objectReference: {fileID: 1472608350}
+    - target: {fileID: 2987740860506822691, guid: 1a3831af0ff204b54a921eb429529a0a, type: 3}
+      propertyPath: cam1
+      value: 
+      objectReference: {fileID: 963194225}
+    - target: {fileID: 2987740860506822691, guid: 1a3831af0ff204b54a921eb429529a0a, type: 3}
+      propertyPath: cam2
+      value: 
+      objectReference: {fileID: 1472608350}
+    - target: {fileID: 2987740860545897026, guid: 1a3831af0ff204b54a921eb429529a0a, type: 3}
+      propertyPath: cam1
+      value: 
+      objectReference: {fileID: 963194225}
+    - target: {fileID: 2987740860545897026, guid: 1a3831af0ff204b54a921eb429529a0a, type: 3}
+      propertyPath: cam2
+      value: 
+      objectReference: {fileID: 1472608350}
+    - target: {fileID: 2987740861143718607, guid: 1a3831af0ff204b54a921eb429529a0a, type: 3}
+      propertyPath: cam1
+      value: 
+      objectReference: {fileID: 963194225}
+    - target: {fileID: 2987740861143718607, guid: 1a3831af0ff204b54a921eb429529a0a, type: 3}
+      propertyPath: cam2
+      value: 
+      objectReference: {fileID: 1472608350}
     - target: {fileID: 2987740861543716544, guid: 1a3831af0ff204b54a921eb429529a0a, type: 3}
       propertyPath: m_RootOrder
       value: 13
