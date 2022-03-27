@@ -8,7 +8,6 @@ namespace PlayerData {
     
         Player player;
         PlayerController playerController;
-        Animator animator;
 
         [Range(0.0f, 5.0f)]
         float slideTime = 0.0f;
@@ -26,7 +25,6 @@ namespace PlayerData {
         void Start() {
             playerController = GetComponent<PlayerController>();
             player = playerController.GetPlayer();
-            animator = playerController.GetAnimator();
         }
 
         void Update() {
@@ -34,6 +32,8 @@ namespace PlayerData {
         }
 
         public void Animate() {
+            Animator animator = playerController.GetAnimator();
+
             float animationSpeedPercent = player.speed/playerController.GetWalkSpeed() * .5f;
             if(player.IsSprinting())
                 animationSpeedPercent = player.speed/playerController.GetRunSpeed();
