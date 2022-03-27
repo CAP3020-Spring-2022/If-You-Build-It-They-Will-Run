@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     /** Movement **/
     Vector3 normalVector = Vector3.up;
     Vector3 input;
-    Vector2 normalInput; // normalized x and z movement
+    public Vector2 normalInput; // normalized x and z movement
 
     float maxSlopeAngle = 35f;
     public bool grounded; // TODO: put into player
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
         {
             float targetRotation = Mathf.Atan2(normalInput.x, normalInput.y) * Mathf.Rad2Deg + cameraT.eulerAngles.y;
             transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, GetModifiedSmoothTime(turnSmoothTime));
-            transform.localRotation = Quaternion.Euler(0, cameraT.transform.localRotation.eulerAngles.y, 0);
+            //transform.localRotation = Quaternion.Euler(0, cameraT.transform.localRotation.eulerAngles.y, 0);
         }
 
         if(Input.GetKeyDown(KeyCode.LeftShift)) {
