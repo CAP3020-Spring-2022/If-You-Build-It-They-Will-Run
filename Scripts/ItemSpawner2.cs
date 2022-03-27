@@ -43,12 +43,12 @@ public class ItemSpawner2 : MonoBehaviour
             itemCoords = new Vector3(camCoords.x + 15, camCoords.y, camCoords.z + 10);
         }
         // Case where only x is -, y and z +
-        else if (camForward.x < 0 && camForward.y >= 0 && camForward.z >= 0)
+        else if (camForward.x < 0 && (camForward.y >= 0.0 || camForward.y == 0) && (camForward.z >= 0.0 || camForward.z == 0.0))
         {
             itemCoords = new Vector3(camCoords.x - 15, camCoords.y, camCoords.z + 10);
         }
         // Case where x and y -, z +
-        else if (camForward.x < 0 && camForward.y < 0 && camForward.z >= 0)
+        else if (camForward.x < 0 && camForward.y < 0 && (camForward.z >= 0.0 || camForward.z == 0.0))
         {
             itemCoords = new Vector3(camCoords.x - 15, camCoords.y, camCoords.z + 10);
         }
@@ -57,9 +57,32 @@ public class ItemSpawner2 : MonoBehaviour
        {
             itemCoords = new Vector3(camCoords.x - 15, camCoords.y, camCoords.z - 10);
         }
+       else if((camForward.x >= 0.0 || camForward.x == 0.0) && (camForward.y >= 0.0 || camForward.y == 0) && camForward.z < 0)
+        {
+            itemCoords = new Vector3(camCoords.x + 15, camCoords.y, camCoords.z - 10);
+        }
+        else if ((camForward.x >= 0.0 || camForward.x == 0.0) && camForward.y < 0 && camForward.z < 0)
+        {
+            itemCoords = new Vector3(camCoords.x + 15, camCoords.y, camCoords.z - 10);
+        }
+        else if(camForward.x < 0 && (camForward.y >= 0.0 || camForward.y == 0) && camForward.z < 0)
+        {
+            itemCoords = new Vector3(camCoords.x - 15, camCoords.y, camCoords.z - 10);
+        }
+        else if((camForward.x >= 0.0 || camForward.x == 0.0) && camForward.y < 0 && (camForward.z >= 0.0 || camForward.z == 0.0)) {
+            itemCoords = new Vector3(camCoords.x + 15, camCoords.y, camCoords.z + 10);
+        }
         else
         {
-            itemCoords = new Vector3(camCoords.x + 15, camCoords.y, camCoords.z + 10);
+            if(camForward.x < 0 || camForward.y < 0 || camForward.z < 0)
+            {
+                itemCoords = new Vector3(camCoords.x - 15, camCoords.y, camCoords.z - 10);
+            }
+            else
+            {
+                itemCoords = new Vector3(camCoords.x + 15, camCoords.y, camCoords.z + 10);
+            }
+
         }
         if (itemBehavior.quantity > 0)
         {

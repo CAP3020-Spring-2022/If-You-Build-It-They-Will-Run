@@ -13,26 +13,26 @@ public class BuildPhaseCamera : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.W))
         {
-            transform.Translate(0, 0, (float)0.3);
+            transform.Translate(0, 0, (float)0.05);
         }
         else if(Input.GetKey(KeyCode.A))
         {
-            transform.Translate((float)-0.3, 0, 0);
+            transform.Translate((float)-0.05, 0, 0);
 
         }
         else if(Input.GetKey(KeyCode.S))
         {
-            transform.Translate(0, 0, (float)-0.3);
+            transform.Translate(0, 0, (float)-0.05);
         }
         else if(Input.GetKey(KeyCode.D))
         {
-            transform.Translate((float)0.3, 0, 0);
+            transform.Translate((float)0.05, 0, 0);
         }
         else if(Input.GetMouseButton(1))
         {
             y = Input.GetAxis("Mouse X") * 3;
             x = Input.GetAxis("Mouse Y") * 3;
-            rotateValue = new Vector3(x, (float)(y * -1.5), 0);
+            rotateValue = new Vector3(x, (float)(y * -3), 0);
             transform.eulerAngles = transform.eulerAngles - rotateValue;
         }
     }
