@@ -19,9 +19,9 @@ public class Debugger : MonoBehaviour
     void Update()
     {
         text.text = /* "Current Speed: " + playerController.GetCurrentSpeed() + */
-                    "Stamina: " + Mathf.RoundToInt(playerController.GetPlayer().GetStamina()) +
-                    "\nMomentum: " + Mathf.RoundToInt(playerController.GetPlayer().GetMomentum());
-        text.text += "\nAction: " + playerController.GetPlayer().GetAction();
-        text.text += "\nCurrent Speed: " + playerController.GetPlayer().GetSpeed();
+                    "Stamina: " + Mathf.RoundToInt(playerController.GetPlayer().stamina) +
+                    "\nMomentum: " + Mathf.RoundToInt(playerController.GetPlayer().stamina);
+        text.text += "\nAction: " + playerController.GetPlayer().stamina;
+        text.text += "\nCurrent Speed: " + playerController.GetPlayer().stamina;
     }
 }

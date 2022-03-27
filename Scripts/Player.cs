@@ -8,88 +8,29 @@ namespace PlayerData {
 
     public class Player {
 
-        Vector3 velocity;
-		Vector3 position;
+        public Vector3 velocity { get; set; }
 
 		bool sprinting;
-		bool sliding;
-		bool jumping;
 
-		bool onGround;
+		public float stamina { get; set; }
+		public float momentum { get; set; }
+		public float speed { get; set; }
 
-		float stamina;
-		float momentum;
-		float speed;
-
-		Transform orientation;
-
-		ActionHandler.ActionType action;
-		// Start is called before the first frame update
+		public ActionHandler.ActionType action { get; set; }
 
 		public Player() {
 			stamina = 100f;
 			momentum = 0.0f;
 			speed = 0.0f;
 			velocity = Vector3.zero;
-			position = Vector3.zero;
 			action = ActionHandler.ActionType.WALK_RUN;
-			orientation = null;
 		}
 
-		public Transform GetOrientation() {
-			return orientation;
-		}
-
-		public void SetOrientation(Transform newOrientation) {
-			orientation = newOrientation;
-		}
-
-		public float GetSpeed() {
-			return speed;
-		}
-
-		public void SetSpeed(float newSpeed) {
-			speed = newSpeed;
-		}
-
-		public Vector3 GetPosition()
-		{
-			return position;
-		}
-
-		public void SetPosition(Vector3 newPosition)
-		{
-			position = newPosition;
-		}
-
-		public Vector3 GetVelocity()
-		{
-			return velocity;
-		}
-
-		public void SetVelocity(Vector3 newVelocity)
-		{
-			velocity = newVelocity;
-		}
-
-		public float GetMomentum()
-		{
-			return momentum;
-		}
-
-		public void SetMomentum(float newMomentum)
-		{
-			momentum = newMomentum;
-		}
-
-		public float GetStamina()
-		{
-			return stamina;
-		}
-
-		public void SetStamina(float newStamina)
-		{
-			stamina = newStamina;
+		public void SetSprinting(bool flag) {
+			sprinting = flag;
+			if(flag) {
+				action = ActionHandler.ActionType.WALK_RUN;
+			}
 		}
 
 		public bool IsSprinting()
@@ -97,47 +38,22 @@ namespace PlayerData {
 			return sprinting;
 		}
 
-		public void SetSprinting(bool flag)
-		{
-			sprinting = flag;
+		public void ToggleSprinting() {
+			sprinting = !sprinting;
 		}
 
 		public bool IsSliding()
 		{
-			return sliding;
-		}
-
-		public void SetSliding(bool flag)
-		{
-			sliding = flag;
+			return this.action == ActionHandler.ActionType.SLIDE ? true : false;
 		}
 
 		public bool IsJumping()
 		{
-			return jumping;
+			return this.action == ActionHandler.ActionType.JUMP ? true : false;
 		}
 
-		public void SetJumping(bool flag)
-		{
-			jumping = flag;
-		}
-
-		public bool OnGround()
-		{
-			return onGround;
-		}
-
-		public void SetOnGround(bool flag)
-		{
-			onGround = flag;
-		}
-		
-		public ActionHandler.ActionType GetAction() {
-			return action;
-		}
-
-		public void SetAction(ActionHandler.ActionType newAction) {
-			action = newAction;	
+		public bool IsWallrunning() {
+			return this.action == ActionHandler.ActionType.WALLRUN ? true : false;
 		}
     }
 }
