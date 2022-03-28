@@ -141,6 +141,8 @@ public class PlayerController : MonoBehaviour
         player.velocity = transform.TransformDirection(input) * player.speed;
         // transform.Translate(player.velocity, this.transform);
         rb.velocity = new Vector3(player.velocity.x, rb.velocity.y, player.velocity.z);
+        //rb.velocity = Vector3.forward * player.speed * normalInput.magnitude;
+        //rb.velocity = Vector3.direction * player.speed * normalInput.magnitude
     }
 
     private Vector2 GetRelativePlayerVelocity() {
