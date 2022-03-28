@@ -916,6 +916,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!223 &791088827 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 4265440525373980409, guid: 8dfbef05240be0e4c891c2020dad9a98, type: 3}
+  m_PrefabInstance: {fileID: 29162177}
+  m_PrefabAsset: {fileID: 0}
+--- !u!223 &866897808 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 490911409386048419, guid: fef5cb564984ec54e8934afe66171913, type: 3}
+  m_PrefabInstance: {fileID: 140371402}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &872166412
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,6 +1169,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7583808142739927630, guid: 909508475bc730043b85c148bd54a180, type: 3}
   m_PrefabInstance: {fileID: 1476321603}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1174079224 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7349435347903304114, guid: 909508475bc730043b85c148bd54a180, type: 3}
+  m_PrefabInstance: {fileID: 1476321603}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174079222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d352a8e3a1db0eb40bebfa3e6468ffb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1269054430 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1f39057e79c312e4aab9aa47819dad27, type: 3}
@@ -1281,7 +1302,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1293569038}
   m_LocalRotation: {x: -0, y: -0.7102575, z: -0, w: 0.703942}
-  m_LocalPosition: {x: 174, y: -349, z: 6.162506}
+  m_LocalPosition: {x: 174, y: -349.56, z: 6.162506}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1584,7 +1605,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498915907}
   m_LocalRotation: {x: -0, y: -0.7102575, z: -0, w: 0.703942}
-  m_LocalPosition: {x: 169, y: -349, z: 6.126559}
+  m_LocalPosition: {x: 169, y: -349.74, z: 6.126559}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1793,6 +1814,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &1991703449 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8479394345649451136, guid: cc3edb2c443b40847b6715b166bcf798, type: 3}
+  m_PrefabInstance: {fileID: 1472608349}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8870256627878193712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1862,12 +1888,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildphase: 0
-  cam1: {fileID: 0}
-  cam2: {fileID: 0}
-  playerController: {fileID: 0}
-  staminaBar: {fileID: 0}
-  momentumBar: {fileID: 0}
-  buildUI: {fileID: 0}
+  cam1: {fileID: 1991703449}
+  cam2: {fileID: 963194225}
+  playerController: {fileID: 1174079224}
+  staminaBar: {fileID: 866897808}
+  momentumBar: {fileID: 791088827}
+  buildUI: {fileID: 94415797}
 --- !u!222 &8870256627878193714
 CanvasRenderer:
   m_ObjectHideFlags: 0

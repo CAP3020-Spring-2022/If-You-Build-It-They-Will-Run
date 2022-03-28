@@ -256,6 +256,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8dfbef05240be0e4c891c2020dad9a98, type: 3}
+--- !u!223 &29162178 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 4265440525373980409, guid: 8dfbef05240be0e4c891c2020dad9a98, type: 3}
+  m_PrefabInstance: {fileID: 29162177}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &80567369
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,6 +568,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fef5cb564984ec54e8934afe66171913, type: 3}
+--- !u!223 &140371403 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 490911409386048419, guid: fef5cb564984ec54e8934afe66171913, type: 3}
+  m_PrefabInstance: {fileID: 140371402}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &584386649 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7349435349519133641, guid: 909508475bc730043b85c148bd54a180, type: 3}
@@ -686,6 +696,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 909508475bc730043b85c148bd54a180, type: 3}
+--- !u!114 &644961291 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7349435347903304114, guid: 909508475bc730043b85c148bd54a180, type: 3}
+  m_PrefabInstance: {fileID: 644961290}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805744500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d352a8e3a1db0eb40bebfa3e6468ffb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1365,6 +1386,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc3edb2c443b40847b6715b166bcf798, type: 3}
+--- !u!1 &1472608350 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8479394345649451136, guid: cc3edb2c443b40847b6715b166bcf798, type: 3}
+  m_PrefabInstance: {fileID: 1472608349}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1498915907
 GameObject:
   m_ObjectHideFlags: 0
@@ -1862,12 +1888,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildphase: 0
-  cam1: {fileID: 0}
-  cam2: {fileID: 0}
-  playerController: {fileID: 0}
-  staminaBar: {fileID: 0}
-  momentumBar: {fileID: 0}
-  buildUI: {fileID: 0}
+  cam1: {fileID: 1472608350}
+  cam2: {fileID: 963194225}
+  playerController: {fileID: 644961291}
+  staminaBar: {fileID: 140371403}
+  momentumBar: {fileID: 29162178}
+  buildUI: {fileID: 94415797}
 --- !u!222 &8870256627878193714
 CanvasRenderer:
   m_ObjectHideFlags: 0
