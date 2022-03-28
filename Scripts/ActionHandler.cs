@@ -37,7 +37,6 @@ namespace PlayerData {
             float animationSpeedPercent = player.speed/playerController.GetWalkSpeed() * .5f;
             if(player.IsSprinting())
                 animationSpeedPercent = player.speed/playerController.GetRunSpeed();
-            animationSpeedPercent *= playerController.normalInput.magnitude;
             Mathf.Clamp(animationSpeedPercent, 0.0f, 1.0f);
 
             switch(player.action) {
