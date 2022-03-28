@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 
     /** Camera **/
     Transform cameraT;
+    [SerializeField] camswitch cameraSettings;
 
     /** Player **/
     Animator animator;
@@ -53,6 +54,8 @@ public class PlayerController : MonoBehaviour
 
     void Awake() {
         rb = GetComponent<Rigidbody>();
+        /* Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false; */
     }
 
     // Start is called before the first frame update
@@ -68,6 +71,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /* if(!this.gameObject.activeSelf) {
+            return;
+        } */
         Inputs();
         Movements();
         /* Animations(); */ // no longer needed because it gets handled automatically now
@@ -106,6 +112,10 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKey(KeyCode.A) && isWallLeft) {
             StartWallrun();
+        }
+
+        if(Input.GetKey(KeyCode.Period)) {
+            cameraSettings.HitButton();
         }
     }
 

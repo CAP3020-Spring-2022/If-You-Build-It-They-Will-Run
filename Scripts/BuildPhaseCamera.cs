@@ -36,4 +36,11 @@ public class BuildPhaseCamera : MonoBehaviour
             transform.eulerAngles = transform.eulerAngles - rotateValue;
         }
     }
+
+    void Awake() {
+        if(this.gameObject.activeSelf) {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
 }

@@ -7,43 +7,52 @@ public class camswitch : MonoBehaviour
     public bool buildphase;
     public GameObject cam1;
     public GameObject cam2;
-    public GameObject Player; //TODO: Can use playerController? has transform to use SetPositionAndRoation()
+    [SerializeField] PlayerController playerController; //TODO: Can use playerController? has transform to use SetPositionAndRoation()
 
     [SerializeField] Canvas staminaBar;
     [SerializeField] Canvas momentumBar;
 
     [SerializeField] Canvas buildUI;
 
-    public int counter = 0;
+    // public int counter = 0;
 
-    public void Awake()
+    public void Start()
     {
-        buildphase = false;
+        buildphase = true;
+        /* Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false; */
     }
 
     // Update is called once per frame
     public void HitButton()
     {
-        if (counter % 2 == 0) // build cam
+        buildphase = !buildphase;
+        if (buildphase) // build cam
                 {
-                    buildphase = true;
                     cam1.SetActive(true);
+                    buildUI.gameObject.SetActive(true);
+
                     cam2.SetActive(false);
                     staminaBar.gameObject.SetActive(false);
                     momentumBar.gameObject.SetActive(false);
-                    buildUI.gameObject.SetActive(true);
-                    counter++;
+                    playerController.gameObject.SetActive(false);
+
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
                     //Player.SetPositionAndRotation(new Vector3(170, 65, 0));
                 }
-        else if (counter % 2 == 1) // player cam
+        else if (!buildphase) // player cam
                 {
-                    buildphase = false;
-                    cam2.SetActive(true);
                     cam1.SetActive(false);
+                    buildUI.gameObject.SetActive(false);
+                    
+                    cam2.SetActive(true);
                     staminaBar.gameObject.SetActive(true);
                     momentumBar.gameObject.SetActive(true);
-                    buildUI.gameObject.SetActive(false);
-                    counter++;
+                    playerController.gameObject.SetActive(true);
+
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
                     //Player.SetPositionAndRotation(new Vector3(170, 65, 0));
                 }        
         
