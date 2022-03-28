@@ -2818,6 +2818,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7349435347903304114, guid: 909508475bc730043b85c148bd54a180, type: 3}
+      propertyPath: cameraSettings
+      value: 
+      objectReference: {fileID: 1966822592}
     - target: {fileID: 7583808142739927630, guid: 909508475bc730043b85c148bd54a180, type: 3}
       propertyPath: m_Name
       value: Player

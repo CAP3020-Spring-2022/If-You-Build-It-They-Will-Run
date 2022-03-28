@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5334037119324981776}
   - component: {fileID: -4683669308469848369}
   - component: {fileID: 3232923237142036411}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: -5962755588348855424}
   - component: {fileID: -1461304994638716399}
   - component: {fileID: 6535568794467173457}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5473328272997168286}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Slide-Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
