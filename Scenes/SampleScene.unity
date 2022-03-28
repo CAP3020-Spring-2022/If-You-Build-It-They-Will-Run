@@ -1442,6 +1442,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1359649428}
     m_Modifications:
+    - target: {fileID: -5117700066308340382, guid: 1ac99f3e0612907459208cb9cb6b2f1c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 929972938834323228, guid: 1ac99f3e0612907459208cb9cb6b2f1c, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -1501,6 +1505,10 @@ PrefabInstance:
     - target: {fileID: 8175600029739937738, guid: 1ac99f3e0612907459208cb9cb6b2f1c, type: 3}
       propertyPath: m_Name
       value: NewEndingIsland
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175600029739937738, guid: 1ac99f3e0612907459208cb9cb6b2f1c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ac99f3e0612907459208cb9cb6b2f1c, type: 3}
@@ -2248,6 +2256,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1359649428}
     m_Modifications:
+    - target: {fileID: -5117700066308340382, guid: 1ac99f3e0612907459208cb9cb6b2f1c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 929972938834323228, guid: 1ac99f3e0612907459208cb9cb6b2f1c, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -2307,6 +2319,10 @@ PrefabInstance:
     - target: {fileID: 8175600029739937738, guid: 1ac99f3e0612907459208cb9cb6b2f1c, type: 3}
       propertyPath: m_Name
       value: NewStartingIsland
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175600029739937738, guid: 1ac99f3e0612907459208cb9cb6b2f1c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ac99f3e0612907459208cb9cb6b2f1c, type: 3}
@@ -2818,6 +2834,10 @@ PrefabInstance:
     - target: {fileID: 1841775886297808995, guid: e90ffe3b7ae85fa4fb88905b33c03a8e, type: 3}
       propertyPath: m_Name
       value: Starting Island
+      objectReference: {fileID: 0}
+    - target: {fileID: 1841775886297808995, guid: e90ffe3b7ae85fa4fb88905b33c03a8e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1841775886297808995, guid: e90ffe3b7ae85fa4fb88905b33c03a8e, type: 3}
       propertyPath: m_IsActive
