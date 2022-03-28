@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     /** Movement **/
     Vector3 normalVector = Vector3.up;
     Vector3 input;
-    public Vector2 normalInput; // normalized x and z movement
+    Vector2 normalInput; // normalized x and z movement
 
     float maxSlopeAngle = 35f;
     public bool grounded; // TODO: put into player
@@ -122,6 +122,7 @@ public class PlayerController : MonoBehaviour
         if(player.IsSprinting()) {
             targetSpeed = runSpeed;
         }
+        targetSpeed *= normalInput.magnitude;
         /* targetSpeed *= 1.0f + player.momentum; */
         /* targetSpeed *= normalInput.magnitude; */ // I don't think this does anything
         player.speed = Mathf.SmoothDamp(player.speed, targetSpeed, ref speedSmoothVelocity, GetModifiedSmoothTime(speedSmoothTime));
