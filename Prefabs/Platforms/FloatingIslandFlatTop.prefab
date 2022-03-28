@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -6881215607234471223}
   - component: {fileID: -2571118854743697038}
   - component: {fileID: 8172464975256312062}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Icosphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 929972938834323228}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FloatingIslandFlatTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}

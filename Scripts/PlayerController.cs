@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
         {
             float targetRotation = Mathf.Atan2(normalInput.x, normalInput.y) * Mathf.Rad2Deg + cameraT.eulerAngles.y;
             transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, GetModifiedSmoothTime(turnSmoothTime));
-            //transform.localRotation = Quaternion.Euler(0, cameraT.transform.localRotation.eulerAngles.y, 0);
+            // transform.localRotation = Quaternion.Euler(0, cameraT.transform.localRotation.eulerAngles.y, 0);
         }
 
         if(Input.GetKeyDown(KeyCode.LeftShift)) {
@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
 
-        if(Input.GetKeyDown(KeyCode.LeftControl) && player.momentum >= 15.0f) {
+        if(Input.GetKeyDown(KeyCode.LeftControl) && player.momentum >= 0.4f) {
             Slide();
         }
 
@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
         targetSpeed *= normalInput.magnitude;
         /* targetSpeed *= 1.0f + player.momentum; */
         /* targetSpeed *= normalInput.magnitude; */ // I don't think this does anything
-        player.speed = Mathf.SmoothDamp(player.speed, targetSpeed, ref speedSmoothVelocity, GetModifiedSmoothTime(speedSmoothTime));
+        player.speed = Mathf.SmoothDamp(player.speed, targetSpeed, ref speedSmoothVelocity, GetModifiedSmoothTime(speedSmoothTime)) * normalInput.magnitude;
         /* Debug.Log("Player speed: " + player.GetSpeed()); */
 
         /* Vector2 relativeVel = GetRelativePlayerVelocity();
@@ -141,33 +141,14 @@ public class PlayerController : MonoBehaviour
         // set velocity of rigidbody
         player.velocity = transform.TransformDirection(input) * player.speed;
         // transform.Translate(player.velocity, this.transform);
-        rb.velocity = new Vector3(player.velocity.x, rb.velocity.y, player.velocity.z);
-        //rb.velocity = Vector3.forward * player.speed * normalInput.magnitude;
-        //rb.velocity = Vector3.direction * player.speed * normalInput.magnitude
+        // rb.velocity = new Vector3(player.velocity.x, rb.velocity.y, player.velocity.z);
+        // rb.velocity = Vector3.forward * player.speed * normalInput.magnitude;
+        /* rb.velocity = transform.forward * player.speed; */
+        Vector3 vel = new Vector3(0, rb.velocity.y, 0);
+        rb.velocity = vel + transform.forward * player.speed;
+        // rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z);
     }
 
-    private Vector2 GetRelativePlayerVelocity() {
-        float lookAngle = cameraT.transform.eulerAngles.y;
-        float moveAngle = Mathf.Atan2(rb.velocity.x, rb.velocity.z) * Mathf.Rad2Deg;
-
-        float u = Mathf.DeltaAngle(lookAngle, moveAngle);
-        float v = 90 - u;
-
-        float magnitude = rb.velocity.magnitude;
-        float yMag = magnitude * Mathf.Cos(u * Mathf.Deg2Rad);
-        float xMag = magnitude * Mathf.Cos(v * Mathf.Deg2Rad);
-
-        return new Vector2(xMag, yMag);
-    }
-
-    private void CounterMove(float x, float y, Vector2 magnitude, float targetSpeed) {
-        if(!grounded || player.IsJumping()) return;
-
-        if(Mathf.Abs(magnitude.x) > 0.01f && Math.Abs(x) < 0.05f || (magnitude.x < -0.01f && x > 0) || (magnitude.x > 0.01f && x < 0))
-            rb.AddForce(targetSpeed * transform.right * Time.deltaTime * -magnitude.x * 0.175f);
-        if (Math.Abs(magnitude.y) > 0.01f && Math.Abs(y) < 0.05f || (magnitude.y < -0.01f && y > 0) || (magnitude.y > 0.01f && y < 0))
-            rb.AddForce(targetSpeed * transform.forward * Time.deltaTime * -magnitude.y * 0.175f);
-    }
 
     // Handles control of ActionHandler depending on movement type, actual 
     // variables changes of animator handled in ActionHandler.cs

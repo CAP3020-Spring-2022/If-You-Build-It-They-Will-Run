@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -7511558181221131132}
   - component: {fileID: 2621496548814592666}
   - component: {fileID: -4983711901026836906}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skull-Pillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
