@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     // Transform orientation;
     Rigidbody rb;
+    Collider collider;
     Player player = new Player();
     // float x, y;
 
@@ -56,7 +57,9 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         /* Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false; */
+        collider = GetComponent<Collider>();
     }
+//TODO: HAVE 2 COLLIDERS, A SMALL BOX AND A LARGE CAPSULE, THEN DISABLE THE LARGE CAPSULE DURING SLIDE
 
     // Start is called before the first frame update
     void Start()
@@ -203,7 +206,9 @@ public class PlayerController : MonoBehaviour
         if(rb.velocity.magnitude > 0.5f && grounded) {
             player.action = ActionHandler.ActionType.SLIDE;
             rb.AddForce(transform.forward * slideForce);
+           // collider.height = .5;
         }else{
+            //collider.height = 1.7;
             player.action = ActionHandler.ActionType.WALK_RUN;
         }
     }
