@@ -57,9 +57,10 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         /* Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false; */
-        collider = GetComponent<Collider>();
+        collider = GetComponent<CapsuleCollider>();
     }
 //TODO: HAVE 2 COLLIDERS, A SMALL BOX AND A LARGE CAPSULE, THEN DISABLE THE LARGE CAPSULE DURING SLIDE
+//USE .ENABLED() FUNCTION TO SET THE CAPSULE COLLIDERS STATUS
 
     // Start is called before the first frame update
     void Start()
@@ -206,9 +207,9 @@ public class PlayerController : MonoBehaviour
         if(rb.velocity.magnitude > 0.5f && grounded) {
             player.action = ActionHandler.ActionType.SLIDE;
             rb.AddForce(transform.forward * slideForce);
-           // collider.height = .5;
+            //collider.ENABLED = false;
         }else{
-            //collider.height = 1.7;
+            //collider.ENABLED = true;
             player.action = ActionHandler.ActionType.WALK_RUN;
         }
     }
