@@ -8343,10 +8343,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1409254651233173924, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2630928203756506021, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
       propertyPath: textBox
       value: 
@@ -8355,34 +8351,6 @@ PrefabInstance:
       propertyPath: cameraSettings
       value: 
       objectReference: {fileID: 1966822592}
-    - target: {fileID: 3217668811457405112, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4930480701090225745, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 61da341937aee4c448527a06d0447a0a, type: 2}
-    - target: {fileID: 5133978305828154795, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
-      propertyPath: m_WarningMessage
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6105329246034269057, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
-    - target: {fileID: 7460853404639127177, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
-      propertyPath: m_Height
-      value: 1.8606994
-      objectReference: {fileID: 0}
-    - target: {fileID: 7460853404639127177, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7460853404639127177, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
-      propertyPath: m_Center.y
-      value: 0.86965024
-      objectReference: {fileID: 0}
     - target: {fileID: 8502049608461673124, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
       propertyPath: m_RootOrder
       value: 17

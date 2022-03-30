@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
         UpdateMomentum();
         UpdateStamina();
 
-        textBox.text = grounded.ToString() + " " + rb.velocity.x.ToString("f2") + " " + rb.velocity.y.ToString("f2") + " " + rb.velocity.z.ToString("f2");
+        /* textBox.text = grounded.ToString() + " " + rb.velocity.x.ToString("f2") + " " + rb.velocity.y.ToString("f2") + " " + rb.velocity.z.ToString("f2"); */
     }
 
     void Inputs() {
