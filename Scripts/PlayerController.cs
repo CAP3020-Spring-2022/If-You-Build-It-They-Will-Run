@@ -1,9 +1,11 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using PlayerData;
 
 public class PlayerController : MonoBehaviour
 {
+    public Text textBox;
 
     /** Camera **/
     Transform cameraT;
@@ -35,10 +37,11 @@ public class PlayerController : MonoBehaviour
 
     /** Jump **/
     bool jumpCheck = true;
-    float jumpHeight = 5.0f;
+    float jumpHeight = 7.0f;
 
     [Range(0,1)]
     float airControlPercent; // TODO: reimplement
+    //TODO: post video link that implements this for reference
 
     /** Slide **/
     float slideForce = 10f;
@@ -61,6 +64,10 @@ public class PlayerController : MonoBehaviour
     }
 //TODO: HAVE 2 COLLIDERS, A SMALL BOX AND A LARGE CAPSULE, THEN DISABLE THE LARGE CAPSULE DURING SLIDE
 //USE .ENABLED() FUNCTION TO SET THE CAPSULE COLLIDERS STATUS
+
+
+//TODO: FIND OUT WHY PLAYER ISN'T MOVING
+//MAYBE THE SAME REASON WHY IT ROTATES INCORRECTLY
 
     // Start is called before the first frame update
     void Start()
@@ -85,6 +92,8 @@ public class PlayerController : MonoBehaviour
 
         UpdateMomentum();
         UpdateStamina();
+
+        /* textBox.text = grounded.ToString() + " " + rb.velocity.x.ToString("f2") + " " + rb.velocity.y.ToString("f2") + " " + rb.velocity.z.ToString("f2"); */
     }
 
     void Inputs() {
@@ -154,13 +163,8 @@ public class PlayerController : MonoBehaviour
         
         // set velocity of rigidbody
         player.velocity = transform.TransformDirection(input) * player.speed;
-        // transform.Translate(player.velocity, this.transform);
-        // rb.velocity = new Vector3(player.velocity.x, rb.velocity.y, player.velocity.z);
-        // rb.velocity = Vector3.forward * player.speed * normalInput.magnitude;
-        /* rb.velocity = transform.forward * player.speed; */
         Vector3 vel = new Vector3(0, rb.velocity.y, 0);
         rb.velocity = vel + transform.forward * player.speed;
-        // rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z);
     }
 
 
@@ -186,12 +190,6 @@ public class PlayerController : MonoBehaviour
         }
     } */
 
-    // LEO TODO: FINISH WATCHING ANIMATION VIDEOS
-    /*
-    BUGS
-    SLIDE -> STUCK ANIMATION
-    PLAYER MOVEMENT RANDOMLY STUCK, BUT FIXES WITH FIDGETING
-    */
     void Jump()
     {
         if(grounded) {
