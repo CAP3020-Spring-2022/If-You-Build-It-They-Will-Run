@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     /** Jump **/
     bool jumpCheck = true;
-    float jumpHeight = 5.0f;
+    float jumpHeight = 7.0f;
 
     [Range(0,1)]
     float airControlPercent; // TODO: reimplement
