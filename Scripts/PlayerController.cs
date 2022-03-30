@@ -1,9 +1,11 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using PlayerData;
 
 public class PlayerController : MonoBehaviour
 {
+    public Text textBox;
 
     /** Camera **/
     Transform cameraT;
@@ -62,6 +64,9 @@ public class PlayerController : MonoBehaviour
 //TODO: HAVE 2 COLLIDERS, A SMALL BOX AND A LARGE CAPSULE, THEN DISABLE THE LARGE CAPSULE DURING SLIDE
 //USE .ENABLED() FUNCTION TO SET THE CAPSULE COLLIDERS STATUS
 
+
+//TODO: FIND OUT WHY PLAYER ISN'T GROUNDED
+
     // Start is called before the first frame update
     void Start()
     {
@@ -85,6 +90,8 @@ public class PlayerController : MonoBehaviour
 
         UpdateMomentum();
         UpdateStamina();
+
+        textBox.text = grounded.ToString() + " " + rb.velocity.x.ToString("f2") + " " + rb.velocity.y.ToString("f2") + " " + rb.velocity.z.ToString("f2");
     }
 
     void Inputs() {
