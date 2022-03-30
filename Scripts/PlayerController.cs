@@ -65,7 +65,8 @@ public class PlayerController : MonoBehaviour
 //USE .ENABLED() FUNCTION TO SET THE CAPSULE COLLIDERS STATUS
 
 
-//TODO: FIND OUT WHY PLAYER ISN'T GROUNDED
+//TODO: FIND OUT WHY PLAYER ISN'T MOVING
+//MAYBE THE SAME REASON WHY IT ROTATES INCORRECTLY
 
     // Start is called before the first frame update
     void Start()
@@ -161,13 +162,8 @@ public class PlayerController : MonoBehaviour
         
         // set velocity of rigidbody
         player.velocity = transform.TransformDirection(input) * player.speed;
-        // transform.Translate(player.velocity, this.transform);
-        // rb.velocity = new Vector3(player.velocity.x, rb.velocity.y, player.velocity.z);
-        // rb.velocity = Vector3.forward * player.speed * normalInput.magnitude;
-        /* rb.velocity = transform.forward * player.speed; */
         Vector3 vel = new Vector3(0, rb.velocity.y, 0);
         rb.velocity = vel + transform.forward * player.speed;
-        // rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z);
     }
 
 
@@ -193,12 +189,6 @@ public class PlayerController : MonoBehaviour
         }
     } */
 
-    // LEO TODO: FINISH WATCHING ANIMATION VIDEOS
-    /*
-    BUGS
-    SLIDE -> STUCK ANIMATION
-    PLAYER MOVEMENT RANDOMLY STUCK, BUT FIXES WITH FIDGETING
-    */
     void Jump()
     {
         if(grounded) {
