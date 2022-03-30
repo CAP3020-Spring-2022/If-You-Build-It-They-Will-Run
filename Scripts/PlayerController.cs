@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
     [Range(0,1)]
     float airControlPercent; // TODO: reimplement
+    //TODO: post video link that implements this for reference
 
     /** Slide **/
     float slideForce = 10f;
