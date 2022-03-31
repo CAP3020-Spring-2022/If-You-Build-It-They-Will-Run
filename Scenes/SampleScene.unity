@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8257,6 +8257,11 @@ Transform:
   m_Father: {fileID: 1303135695}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!223 &1666213342 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 7976361126499600240, guid: d3275e22bbcd9944e8fd0d40642ef8cf, type: 3}
+  m_PrefabInstance: {fileID: 870013489}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1699340549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8437,6 +8442,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1910107843}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!223 &1963897920 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 6305115885773772861, guid: 9948a4d91e2196349898091b900f16b6, type: 3}
+  m_PrefabInstance: {fileID: 942833747}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1966822590
 GameObject:
   m_ObjectHideFlags: 0
@@ -8492,8 +8502,8 @@ MonoBehaviour:
   cam1: {fileID: 1472608350}
   cam2: {fileID: 963194225}
   playerController: {fileID: 1479915415}
-  staminaBar: {fileID: 0}
-  momentumBar: {fileID: 0}
+  staminaBar: {fileID: 1666213342}
+  momentumBar: {fileID: 1963897920}
   buildUI: {fileID: 672778038}
 --- !u!114 &1966822593
 MonoBehaviour:
