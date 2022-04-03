@@ -1179,6 +1179,7 @@ GameObject:
   - component: {fileID: 1409254651233173924}
   - component: {fileID: 3217668811457405112}
   - component: {fileID: 7460853404639127177}
+  - component: {fileID: 1531301616344105209}
   m_Layer: 0
   m_Name: Player Prefab
   m_TagString: Player
@@ -1311,3 +1312,17 @@ CapsuleCollider:
   m_Height: 1.8606994
   m_Direction: 1
   m_Center: {x: 0, y: 0.86965024, z: 0}
+--- !u!136 &1531301616344105209
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9130636744443246622}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.5, z: 0.5}

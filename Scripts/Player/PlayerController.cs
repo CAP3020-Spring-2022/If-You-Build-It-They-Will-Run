@@ -6,6 +6,11 @@ using PlayerData;
 public class PlayerController : MonoBehaviour
 {
     public Text textBox;
+    /*
+    public CapsuleCollider standingCollider;
+    public CapsuleCollider slidingCollider;
+    */
+
 
     /** Camera **/
     Transform cameraT;
@@ -15,7 +20,6 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     // Transform orientation;
     Rigidbody rb;
-    Collider collider;
     Player player = new Player();
     // float x, y;
 
@@ -60,7 +64,6 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         /* Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false; */
-        collider = GetComponent<CapsuleCollider>();
     }
 //TODO: HAVE 2 COLLIDERS, A SMALL BOX AND A LARGE CAPSULE, THEN DISABLE THE LARGE CAPSULE DURING SLIDE
 //USE .ENABLED() FUNCTION TO SET THE CAPSULE COLLIDERS STATUS
@@ -205,10 +208,12 @@ public class PlayerController : MonoBehaviour
         if(rb.velocity.magnitude > 0.5f && grounded) {
             player.action = ActionHandler.ActionType.SLIDE;
             rb.AddForce(transform.forward * slideForce);
-            //collider.ENABLED = false;
+     //       standingCollider.enabled = false;
+     //       slidingCollider.enabled = true;
         }else{
-            //collider.ENABLED = true;
             player.action = ActionHandler.ActionType.WALK_RUN;
+     //       standingCollider.enabled = true;
+     //       slidingCollider.enabled = false;
         }
     }
 

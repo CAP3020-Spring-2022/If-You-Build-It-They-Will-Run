@@ -8292,6 +8292,14 @@ PrefabInstance:
       propertyPath: cameraSettings
       value: 
       objectReference: {fileID: 1966822592}
+    - target: {fileID: 2630928203756506021, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
+      propertyPath: slidingCollider
+      value: 
+      objectReference: {fileID: 1750630036}
+    - target: {fileID: 2630928203756506021, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
+      propertyPath: standingCollider
+      value: 
+      objectReference: {fileID: 1750630037}
     - target: {fileID: 8502049608461673124, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -8342,6 +8350,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
+--- !u!136 &1750630036 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 1531301616344105209, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
+  m_PrefabInstance: {fileID: 1750630035}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &1750630037 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 7460853404639127177, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
+  m_PrefabInstance: {fileID: 1750630035}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1845921022 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3493555798265701260, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}

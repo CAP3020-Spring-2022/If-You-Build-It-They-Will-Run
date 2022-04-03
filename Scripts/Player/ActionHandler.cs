@@ -11,6 +11,8 @@ namespace PlayerData {
 
         [Range(0.0f, 5.0f)]
         float slideTime = 0.0f;
+        public CapsuleCollider standingCollider;
+        public CapsuleCollider slidingCollider;
 
         public enum ActionType {
             WALK_RUN,
@@ -46,6 +48,8 @@ namespace PlayerData {
                     animator.SetBool("sliding", false);
                     animator.SetBool("wallrunning", false);
                     animator.SetBool("falling", false);
+                    standingCollider.enabled = true;
+                    slidingCollider.enabled = false;
                     break;
 
                 case ActionType.JUMP:
@@ -64,11 +68,14 @@ namespace PlayerData {
                     animator.SetBool("sliding", true);
 
                     // No longer needed, figured out animator
-                    if(slideTime >= 5.0f) {
+                    if(slideTime >= 10.0f) {
                         animator.SetBool("sliding", false);
                         slideTime = 0.0f;
                         player.action = ActionType.WALK_RUN;
                     }
+                    standingCollider.enabled = false;
+                    slidingCollider.enabled = true;
+
                     break;
 
                 case ActionType.WALLRUN:
