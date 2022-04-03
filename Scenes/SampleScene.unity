@@ -8284,6 +8284,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 171083780874031530, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
+      propertyPath: slidingCollider
+      value: 
+      objectReference: {fileID: 1750630036}
+    - target: {fileID: 171083780874031530, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
+      propertyPath: standingCollider
+      value: 
+      objectReference: {fileID: 1750630037}
     - target: {fileID: 2630928203756506021, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
       propertyPath: textBox
       value: 
