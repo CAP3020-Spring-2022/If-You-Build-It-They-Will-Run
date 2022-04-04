@@ -68,7 +68,7 @@ namespace PlayerData {
                     animator.SetBool("sliding", true);
 
                     // No longer needed, figured out animator
-                    if(slideTime >= 10.0f) {
+                    if(slideTime >= 8.0f) {
                         animator.SetBool("sliding", false);
                         slideTime = 0.0f;
                         player.action = ActionType.WALK_RUN;
