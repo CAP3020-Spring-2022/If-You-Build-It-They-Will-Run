@@ -26,18 +26,18 @@ public class PlayerController : MonoBehaviour
 
     float maxSlopeAngle = 35f;
     public bool grounded; // TODO: put into player
-    float turnSmoothTime = .2f;
-    float turnSmoothVelocity;
     float speedSmoothTime = .1f;
     float speedSmoothVelocity;
 
     float walkSpeed = 2f;
     float runSpeed = 5f;
-    float gravity = 10f; // now positive because Vector3.down
+    float gravity = 9f; // now positive because Vector3.down
 
     /** Jump **/
     bool jumpCheck = true;
-    float jumpHeight = 7.0f;
+    float jumpHeight = 100.0f;
+    float turnSmoothTime = .2f;
+    float turnSmoothVelocity;
 
     [Range(0,1)]
     float airControlPercent; // TODO: reimplement
@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
         input = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
         normalInput = new Vector2(input.x, input.z).normalized;
 
-        if(normalInput != Vector2.zero) // change direction of player depending on rotation of camera
+        if(normalInput != Vector2.zero && !player.IsWallrunning()) // change direction of player depending on rotation of camera
         {
             float targetRotation = Mathf.Atan2(normalInput.x, normalInput.y) * Mathf.Rad2Deg + cameraT.eulerAngles.y;
             transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, GetModifiedSmoothTime(turnSmoothTime));
@@ -119,23 +119,28 @@ public class PlayerController : MonoBehaviour
             Slide();
         }
 
-        if(Input.GetKey(KeyCode.D) && isWallRight) {
+        if(Input.GetKeyDown(KeyCode.Mouse1) && (isWallRight || isWallLeft)) {
             StartWallrun();
         }
 
-        if(Input.GetKey(KeyCode.A) && isWallLeft) {
+        /* if(Input.GetKey(KeyCode.A) && isWallLeft) {
             StartWallrun();
-        }
+        } */
 
         if(Input.GetKey(KeyCode.Period)) {
             cameraSettings.HitButton();
+        }
+
+        if(Input.GetKey(KeyCode.L)) {
+            PrintDebugInfo();
         }
     }
 
     void Movements()
     {           
-        if(rb.velocity.y <= -1.5f && !grounded) { // check before applying gravity?
+        if(rb.velocity.y <= -1.5f && !grounded && !player.IsFalling()) { // check before applying gravity?
             player.action = ActionHandler.ActionType.FALLING;
+            Debug.Log("Falling trigger");
         }
 
         rb.AddForce(Vector3.down * Time.deltaTime * gravity); // gravity
@@ -157,14 +162,15 @@ public class PlayerController : MonoBehaviour
         // reset things if grounded
         if(grounded) {
             jumpCheck = true;
-            if(player.action == ActionHandler.ActionType.FALLING)
+            if(player.IsFalling() || player.IsWallrunning())
                 player.action = ActionHandler.ActionType.WALK_RUN;
         }
         
         // set velocity of rigidbody
-        player.velocity = transform.TransformDirection(input) * player.speed;
+        /* player.velocity = (player.IsWallrunning() ? transform.TransformDirection(input) : Vector3.zero) * player.speed; */
         Vector3 vel = new Vector3(0, rb.velocity.y, 0);
         rb.velocity = vel + transform.forward * player.speed;
+        player.velocity = rb.velocity;
     }
 
 
@@ -192,7 +198,7 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if(grounded) {
+        if(grounded && !player.IsJumping()) {
             jumpCheck = false;
             player.action = ActionHandler.ActionType.JUMP;
 
@@ -215,6 +221,9 @@ public class PlayerController : MonoBehaviour
     void StartWallrun() {
         rb.useGravity = false;
         player.action = ActionHandler.ActionType.WALLRUN;
+        Debug.Log("Happens");
+
+        // Collision wall = 
 
         if(rb.velocity.magnitude <= maxWallrunSpeed) {
             rb.AddForce(transform.forward * wallrunForce * Time.deltaTime);
@@ -230,13 +239,14 @@ public class PlayerController : MonoBehaviour
     void StopWallrun() {
         player.action = ActionHandler.ActionType.WALK_RUN;
         rb.useGravity = true;
+        // rb.velocity = Vector3.zero;
     }
 
     void CheckForWall() {
         isWallRight = Physics.Raycast(transform.position, transform.right, 1f, wallLayer);
         isWallLeft = Physics.Raycast(transform.position, -transform.right, 1f, wallLayer);
 
-        if(!isWallLeft && !isWallRight && player.IsWallrunning())
+        if(!(isWallLeft || isWallRight) && player.IsWallrunning())
             StopWallrun();
     }
 
@@ -247,6 +257,7 @@ public class PlayerController : MonoBehaviour
 
     private bool cancellingGrounded;
 
+    // Build-in unity function (MonoBehaviour)
     private void OnCollisionStay(Collision other) {
         int layer = other.gameObject.layer;
         if(groundLayer != (groundLayer | (1 << layer))) return;
@@ -263,11 +274,19 @@ public class PlayerController : MonoBehaviour
 
         // Invoke ground/wall cancel, can't check normals with CollisionExit
         // delay ensures you're actually on the ground, can be weird otherwise
-        float delay = 3f;
+        float delay = 2f;
         if(!cancellingGrounded) {
             cancellingGrounded = true;
             Invoke(nameof(StopGrounded), Time.deltaTime * delay);
         }
+    }
+
+    private void OnCollisionEnter(Collision other) {
+        int layer = other.gameObject.layer;
+        if(wallLayer != (wallLayer | (1 << layer))) return;
+
+        Vector3 normal = other.contacts[0].normal;
+        transform.Rotate(transform.eulerAngles - normal, Space.Self);
     }
 
     private void StopGrounded() {
@@ -330,6 +349,17 @@ public class PlayerController : MonoBehaviour
             ns = 100.0f;
 
         player.stamina = ns;
+    }
+
+    void PrintDebugInfo() {
+        Debug.Log("Player Current Info:\n"
+                + "Current Action: " + player.action + "\n"
+                + "Current Velocity: " + player.velocity + "\n"
+                + "Sprinting?: " + player.IsSprinting() + "\n"
+                + "Sliding?: " + player.IsSliding() + "\n"
+                + "Jumping?: " + player.IsJumping() + "\n"
+                + "Wallrunning?: " + player.IsWallrunning() + "\n"
+                + "Falling?: " + player.IsFalling() + "\n");
     }
 
     float GetModifiedSmoothTime(float smoothTime)

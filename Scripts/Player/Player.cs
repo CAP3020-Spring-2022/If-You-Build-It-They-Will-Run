@@ -55,5 +55,9 @@ namespace PlayerData {
 		public bool IsWallrunning() {
 			return this.action == ActionHandler.ActionType.WALLRUN ? true : false;
 		}
+
+		public bool IsFalling() {
+			return this.action == ActionHandler.ActionType.FALLING ? true : false;
+		}
     }
 }
