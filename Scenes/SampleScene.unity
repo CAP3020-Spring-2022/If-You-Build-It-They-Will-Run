@@ -2759,6 +2759,7 @@ MonoBehaviour:
   menu: {fileID: 689360672}
   stambar: {fileID: 764728332}
   healthbar: {fileID: 284930668}
+  drop: {fileID: 248939307}
   buildcanvas: {fileID: 84139231}
 --- !u!1 &1353629852
 GameObject:
@@ -2874,6 +2875,7 @@ MonoBehaviour:
   menu: {fileID: 248939307}
   stambar: {fileID: 1702907838}
   healthbar: {fileID: 926241949}
+  drop: {fileID: 248939307}
   buildcanvas: {fileID: 84139231}
 --- !u!4 &1357926581
 Transform:
