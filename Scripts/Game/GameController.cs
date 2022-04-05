@@ -5,11 +5,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using PlayerData;
 
 public class GameController : MonoBehaviour {
     public GameObject menu;
     public GameObject stambar;
     public GameObject healthbar;
+    
+    public GameObject drop;
 
     public GameObject buildcanvas;
     void Start()
@@ -17,8 +21,13 @@ public class GameController : MonoBehaviour {
         // menu.SetActive(false);
     }
 	public void Update () {
-        if (Input.GetKey("escape"))
-            Application.Quit();
+        if (Input.GetKey("escape")){
+            Application.Quit();}
+            
+        if (drop.activeSelf){
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            }
 	}
 
 
@@ -33,9 +42,9 @@ public class GameController : MonoBehaviour {
         Application.Quit();	
     }
 
-    public void camOnClick(){
-        // press.
-    }
+    // public void camOnClick(){
+    //     cameraSettings.HitButton();
+    // }
 
     public void ResumeOnClick(){
         menu.SetActive(false);

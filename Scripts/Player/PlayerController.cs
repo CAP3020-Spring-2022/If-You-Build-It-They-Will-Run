@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
         /* textBox.text = grounded.ToString() + " " + rb.velocity.x.ToString("f2") + " " + rb.velocity.y.ToString("f2") + " " + rb.velocity.z.ToString("f2"); */
     }
 
-    void Inputs() {
+    public void Inputs() {
         input = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
         normalInput = new Vector2(input.x, input.z).normalized;
 
@@ -130,9 +130,13 @@ public class PlayerController : MonoBehaviour
             StartWallrun();
         }
 
-        if(Input.GetKey(KeyCode.Period)) {
-            cameraSettings.HitButton();
-        }
+        // if(Input.GetKey(KeyCode.Period)) {
+        //     cameraSettings.HitButton();
+        // }
+    }
+    public void camOnClick(){
+        cameraSettings.HitButton();
+        Debug.Log("reached");
     }
 
     void Movements()
