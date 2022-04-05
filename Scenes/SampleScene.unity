@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -498,6 +498,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 273196407}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &284930668 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6305115885773772858, guid: 9948a4d91e2196349898091b900f16b6, type: 3}
+  m_PrefabInstance: {fileID: 942833747}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &307017406 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1841775886297808995, guid: e90ffe3b7ae85fa4fb88905b33c03a8e, type: 3}
@@ -1369,6 +1374,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &764728332 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7976361126499600247, guid: d3275e22bbcd9944e8fd0d40642ef8cf, type: 3}
+  m_PrefabInstance: {fileID: 870013489}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &830306280
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2717,9 +2727,9 @@ MonoBehaviour:
   cam1: {fileID: 1472608350}
   cam2: {fileID: 963194225}
   playerController: {fileID: 0}
-  staminaBar: {fileID: 0}
-  momentumBar: {fileID: 0}
-  buildUI: {fileID: 0}
+  staminaBar: {fileID: 1666213342}
+  momentumBar: {fileID: 1963897920}
+  buildUI: {fileID: 672778038}
 --- !u!4 &1338443358
 Transform:
   m_ObjectHideFlags: 0
@@ -2746,10 +2756,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e548210cb66f44e30b5d4f5443a00a1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: {fileID: 0}
-  stambar: {fileID: 0}
-  healthbar: {fileID: 0}
-  buildcanvas: {fileID: 0}
+  menu: {fileID: 689360672}
+  stambar: {fileID: 764728332}
+  healthbar: {fileID: 284930668}
+  buildcanvas: {fileID: 84139231}
 --- !u!1 &1353629852
 GameObject:
   m_ObjectHideFlags: 0
