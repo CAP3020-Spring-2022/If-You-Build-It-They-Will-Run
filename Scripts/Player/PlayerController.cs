@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
 
     /** Jump **/
     bool jumpCheck = true;
-    float jumpHeight = 7.0f;
+    float jumpHeight = 2000.0f;
 
     [Range(0,1)]
     float airControlPercent; // TODO: reimplement
@@ -203,8 +203,8 @@ public class PlayerController : MonoBehaviour
             jumpCheck = false;
             player.action = ActionHandler.ActionType.JUMP;
 
-            rb.AddForce(Vector3.up * jumpHeight * 1.5f);
-            rb.AddForce(normalVector * jumpHeight * 0.5f);
+            rb.AddForce(Vector3.up * jumpHeight * 1.5f * Time.deltaTime);
+            rb.AddForce(normalVector * jumpHeight * 0.5f * Time.deltaTime);
         }
     }
 
@@ -212,12 +212,8 @@ public class PlayerController : MonoBehaviour
         if(rb.velocity.magnitude > 0.5f && grounded) {
             player.action = ActionHandler.ActionType.SLIDE;
             rb.AddForce(transform.forward * slideForce);
-     //       standingCollider.enabled = false;
-     //       slidingCollider.enabled = true;
         }else{
             player.action = ActionHandler.ActionType.WALK_RUN;
-     //       standingCollider.enabled = true;
-     //       slidingCollider.enabled = false;
         }
     }
 
