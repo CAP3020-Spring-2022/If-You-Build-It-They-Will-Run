@@ -1,11 +1,18 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 using PlayerData;
 
 public class PlayerController : MonoBehaviour
 {
     public Text textBox;
+
+    /** Raycast **/
+    float maxVaultCastDistance = 2f;
+    RaycastHit VaultHit;
+    bool isVaultable = false;
 
     /** Camera **/
     Transform cameraT;
@@ -100,15 +107,20 @@ public class PlayerController : MonoBehaviour
         {
             float targetRotation = Mathf.Atan2(normalInput.x, normalInput.y) * Mathf.Rad2Deg + cameraT.eulerAngles.y;
             transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, GetModifiedSmoothTime(turnSmoothTime));
-            // transform.localRotation = Quaternion.Euler(0, cameraT.transform.localRotation.eulerAngles.y, 0);
         }
+
+        //TODO: make this only trigger if it hits an object with the vaultable tag
+        isVaultable = Physics.Raycast(transform.position, transform.forward, out VaultHit, maxVaultCastDistance);
 
         if(Input.GetKeyDown(KeyCode.LeftShift)) {
             player.ToggleSprinting();
         }
 
         if(Input.GetKey(KeyCode.Space) && player.stamina >= 15.0f && jumpCheck) {
-            Jump();
+            if(isVaultable)
+                Vault();
+            else
+                Jump();
         }
 
         if(Input.GetKeyDown(KeyCode.LeftControl) && player.momentum >= 0.4f) {
@@ -190,6 +202,23 @@ public class PlayerController : MonoBehaviour
         }
     } */
 
+    void OnDrawGizmos()
+    {
+        if(isVaultable)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(transform.position, transform.forward * VaultHit.distance);
+        }
+        else
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawRay(transform.position, transform.forward * maxVaultCastDistance);
+        }
+    }
+    void Vault()
+    {
+
+    }
     void Jump()
     {
         if(grounded) {
