@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     float jumpHeight = 2000.0f;
 
     [Range(0,1)]
-    float airControlPercent; // TODO: reimplement
+    public float airControlPercent; // TODO: reimplement
     //TODO: post video link that implements this for reference
 
     /** Slide **/
