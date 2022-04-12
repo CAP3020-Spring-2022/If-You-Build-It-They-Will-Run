@@ -6,11 +6,6 @@ using PlayerData;
 public class PlayerController : MonoBehaviour
 {
     public Text textBox;
-    /*
-    public CapsuleCollider standingCollider;
-    public CapsuleCollider slidingCollider;
-    */
-
 
     /** Camera **/
     Transform cameraT;
@@ -21,7 +16,6 @@ public class PlayerController : MonoBehaviour
     // Transform orientation;
     Rigidbody rb;
     Player player = new Player();
-    // float x, y;
 
     /** Movement **/
     Vector3 normalVector = Vector3.up;
@@ -29,7 +23,7 @@ public class PlayerController : MonoBehaviour
     Vector2 normalInput; // normalized x and z movement
 
     float maxSlopeAngle = 35f;
-    public bool grounded; // TODO: put into player
+    public bool grounded;
     float turnSmoothTime = .2f;
     float turnSmoothVelocity;
     float speedSmoothTime = .1f;
@@ -44,8 +38,7 @@ public class PlayerController : MonoBehaviour
     float jumpHeight = 2000.0f;
 
     [Range(0,1)]
-    public float airControlPercent; // TODO: reimplement
-    //TODO: post video link that implements this for reference
+    public float airControlPercent;
 
     /** Slide **/
     float slideForce = 10f;
@@ -62,15 +55,15 @@ public class PlayerController : MonoBehaviour
 
     void Awake() {
         rb = GetComponent<Rigidbody>();
-        /* Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false; */
     }
-//TODO: HAVE 2 COLLIDERS, A SMALL BOX AND A LARGE CAPSULE, THEN DISABLE THE LARGE CAPSULE DURING SLIDE
-//USE .ENABLED() FUNCTION TO SET THE CAPSULE COLLIDERS STATUS
 
+//TODO: Create Vaulting mechanic using a raycast and tags for vaultable objects. 
+// https://youtu.be/na96A7V6qbM
+// https://www.youtube.com/watch?v=Hbo7vmsrABU
 
-//TODO: FIND OUT WHY PLAYER ISN'T MOVING
-//MAYBE THE SAME REASON WHY IT ROTATES INCORRECTLY
+// RAYCAST TUTORIAL
+// https://www.youtube.com/watch?v=CoTK39SZft8
+
 
     // Start is called before the first frame update
     void Start()
