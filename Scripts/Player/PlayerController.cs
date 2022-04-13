@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public bool DebugMode = true;
 
     /** Raycast **/
-    float maxRaycastDistance = 2f;
+    float maxRaycastDistance = 2.2f;
     RaycastHit RayHit;
     bool isVaultable = false;
     bool rayTrigger = false;
@@ -241,7 +241,7 @@ public class PlayerController : MonoBehaviour
 
             rb.AddForce(Vector3.up * jumpHeight);
             rb.AddForce(normalVector * jumpHeight * 0.5f);
-            rb.AddForce(transform.forward * 100.0f);
+            rb.AddForce(transform.forward * 1000.0f);
 
             //in the actionhandler it should play the animation and change colliders
         }
