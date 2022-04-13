@@ -90,12 +90,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /* if(!this.gameObject.activeSelf) {
-            return;
-        } */
         Inputs();
         Movements();
-        /* Animations(); */ // no longer needed because it gets handled automatically now
         CheckForWall();
 
         UpdateMomentum();
@@ -189,33 +185,10 @@ public class PlayerController : MonoBehaviour
         }
         
         // set velocity of rigidbody
-        player.velocity = transform.TransformDirection(input) * player.speed;
+        player.velocity = transform.TransformDirection(normalInput) * player.speed;
         Vector3 vel = new Vector3(0, rb.velocity.y, 0);
         rb.velocity = vel + transform.forward * player.speed;
     }
-
-
-    // Handles control of ActionHandler depending on movement type, actual 
-    // variables changes of animator handled in ActionHandler.cs
-    /* void Animations() {
-        switch(player.action) {
-            case ActionHandler.ActionType.WALK_RUN:
-                break; // default handled
-            case ActionHandler.ActionType.JUMP:
-                Jump();
-                break;
-            case ActionHandler.ActionType.SLIDE:
-                Slide();
-                break;
-            case ActionHandler.ActionType.FALLING:
-                if(grounded)
-                    player.action = ActionHandler.ActionType.WALK_RUN;
-                break;
-            case ActionHandler.ActionType.WALLRUN:
-                Wallrun();
-                break;
-        }
-    } */
 
     void OnDrawGizmos()
     {
@@ -241,10 +214,11 @@ public class PlayerController : MonoBehaviour
 
             rb.AddForce(Vector3.up * jumpHeight);
             rb.AddForce(normalVector * jumpHeight * 0.5f);
-            rb.AddForce(transform.forward * 1000.0f);
-
-            //in the actionhandler it should play the animation and change colliders
+            //rb.AddForce(transform.forward * 1000.0f);
+                   // transform.Translate(transform.forward);
         }
+        
+        //transform.Translate(input * Time.deltaTime * 5);
     }
     void Jump()
     {
