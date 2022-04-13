@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &84139231 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8176211129331169733, guid: 60ef79e992b7a694d9272278a258d6e1, type: 3}
-  m_PrefabInstance: {fileID: 703334501}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &94415794
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,11 +494,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 273196407}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &284930668 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6305115885773772858, guid: 9948a4d91e2196349898091b900f16b6, type: 3}
-  m_PrefabInstance: {fileID: 942833747}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &307017406 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1841775886297808995, guid: e90ffe3b7ae85fa4fb88905b33c03a8e, type: 3}
@@ -1409,11 +1399,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &764728332 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7976361126499600247, guid: d3275e22bbcd9944e8fd0d40642ef8cf, type: 3}
-  m_PrefabInstance: {fileID: 870013489}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &830306280
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1893,11 +1878,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e90ffe3b7ae85fa4fb88905b33c03a8e, type: 3}
---- !u!1 &926241949 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7976361128187384750, guid: d3275e22bbcd9944e8fd0d40642ef8cf, type: 3}
-  m_PrefabInstance: {fileID: 870013489}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &942833747
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2875,11 +2855,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e548210cb66f44e30b5d4f5443a00a1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: {fileID: 689360672}
-  stambar: {fileID: 764728332}
-  healthbar: {fileID: 284930668}
-  drop: {fileID: 248939307}
-  buildcanvas: {fileID: 84139231}
+  menu: {fileID: 0}
+  stambar: {fileID: 0}
+  healthbar: {fileID: 0}
+  drop: {fileID: 0}
+  buildcanvas: {fileID: 0}
 --- !u!1 &1353629852
 GameObject:
   m_ObjectHideFlags: 0
@@ -2991,11 +2971,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e548210cb66f44e30b5d4f5443a00a1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: {fileID: 248939307}
-  stambar: {fileID: 1702907838}
-  healthbar: {fileID: 926241949}
-  drop: {fileID: 248939307}
-  buildcanvas: {fileID: 84139231}
+  menu: {fileID: 0}
+  stambar: {fileID: 0}
+  healthbar: {fileID: 0}
+  drop: {fileID: 0}
+  buildcanvas: {fileID: 0}
 --- !u!4 &1357926581
 Transform:
   m_ObjectHideFlags: 0
@@ -8572,11 +8552,6 @@ MonoBehaviour:
   gridSize: {x: 1, y: 1, z: 1}
   cam1: {fileID: 1472608350}
   cam2: {fileID: 963194225}
---- !u!1 &1702907838 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6305115884704665555, guid: 9948a4d91e2196349898091b900f16b6, type: 3}
-  m_PrefabInstance: {fileID: 942833747}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1750630035
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8616,6 +8591,10 @@ PrefabInstance:
       propertyPath: airControlPercent
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 5133978305828154795, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 47584bb827783ba46967d22fccc45bcf, type: 2}
     - target: {fileID: 8502049608461673124, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
       propertyPath: m_RootOrder
       value: 14

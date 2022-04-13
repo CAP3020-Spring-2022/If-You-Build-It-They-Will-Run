@@ -1,14 +1,20 @@
 fileFormatVersion: 2
-guid: c4312fea73ec17f40bfd17e48e906fc8
+guid: ddaa97bd42ba3224fb26aa0d70bfe94c
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: 7176209919637214875
-    second: Action
+    second: Wallrun
   - first:
       74: 1474744063889944348
     second: Armature|mixamo.com|Layer0
+  - first:
+      74: 1021645820220355276
+    second: Armature|mixamo.com|Layer0.001
+  - first:
+      74: -1364474898790094943
+    second: Armature|mixamo.com|Layer0.002
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -22,7 +28,14 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: 
+    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
+      copied configuration does not match position in animation file:\n\t'mixamorig:LeftUpLeg'
+      : position error = 101.350533 mm\n\t'mixamorig:LeftLeg' : position error =
+      418.592194 mm\n\t'mixamorig:LeftFoot' : position error = 345.641693 mm\n\t'mixamorig:LeftToeBase'
+      : position error = 153.031967 mm\n\t'mixamorig:RightUpLeg' : position error
+      = 101.078400 mm\n\t'mixamorig:RightLeg' : position error = 418.582916 mm\n\t'mixamorig:RightFoot'
+      : position error = 345.637970 mm\n\t'mixamorig:RightToeBase' : position error
+      = 153.620590 mm\n"
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -36,7 +49,36 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Wallrun
+      takeName: Action
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 28
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []

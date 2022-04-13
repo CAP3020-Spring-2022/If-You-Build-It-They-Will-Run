@@ -246,7 +246,7 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(Vector3.up * jumpHeight);
         rb.AddForce(normalVector * jumpHeight * 0.5f);
         //rb.AddForce(transform.forward * 1000.0f);
-        // transform.Translate(transform.forward);
+        transform.Translate(transform.forward);
     }
     
     void Jump()
