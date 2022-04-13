@@ -452,7 +452,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5548068151598006875, guid: 6cc1db91b7ae4d642b95cead6d9fd333, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -374.6
+      value: -400
       objectReference: {fileID: 0}
     - target: {fileID: 5548068151598006875, guid: 6cc1db91b7ae4d642b95cead6d9fd333, type: 3}
       propertyPath: m_LocalPosition.z
@@ -493,7 +493,7 @@ PrefabInstance:
     - target: {fileID: 5548068151598006879, guid: 6cc1db91b7ae4d642b95cead6d9fd333, type: 3}
       propertyPath: Player
       value: 
-      objectReference: {fileID: 845874387}
+      objectReference: {fileID: 0}
     - target: {fileID: 5548068151598006879, guid: 6cc1db91b7ae4d642b95cead6d9fd333, type: 3}
       propertyPath: spawn.x
       value: 177
@@ -570,11 +570,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 571a9507f9da5834191f81105e05fe64, type: 3}
---- !u!1 &845874387 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9130636744443246622, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
-  m_PrefabInstance: {fileID: 320280301}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -857,11 +852,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e548210cb66f44e30b5d4f5443a00a1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: {fileID: 0}
-  stambar: {fileID: 0}
-  healthbar: {fileID: 0}
-  drop: {fileID: 0}
-  buildcanvas: {fileID: 0}
 --- !u!1001 &1472608349
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -936,15 +926,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f39057e79c312e4aab9aa47819dad27, type: 3}
       propertyPath: m_LocalScale.x
-      value: 90
+      value: 40.17701
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f39057e79c312e4aab9aa47819dad27, type: 3}
       propertyPath: m_LocalScale.y
-      value: 40
+      value: 20.421461
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f39057e79c312e4aab9aa47819dad27, type: 3}
       propertyPath: m_LocalScale.z
-      value: 70
+      value: 69.69934
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f39057e79c312e4aab9aa47819dad27, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1446,11 +1436,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e548210cb66f44e30b5d4f5443a00a1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: {fileID: 0}
-  stambar: {fileID: 0}
-  healthbar: {fileID: 0}
-  drop: {fileID: 0}
-  buildcanvas: {fileID: 0}
 --- !u!4 &8751578262603110127
 Transform:
   m_ObjectHideFlags: 0
