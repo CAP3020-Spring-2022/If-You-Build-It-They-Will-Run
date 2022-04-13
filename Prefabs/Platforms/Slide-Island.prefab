@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4876933053422263863}
   - component: {fileID: -7918335002988649766}
   - component: {fileID: 6810617627222560596}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5601857277592714878}
   - component: {fileID: 8295787077581458017}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Slide-Island
   m_TagString: Untagged
   m_Icon: {fileID: 0}
