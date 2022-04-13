@@ -9,15 +9,14 @@ public class PlayerController : MonoBehaviour
 {
     /** Debug **/
     public Text textBox;
-    public bool DebugMode = true;
+    public bool debugMode = true;
 
     /** Raycast **/
     float maxRaycastDistance = 2.2f;
-    RaycastHit RayHit;
+    RaycastHit rayHit;
     bool isVaultable = false;
     bool rayTrigger = false;
-    //Vector3 RaycastOffset = new Vector3(0, 1, 0);
-    Vector3 RaycastOffset = new Vector3(0, 0, 0);
+    Vector3 RaycastOffset = Vector3.zero;
 
     /** Camera **/
     Transform cameraT;
@@ -25,8 +24,8 @@ public class PlayerController : MonoBehaviour
 
     /** Player **/
     Animator animator;
-    // Transform orientation;
     Rigidbody rb;
+    Collider capsuleCollider;
     Player player = new Player();
 
     /** Movement **/
@@ -35,9 +34,6 @@ public class PlayerController : MonoBehaviour
     Vector2 normalInput; // normalized x and z movement
 
     float maxSlopeAngle = 35f;
-    public bool grounded;
-    float turnSmoothTime = .2f;
-    float turnSmoothVelocity;
     float speedSmoothTime = .1f;
     float speedSmoothVelocity;
 
@@ -47,16 +43,18 @@ public class PlayerController : MonoBehaviour
 
     /** Jump **/
     bool jumpCheck = true;
-    float jumpHeight = 150.0f;
+    float jumpHeight = 25.0f;
+    float turnSmoothTime = .2f;
+    float turnSmoothVelocity;
 
     [Range(0,1)]
     public float airControlPercent;
 
     /** Slide **/
-    float slideForce = 10f;
+    float slideForce = 30f;
 
     /** Wallrun **/
-    float wallrunForce;
+    float wallrunForce = 200f;
     float maxWallrunTime;
     float maxWallrunSpeed;
     bool isWallRight, isWallLeft;
@@ -87,36 +85,41 @@ public class PlayerController : MonoBehaviour
         player.action = ActionHandler.ActionType.WALK_RUN;
     }
 
+    void FixedUpdate() {
+        Movements();
+
+        UpdateMomentum();
+        UpdateStamina();
+    }
+
     // Update is called once per frame
     void Update()
     {
         Inputs();
-        Movements();
         CheckForWall();
 
-        UpdateMomentum();
-        UpdateStamina();
-
-        if(DebugMode)
-            textBox.text = "rayTrigger = " + rayTrigger + ". isVaultable = " + isVaultable; 
+        if(debugMode)
+            textBox.text = "rayTrigger = " + rayTrigger + ". isVaultable = " + isVaultable;
     }
 
     public void Inputs() {
         input = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
         normalInput = new Vector2(input.x, input.z).normalized;
 
-        if(normalInput != Vector2.zero) // change direction of player depending on rotation of camera
+        /* rb.velocity = Vector3.zero; */
+
+        if(normalInput != Vector2.zero && !player.IsWallrunning()) // change direction of player depending on rotation of camera
         {
             float targetRotation = Mathf.Atan2(normalInput.x, normalInput.y) * Mathf.Rad2Deg + cameraT.eulerAngles.y;
             transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, GetModifiedSmoothTime(turnSmoothTime));
         }
 
         Ray ray = new Ray(transform.position + RaycastOffset, transform.forward);
-        rayTrigger = Physics.Raycast(ray, out RayHit, maxRaycastDistance);
+        rayTrigger = Physics.Raycast(ray, out rayHit, maxRaycastDistance);
 
         if(rayTrigger)
         {
-            if(RayHit.collider.tag == "Vaultable")
+            if(rayHit.collider.tag == "Vaultable")
                 isVaultable = true;
             else
                 isVaultable = false;
@@ -128,48 +131,36 @@ public class PlayerController : MonoBehaviour
             player.ToggleSprinting();
         }
 
-        if(Input.GetKey(KeyCode.Space) && player.stamina >= 15.0f && jumpCheck) {
+        if(Input.GetKey(KeyCode.Space) && player.stamina >= 15.0f && (jumpCheck 
+        || player.onWall)) {
             if(isVaultable)
-                Vault();
+                player.SetVaulting(true);
             else
-                Jump();
+                player.SetJumping(true);
         }
 
-        if(Input.GetKeyDown(KeyCode.LeftControl) && player.momentum >= 0.4f) {
-            Slide();
+        if(Input.GetKeyDown(KeyCode.LeftControl) && player.momentum >= 0.1f && player.grounded) {
+            player.SetSliding(true);
         }
 
-        if(Input.GetKey(KeyCode.D) && isWallRight) {
-            StartWallrun();
+        if(Input.GetKeyDown(KeyCode.Mouse1) && player.onWall) {
+            player.SetWallrunning(true);
         }
 
-        if(Input.GetKey(KeyCode.A) && isWallLeft) {
-            StartWallrun();
+        if(Input.GetKey(KeyCode.L)) {
+            PrintDebugInfo();
         }
-
-        // if(Input.GetKey(KeyCode.Period)) {
-        //     cameraSettings.HitButton();
-        // }
-    }
-    public void camOnClick(){
-        cameraSettings.HitButton();
-        Debug.Log("reached");
     }
 
     void Movements()
     {           
-        if(rb.velocity.y <= -1.1f && !grounded) { // check before applying gravity?
-            player.action = ActionHandler.ActionType.FALLING;
-        }
-
-        rb.AddForce(Vector3.down * Time.deltaTime * gravity); // gravity
-
-        // get speed multiplier
-        float targetSpeed = walkSpeed;
-        if(player.IsSprinting()) {
-            targetSpeed = runSpeed;
-        }
+        HandleInputs();
+        ApplyGravity();
+        FallingCheck();
+        
+        float targetSpeed = GetTargetSpeed();
         targetSpeed *= normalInput.magnitude;
+        
         /* targetSpeed *= 1.0f + player.momentum; */
         /* targetSpeed *= normalInput.magnitude; */ // I don't think this does anything
         player.speed = Mathf.SmoothDamp(player.speed, targetSpeed, ref speedSmoothVelocity, GetModifiedSmoothTime(speedSmoothTime)) * normalInput.magnitude;
@@ -178,10 +169,12 @@ public class PlayerController : MonoBehaviour
         CounterMove(input.x, input.y, relativeVel, targetSpeed); */
         
         // reset things if grounded
-        if(grounded) {
+        if(player.grounded) {
             jumpCheck = true;
-            if(player.action == ActionHandler.ActionType.FALLING)
+            if(player.IsFalling() || player.IsWallrunning()) {
                 player.action = ActionHandler.ActionType.WALK_RUN;
+                rb.useGravity = true;
+            }
         }
         
         // set velocity of rigidbody
@@ -190,70 +183,112 @@ public class PlayerController : MonoBehaviour
         rb.velocity = vel + transform.forward * player.speed;
     }
 
-    void OnDrawGizmos()
-    {
-        if(DebugMode)
-        {
-            if(rayTrigger)
-            {
-                Gizmos.color = Color.red;
-                Gizmos.DrawRay(transform.position + RaycastOffset, transform.forward * RayHit.distance);
-            }
+    private float GetTargetSpeed() {
+        if(player.IsSprinting())
+            return runSpeed;
+        else
+            return walkSpeed;
+    }
+
+    private void HandleInputs() {
+        if(player.IsJumping()) {
+            Jump();
+        }
+        if(player.IsSliding()) {
+            Slide();
+        }
+        if(player.IsWallrunning()) {
+            Wallrun();
+        }
+    }
+
+    private void VaultCheck() {
+        Ray ray = new Ray(transform.position + RaycastOffset, transform.forward);
+        rayTrigger = Physics.Raycast(ray, out rayHit, maxRaycastDistance);
+
+        if(rayTrigger) {
+            if(rayHit.collider.tag == "Vaultable")
+                isVaultable = true;
             else
-            {
+                isVaultable = false;
+        }else
+            isVaultable = false;
+    }
+
+    private void ApplyGravity() {
+        if(!player.grounded) {
+            rb.AddForce(Vector3.down * Time.fixedDeltaTime * gravity);
+        }
+    }
+
+    private void FallingCheck() {
+        if(rb.velocity.y >= -1.1f 
+          && !player.grounded 
+          && !player.IsFalling() 
+          && !player.IsWallrunning()) {
+            player.SetFalling(true);
+        }
+    }
+
+    void OnDrawGizmos() {
+        if(debugMode) {
+            if(rayTrigger) {
+                Gizmos.color = Color.red;
+                Gizmos.DrawRay(transform.position + RaycastOffset, transform.forward * rayHit.distance);
+            }else{
                 Gizmos.color = Color.blue;
                 Gizmos.DrawRay(transform.position + RaycastOffset, transform.forward * maxRaycastDistance);
             }
         }
     }
-    void Vault()
-    {
-        if(player.action != ActionHandler.ActionType.VAULTING && player.action != ActionHandler.ActionType.JUMP && grounded)
-        {
-            player.action = ActionHandler.ActionType.VAULTING;
 
-            rb.AddForce(Vector3.up * jumpHeight);
-            rb.AddForce(normalVector * jumpHeight * 0.5f);
-            //rb.AddForce(transform.forward * 1000.0f);
-                   // transform.Translate(transform.forward);
-        }
-        
-        //transform.Translate(input * Time.deltaTime * 5);
+    public void Vault() {
+        rb.AddForce(Vector3.up * jumpHeight);
+        rb.AddForce(normalVector * jumpHeight * 0.5f);
+        //rb.AddForce(transform.forward * 1000.0f);
+        // transform.Translate(transform.forward);
     }
+    
     void Jump()
     {
-        if(player.action != ActionHandler.ActionType.JUMP && player.action != ActionHandler.ActionType.VAULTING && grounded)
-        {
+        if(player.grounded) {
             jumpCheck = false;
-            player.action = ActionHandler.ActionType.JUMP;
-
-            rb.AddForce(Vector3.up * jumpHeight);
+            rb.AddForce(Vector3.up * jumpHeight * 1.5f);
             rb.AddForce(normalVector * jumpHeight * 0.5f);
+        }else if(player.onWall) {
+            rb.AddForce(Vector3.up * jumpHeight * 0.5f);
+            rb.AddForce(normalVector * jumpHeight * 1.5f);
         }
     }
 
     void Slide() {
-        if(rb.velocity.magnitude > 0.5f && grounded) {
-            player.action = ActionHandler.ActionType.SLIDE;
+        if(/* rb.velocity.magnitude > 0.5f &&  */player.grounded) {
+            // player.action = ActionHandler.ActionType.SLIDE;
             rb.AddForce(transform.forward * slideForce);
         }else{
-            player.action = ActionHandler.ActionType.WALK_RUN;
+            //collider.ENABLED = true;
+            // player.action = ActionHandler.ActionType.WALK_RUN;
         }
     }
 
-    void StartWallrun() {
+    void Wallrun() {
+        rb.AddForce(new Vector3(0.0f, 1.0f, 0.0f));
         rb.useGravity = false;
-        player.action = ActionHandler.ActionType.WALLRUN;
-
-        if(rb.velocity.magnitude <= maxWallrunSpeed) {
-            rb.AddForce(transform.forward * wallrunForce * Time.deltaTime);
+        // player.action = ActionHandler.ActionType.WALLRUN;
+         // Debug.Log("Happens");
+        
+        /* if(rb.velocity.magnitude <= maxWallrunSpeed) { */
+            rb.AddForce(transform.forward * wallrunForce);
 
             // stick character to wall
             if(isWallRight)
-                rb.AddForce(transform.right * wallrunForce / 5 * Time.deltaTime);
-            else
-                rb.AddForce(-transform.right * wallrunForce / 5 * Time.deltaTime);
-        }
+                rb.AddForce(transform.right * wallrunForce / 10 * Time.deltaTime);
+            else if(isWallLeft)
+                rb.AddForce(-transform.right * wallrunForce / 10 * Time.deltaTime);
+        // }
+
+        if(rb.velocity.x == 0.0f && rb.velocity.z == 0.0f)
+            StopWallrun();
     }
 
     void StopWallrun() {
@@ -265,7 +300,12 @@ public class PlayerController : MonoBehaviour
         isWallRight = Physics.Raycast(transform.position, transform.right, 1f, wallLayer);
         isWallLeft = Physics.Raycast(transform.position, -transform.right, 1f, wallLayer);
 
-        if(!isWallLeft && !isWallRight && player.IsWallrunning())
+        if(isWallLeft || isWallRight)
+            player.onWall = true;
+        else
+            player.onWall = false;
+
+        if(!player.onWall && player.IsWallrunning())
             StopWallrun();
     }
 
@@ -283,7 +323,7 @@ public class PlayerController : MonoBehaviour
         for(int i = 0; i < other.contactCount; i++) {
             Vector3 normal = other.contacts[i].normal;
             if(IsFloor(normal)) { // if its just a slope you never left the ground
-                grounded = true;
+                player.grounded = true;
                 cancellingGrounded = false;
                 normalVector = normal;
                 CancelInvoke(nameof(StopGrounded));
@@ -298,9 +338,9 @@ public class PlayerController : MonoBehaviour
             Invoke(nameof(StopGrounded), Time.deltaTime * delay);
         }
     }
-
+    
     private void StopGrounded() {
-        grounded = false;
+        player.grounded = false;
     }
 
     void UpdateMomentum() {
@@ -361,9 +401,24 @@ public class PlayerController : MonoBehaviour
         player.stamina = ns;
     }
 
+    void PrintDebugInfo() {
+        Debug.Log(
+                  "-------PLAYER INFO-------\n"
+                + "ACTION       : " + player.action + "\n"
+                + "VELOCITY     : " + player.velocity + "\n"
+                + "GROUNDED     : " + player.grounded + "\n"
+                + "EULER ANGLES : " + transform.eulerAngles + "\n"
+                + "------MOVEMENT TYPES------\n"
+                + "SPRINTING   : " + player.IsSprinting() + "\n"
+                + "SLIDING     : " + player.IsSliding() + "\n"
+                + "JUMPING     : " + player.IsJumping() + "\n"
+                + "WALLRUNNING : " + player.IsWallrunning() + "\n"
+                + "FALLING     : " + player.IsFalling() + "\n");
+    }
+
     float GetModifiedSmoothTime(float smoothTime)
     {
-        if(grounded)
+        if(player.grounded)
             return smoothTime;
 
         if(airControlPercent == 0)

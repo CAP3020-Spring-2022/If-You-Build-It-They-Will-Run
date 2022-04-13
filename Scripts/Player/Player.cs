@@ -16,6 +16,9 @@ namespace PlayerData {
 		public float momentum { get; set; }
 		public float speed { get; set; }
 
+		public bool grounded { get; set; }
+		public bool onWall { get; set; }
+
 		public ActionHandler.ActionType action { get; set; }
 
 		public Player() {
@@ -26,6 +29,7 @@ namespace PlayerData {
 			action = ActionHandler.ActionType.WALK_RUN;
 		}
 
+		// TODO: Sprinting is technically just a speed mod, why have it change action?
 		public void SetSprinting(bool flag) {
 			sprinting = flag;
 			if(flag) {
@@ -44,16 +48,54 @@ namespace PlayerData {
 
 		public bool IsSliding()
 		{
-			return this.action == ActionHandler.ActionType.SLIDE ? true : false;
+			return this.action == ActionHandler.ActionType.SLIDE;
 		}
 
 		public bool IsJumping()
 		{
-			return this.action == ActionHandler.ActionType.JUMP ? true : false;
+			return this.action == ActionHandler.ActionType.JUMP;
 		}
 
 		public bool IsWallrunning() {
-			return this.action == ActionHandler.ActionType.WALLRUN ? true : false;
+			return this.action == ActionHandler.ActionType.WALLRUN;
+		}
+
+		public bool IsFalling() {
+			return this.action == ActionHandler.ActionType.FALLING;
+		}
+		
+		public bool isVaulting() {
+			return this.action == ActionHandler.ActionType.VAULT;
+		}
+
+		public void SetJumping(bool flag) {
+			if(flag && grounded) {
+				action = ActionHandler.ActionType.JUMP;
+			}
+		}
+
+		public void SetSliding(bool flag) {
+			if(flag && grounded) {
+				action = ActionHandler.ActionType.SLIDE;
+			}
+		}
+
+		public void SetWallrunning(bool flag) {
+			if(flag && onWall) {
+				action = ActionHandler.ActionType.WALLRUN;
+			}
+		}
+		
+		public void SetFalling(bool flag) {
+			if(flag && !grounded) {
+				action = ActionHandler.ActionType.FALLING;
+			}
+		}
+
+		public void SetVaulting(bool flag) {
+			if(flag) {
+				action = ActionHandler.ActionType.VAULT;
+			}
 		}
     }
 }
