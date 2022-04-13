@@ -65,7 +65,7 @@ namespace PlayerData {
 			return this.action == ActionHandler.ActionType.FALLING;
 		}
 		
-		public bool isVaulting() {
+		public bool IsVaulting() {
 			return this.action == ActionHandler.ActionType.VAULT;
 		}
 

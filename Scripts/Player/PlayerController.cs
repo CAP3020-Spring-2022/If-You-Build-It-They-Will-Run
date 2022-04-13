@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
     bool isWallRight, isWallLeft;
 
     /** Vault **/
-    float vaultHeight = 10000f;
+    float vaultHeight = 25f;
 
     /** World **/
     public LayerMask groundLayer;
@@ -203,6 +203,9 @@ public class PlayerController : MonoBehaviour
         if(player.IsWallrunning()) {
             Wallrun();
         }
+        if(player.IsVaulting()) {
+            Vault();
+        }
     }
 
     private void VaultCheck() {
@@ -341,7 +344,7 @@ public class PlayerController : MonoBehaviour
         float delay = 3f;
         if(!cancellingGrounded) {
             cancellingGrounded = true;
-            Invoke(nameof(StopGrounded), Time.deltaTime * delay);
+            Invoke(nameof(StopGrounded), Time.fixedDeltaTime * delay);
         }
     }
     
