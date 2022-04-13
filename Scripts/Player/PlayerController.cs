@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-//TODO: Create Vaulting mechanic using a raycast and tags for vaultable objects. 
+// TODO: Create Vaulting mechanic using a raycast and tags for vaultable objects. 
 // https://youtu.be/na96A7V6qbM
 // https://www.youtube.com/watch?v=Hbo7vmsrABU
 
@@ -249,7 +249,7 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(Vector3.up * vaultHeight);
         rb.AddForce(normalVector * vaultHeight * 0.5f);
         //rb.AddForce(transform.forward * 1000.0f);
-        transform.Translate(transform.forward);
+        // transform.Translate(transform.forward);
     }
     
     void Jump()
@@ -303,10 +303,13 @@ public class PlayerController : MonoBehaviour
         isWallRight = Physics.Raycast(transform.position, transform.right, 1f, wallLayer);
         isWallLeft = Physics.Raycast(transform.position, -transform.right, 1f, wallLayer);
 
-        if(isWallLeft || isWallRight)
+        if(isWallLeft || isWallRight) {
             player.onWall = true;
-        else
+            player.wallRight = isWallRight;
+        }else {
             player.onWall = false;
+            player.wallRight = false;
+        }
 
         if(!player.onWall && player.IsWallrunning())
             StopWallrun();

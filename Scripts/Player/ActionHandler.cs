@@ -107,6 +107,7 @@ namespace PlayerData {
                         slideTime = 0.0f;
                         player.action = ActionType.WALK_RUN;
                     }
+
                     standingCollider.enabled = false;
                     slidingCollider.enabled = true;
                     vaultingCollider.enabled = false;
@@ -117,6 +118,7 @@ namespace PlayerData {
                     vaultTime = 0.0f;
                     slideTime = 0.0f;
                     animator.SetBool("wallrunning", true);
+                    animator.SetBool("wallRight", player.wallRight);
                     animator.SetBool("jumping", false);
                     animator.SetBool("falling", false);
                     animator.SetBool("sliding", false);

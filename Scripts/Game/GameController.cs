@@ -24,10 +24,10 @@ public class GameController : MonoBehaviour {
         if (Input.GetKey("escape")){
             Application.Quit();}
             
-        if (drop.activeSelf){
+        /* if (drop.activeSelf){
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            }
+        } */ // TODO: Broken
 	}
 
 

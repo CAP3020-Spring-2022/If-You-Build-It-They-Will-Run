@@ -18,6 +18,7 @@ namespace PlayerData {
 
 		public bool grounded { get; set; }
 		public bool onWall { get; set; }
+		public bool wallRight { get; set; }
 
 		public ActionHandler.ActionType action { get; set; }
 
