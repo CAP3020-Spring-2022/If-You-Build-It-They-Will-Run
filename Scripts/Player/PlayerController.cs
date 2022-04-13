@@ -7,12 +7,17 @@ using PlayerData;
 
 public class PlayerController : MonoBehaviour
 {
+    /** Debug **/
     public Text textBox;
+    public bool DebugMode = true;
 
     /** Raycast **/
-    float maxVaultCastDistance = 2f;
-    RaycastHit VaultHit;
+    float maxRaycastDistance = 2f;
+    RaycastHit RayHit;
     bool isVaultable = false;
+    bool rayTrigger = false;
+    //Vector3 RaycastOffset = new Vector3(0, 1, 0);
+    Vector3 RaycastOffset = new Vector3(0, 0, 0);
 
     /** Camera **/
     Transform cameraT;
@@ -42,7 +47,7 @@ public class PlayerController : MonoBehaviour
 
     /** Jump **/
     bool jumpCheck = true;
-    float jumpHeight = 2000.0f;
+    float jumpHeight = 150.0f;
 
     [Range(0,1)]
     public float airControlPercent;
@@ -96,7 +101,8 @@ public class PlayerController : MonoBehaviour
         UpdateMomentum();
         UpdateStamina();
 
-        /* textBox.text = grounded.ToString() + " " + rb.velocity.x.ToString("f2") + " " + rb.velocity.y.ToString("f2") + " " + rb.velocity.z.ToString("f2"); */
+        if(DebugMode)
+            textBox.text = "rayTrigger = " + rayTrigger + ". isVaultable = " + isVaultable; 
     }
 
     public void Inputs() {
@@ -109,8 +115,18 @@ public class PlayerController : MonoBehaviour
             transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, GetModifiedSmoothTime(turnSmoothTime));
         }
 
-        //TODO: make this only trigger if it hits an object with the vaultable tag
-        isVaultable = Physics.Raycast(transform.position, transform.forward, out VaultHit, maxVaultCastDistance);
+        Ray ray = new Ray(transform.position + RaycastOffset, transform.forward);
+        rayTrigger = Physics.Raycast(ray, out RayHit, maxRaycastDistance);
+
+        if(rayTrigger)
+        {
+            if(RayHit.collider.tag == "Vaultable")
+                isVaultable = true;
+            else
+                isVaultable = false;
+        }
+        else
+            isVaultable = false;
 
         if(Input.GetKeyDown(KeyCode.LeftShift)) {
             player.ToggleSprinting();
@@ -146,7 +162,7 @@ public class PlayerController : MonoBehaviour
 
     void Movements()
     {           
-        if(rb.velocity.y <= -1.5f && !grounded) { // check before applying gravity?
+        if(rb.velocity.y <= -1.1f && !grounded) { // check before applying gravity?
             player.action = ActionHandler.ActionType.FALLING;
         }
 
@@ -161,7 +177,6 @@ public class PlayerController : MonoBehaviour
         /* targetSpeed *= 1.0f + player.momentum; */
         /* targetSpeed *= normalInput.magnitude; */ // I don't think this does anything
         player.speed = Mathf.SmoothDamp(player.speed, targetSpeed, ref speedSmoothVelocity, GetModifiedSmoothTime(speedSmoothTime)) * normalInput.magnitude;
-        /* Debug.Log("Player speed: " + player.GetSpeed()); */
 
         /* Vector2 relativeVel = GetRelativePlayerVelocity();
         CounterMove(input.x, input.y, relativeVel, targetSpeed); */
@@ -204,29 +219,42 @@ public class PlayerController : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        if(isVaultable)
+        if(DebugMode)
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawRay(transform.position, transform.forward * VaultHit.distance);
-        }
-        else
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawRay(transform.position, transform.forward * maxVaultCastDistance);
+            if(rayTrigger)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawRay(transform.position + RaycastOffset, transform.forward * RayHit.distance);
+            }
+            else
+            {
+                Gizmos.color = Color.blue;
+                Gizmos.DrawRay(transform.position + RaycastOffset, transform.forward * maxRaycastDistance);
+            }
         }
     }
     void Vault()
     {
+        if(player.action != ActionHandler.ActionType.VAULTING && player.action != ActionHandler.ActionType.JUMP && grounded)
+        {
+            player.action = ActionHandler.ActionType.VAULTING;
 
+            rb.AddForce(Vector3.up * jumpHeight);
+            rb.AddForce(normalVector * jumpHeight * 0.5f);
+            rb.AddForce(transform.forward * 100.0f);
+
+            //in the actionhandler it should play the animation and change colliders
+        }
     }
     void Jump()
     {
-        if(grounded) {
+        if(player.action != ActionHandler.ActionType.JUMP && player.action != ActionHandler.ActionType.VAULTING && grounded)
+        {
             jumpCheck = false;
             player.action = ActionHandler.ActionType.JUMP;
 
-            rb.AddForce(Vector3.up * jumpHeight * 1.5f * Time.deltaTime);
-            rb.AddForce(normalVector * jumpHeight * 0.5f * Time.deltaTime);
+            rb.AddForce(Vector3.up * jumpHeight);
+            rb.AddForce(normalVector * jumpHeight * 0.5f);
         }
     }
 

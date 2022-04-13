@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -5754084199372789682}
   - component: {fileID: -7511558181221131132}
   - component: {fileID: 4814181207303870089}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ramp-Island
   m_TagString: Untagged
   m_Icon: {fileID: 0}

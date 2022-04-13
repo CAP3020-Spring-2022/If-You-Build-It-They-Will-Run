@@ -1178,6 +1178,7 @@ GameObject:
   - component: {fileID: 171083780874031530}
   - component: {fileID: 7460853404639127177}
   - component: {fileID: 1531301616344105209}
+  - component: {fileID: 5367050194124999755}
   m_Layer: 0
   m_Name: Player Prefab
   m_TagString: Player
@@ -1250,8 +1251,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textBox: {fileID: 0}
+  DebugMode: 1
   cameraSettings: {fileID: 0}
   grounded: 0
+  airControlPercent: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -1270,8 +1273,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dfa5b4466790b249b0899a7769fc649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalSlideTime: 2
+  totalVaultTime: 7
   standingCollider: {fileID: 0}
   slidingCollider: {fileID: 0}
+  vaultingCollider: {fileID: 0}
 --- !u!136 &7460853404639127177
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1300,3 +1306,17 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 2
   m_Center: {x: 0, y: 0.5, z: 0.5}
+--- !u!136 &5367050194124999755
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9130636744443246622}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 0
+  m_Center: {x: 0, y: 1.4, z: 0}
