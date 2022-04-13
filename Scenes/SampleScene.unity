@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2092,6 +2092,11 @@ MonoBehaviour:
   dstFromTarget: 2
   pitchMinMax: {x: -40, y: 85}
   rotationSmoothTime: 0.12
+--- !u!1 &1047173861 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7976361126499600247, guid: d3275e22bbcd9944e8fd0d40642ef8cf, type: 3}
+  m_PrefabInstance: {fileID: 870013489}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1055380145
 GameObject:
   m_ObjectHideFlags: 0
@@ -2189,6 +2194,11 @@ MonoBehaviour:
   gridSize: {x: 1, y: 1, z: 1}
   cam1: {fileID: 1472608350}
   cam2: {fileID: 963194225}
+--- !u!1 &1077675381 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8176211129331169733, guid: 60ef79e992b7a694d9272278a258d6e1, type: 3}
+  m_PrefabInstance: {fileID: 703334501}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1084086736
 GameObject:
   m_ObjectHideFlags: 0
@@ -2855,11 +2865,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e548210cb66f44e30b5d4f5443a00a1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: {fileID: 0}
-  stambar: {fileID: 0}
-  healthbar: {fileID: 0}
-  drop: {fileID: 0}
-  buildcanvas: {fileID: 0}
+  menu: {fileID: 689360672}
+  stambar: {fileID: 1047173861}
+  healthbar: {fileID: 1494133764}
+  drop: {fileID: 248939307}
+  buildcanvas: {fileID: 1077675381}
 --- !u!1 &1353629852
 GameObject:
   m_ObjectHideFlags: 0
@@ -2971,11 +2981,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e548210cb66f44e30b5d4f5443a00a1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: {fileID: 0}
-  stambar: {fileID: 0}
-  healthbar: {fileID: 0}
-  drop: {fileID: 0}
-  buildcanvas: {fileID: 0}
+  menu: {fileID: 689360672}
+  stambar: {fileID: 1047173861}
+  healthbar: {fileID: 1494133764}
+  drop: {fileID: 248939307}
+  buildcanvas: {fileID: 1077675381}
 --- !u!4 &1357926581
 Transform:
   m_ObjectHideFlags: 0
@@ -8340,6 +8350,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1487829941}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1494133764 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6305115885773772858, guid: 9948a4d91e2196349898091b900f16b6, type: 3}
+  m_PrefabInstance: {fileID: 942833747}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1511919571
 GameObject:
   m_ObjectHideFlags: 0

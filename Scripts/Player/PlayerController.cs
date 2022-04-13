@@ -59,6 +59,9 @@ public class PlayerController : MonoBehaviour
     float maxWallrunSpeed;
     bool isWallRight, isWallLeft;
 
+    /** Vault **/
+    float vaultHeight = 10000f;
+
     /** World **/
     public LayerMask groundLayer;
     public LayerMask wallLayer;
@@ -243,8 +246,8 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Vault() {
-        rb.AddForce(Vector3.up * jumpHeight);
-        rb.AddForce(normalVector * jumpHeight * 0.5f);
+        rb.AddForce(Vector3.up * vaultHeight);
+        rb.AddForce(normalVector * vaultHeight * 0.5f);
         //rb.AddForce(transform.forward * 1000.0f);
         transform.Translate(transform.forward);
     }
