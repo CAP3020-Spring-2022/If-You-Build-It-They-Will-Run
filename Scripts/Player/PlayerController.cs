@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
     bool isWallRight, isWallLeft;
 
     /** Vault **/
-    float vaultHeight = 25f;
+    public float vaultHeight = 85;
 
     /** World **/
     public LayerMask groundLayer;
@@ -70,12 +70,10 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-// TODO: Create Vaulting mechanic using a raycast and tags for vaultable objects. 
-// https://youtu.be/na96A7V6qbM
-// https://www.youtube.com/watch?v=Hbo7vmsrABU
-
-// RAYCAST TUTORIAL
-// https://www.youtube.com/watch?v=CoTK39SZft8
+// TODO(Leo): Adjust vaulting and sliding to feel right
+// PROBLEM WITH VAULT: As soon as the isVaultable Raycast no longer detects a vaulatble object in front of the player, ie. in the middle of the animation when the ray is passing through or
+// over the vaultable object, isVaultable turns false and the player.action state gets set equal to a different state. The change of state here is an issue because it causes the animation to
+// snap quickly instead of transition and it also swaps to the standingCollider too quickly
 
 
     // Start is called before the first frame update
@@ -117,18 +115,7 @@ public class PlayerController : MonoBehaviour
             transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, GetModifiedSmoothTime(turnSmoothTime));
         }
 
-        Ray ray = new Ray(transform.position + RaycastOffset, transform.forward);
-        rayTrigger = Physics.Raycast(ray, out rayHit, maxRaycastDistance);
-
-        if(rayTrigger)
-        {
-            if(rayHit.collider.tag == "Vaultable")
-                isVaultable = true;
-            else
-                isVaultable = false;
-        }
-        else
-            isVaultable = false;
+        VaultCheck();
 
         if(Input.GetKeyDown(KeyCode.LeftShift)) {
             player.ToggleSprinting();
@@ -249,10 +236,15 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Vault() {
-        rb.AddForce(Vector3.up * vaultHeight);
-        rb.AddForce(normalVector * vaultHeight * 0.5f);
-        //rb.AddForce(transform.forward * 1000.0f);
-        // transform.Translate(transform.forward);
+        if(player.grounded)
+        {
+            //jumpCheck = false;
+            rb.AddForce(Vector3.up * vaultHeight);
+            // rb.AddForce(Vector3.up * vaultHeight * 1.5f);
+            // rb.AddForce(normalVector * vaultHeight * 0.5f);
+            // rb.AddForce(transform.forward * 1000.0f);
+            // transform.Translate(transform.forward);
+        }
     }
     
     void Jump()

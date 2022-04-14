@@ -8591,6 +8591,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 895824697}
     - target: {fileID: 2630928203756506021, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
+      propertyPath: vaultHeight
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 2630928203756506021, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
       propertyPath: cameraSettings
       value: 
       objectReference: {fileID: 1966822592}
@@ -8682,7 +8686,7 @@ GameObject:
   - component: {fileID: 1756466858}
   - component: {fileID: 1756466857}
   - component: {fileID: 1756466856}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Vault Cube
   m_TagString: Vaultable
   m_Icon: {fileID: 0}

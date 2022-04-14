@@ -1251,10 +1251,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textBox: {fileID: 0}
-  DebugMode: 1
+  debugMode: 1
   cameraSettings: {fileID: 0}
-  grounded: 0
   airControlPercent: 0
+  vaultHeight: 85
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -1319,4 +1319,4 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 0
-  m_Center: {x: 0, y: 1.2, z: 0}
+  m_Center: {x: 0, y: 1.3, z: 0}
