@@ -12,11 +12,22 @@ public class PlayerController : MonoBehaviour
     public bool debugMode = true;
 
     /** Raycast **/
-    float maxRaycastDistance = 2.2f;
-    RaycastHit rayHit;
     bool isVaultable = false;
+    RaycastHit rayHit;
+    RaycastHit rayHitBack;
     bool rayTrigger = false;
-    Vector3 RaycastOffset = Vector3.zero;
+    bool backRayTrigger = false;
+    //Set on Awake
+    Vector3 vaultingCastOffset;
+    float vaultingCastDistance = 3.2f;
+
+    Vector3 defaultCastOffset = Vector3.zero;
+    float defaultCastDistance = 2.2f;
+    //Set on Awake
+    float maxRaycastDistance;
+    //Set on Awake
+    Vector3 RaycastOffset;
+
 
     /** Camera **/
     Transform cameraT;
@@ -60,7 +71,7 @@ public class PlayerController : MonoBehaviour
     bool isWallRight, isWallLeft;
 
     /** Vault **/
-    public float vaultHeight = 85;
+    public float vaultHeight = 40;
 
     /** World **/
     public LayerMask groundLayer;
@@ -68,6 +79,9 @@ public class PlayerController : MonoBehaviour
 
     void Awake() {
         rb = GetComponent<Rigidbody>();
+        vaultingCastOffset = -1 * transform.forward;
+        maxRaycastDistance = defaultCastDistance;
+        RaycastOffset = defaultCastOffset;
     }
 
 // TODO(Leo): Adjust vaulting and sliding to feel right
@@ -75,6 +89,8 @@ public class PlayerController : MonoBehaviour
 // over the vaultable object, isVaultable turns false and the player.action state gets set equal to a different state. The change of state here is an issue because it causes the animation to
 // snap quickly instead of transition and it also swaps to the standingCollider too quickly
 
+// SOLUTION: maybe during the vaulting state, set the position of the raycast further back and maybe lower. This might work because the ray would be lower than the capsule collider and wouldn't
+// interact with it, and then when the player is over the object the ray would enter the object and no longer be able to detect it. THIS MAY NOT WORK 
 
     // Start is called before the first frame update
     void Start()
@@ -100,7 +116,9 @@ public class PlayerController : MonoBehaviour
         CheckForWall();
 
         if(debugMode)
-            textBox.text = "rayTrigger = " + rayTrigger + ". isVaultable = " + isVaultable;
+            textBox.text = "debug";
+        else
+            textBox.text = " ";
     }
 
     public void Inputs() {
@@ -199,13 +217,34 @@ public class PlayerController : MonoBehaviour
         Ray ray = new Ray(transform.position + RaycastOffset, transform.forward);
         rayTrigger = Physics.Raycast(ray, out rayHit, maxRaycastDistance);
 
-        if(rayTrigger) {
-            if(rayHit.collider.tag == "Vaultable")
-                isVaultable = true;
-            else
-                isVaultable = false;
-        }else
+        Ray backRay = new Ray(transform.position + RaycastOffset, -1 * transform.forward);
+        backRayTrigger = Physics.Raycast(backRay, out rayHitBack, maxRaycastDistance);
+
+        if(rayTrigger && rayHit.collider.tag == "Vaultable")
+            isVaultable = true;
+
+        //if isGrounded AND backRay
+        //if(player.grounded && backRayTrigger && rayHitBack.collider.tag == "Vaultable")
+        if(player.grounded || backRayTrigger && rayHitBack.collider.tag == "Vaultable")
             isVaultable = false;
+    }
+    
+    void OnDrawGizmos() {
+        if(rayTrigger) {
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(transform.position + RaycastOffset, transform.forward * rayHit.distance);
+        }else{
+            Gizmos.color = Color.blue;
+            Gizmos.DrawRay(transform.position + RaycastOffset, transform.forward * maxRaycastDistance);
+        }
+
+        if(backRayTrigger) {
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(transform.position + RaycastOffset, -1 * transform.forward * rayHitBack.distance);
+        }else{
+            Gizmos.color = Color.blue;
+            Gizmos.DrawRay(transform.position + RaycastOffset, -1 * transform.forward * maxRaycastDistance);
+        }
     }
 
     private void ApplyGravity() {
@@ -223,25 +262,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnDrawGizmos() {
-        if(debugMode) {
-            if(rayTrigger) {
-                Gizmos.color = Color.red;
-                Gizmos.DrawRay(transform.position + RaycastOffset, transform.forward * rayHit.distance);
-            }else{
-                Gizmos.color = Color.blue;
-                Gizmos.DrawRay(transform.position + RaycastOffset, transform.forward * maxRaycastDistance);
-            }
-        }
-    }
-
     public void Vault() {
         if(player.grounded)
         {
-            //jumpCheck = false;
+            jumpCheck = false;
             rb.AddForce(Vector3.up * vaultHeight);
-            // rb.AddForce(Vector3.up * vaultHeight * 1.5f);
-            // rb.AddForce(normalVector * vaultHeight * 0.5f);
+            //rb.AddForce(Vector3.up * vaultHeight * 1.5f);
+            //rb.AddForce(normalVector * vaultHeight * 0.5f);
             // rb.AddForce(transform.forward * 1000.0f);
             // transform.Translate(transform.forward);
         }
