@@ -8596,7 +8596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2630928203756506021, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
       propertyPath: vaultHeight
-      value: 40
+      value: 85
       objectReference: {fileID: 0}
     - target: {fileID: 2630928203756506021, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
       propertyPath: cameraSettings

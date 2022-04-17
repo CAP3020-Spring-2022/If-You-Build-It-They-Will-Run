@@ -1319,4 +1319,4 @@ CapsuleCollider:
   m_Radius: 0.3
   m_Height: 2
   m_Direction: 0
-  m_Center: {x: 0, y: 1.5, z: 0}
+  m_Center: {x: 0, y: 1.1, z: 0}
