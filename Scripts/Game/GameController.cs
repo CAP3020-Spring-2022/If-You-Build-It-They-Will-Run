@@ -16,6 +16,10 @@ public class GameController : MonoBehaviour {
     public GameObject drop;
 
     public GameObject buildcanvas;
+    public GameObject thirdPerson;
+    public GameObject build;
+    bool thirdPersonActive = true;
+    bool buildActive = false;
     void Start()
     {
         // menu.SetActive(false);
@@ -32,19 +36,24 @@ public class GameController : MonoBehaviour {
 
 
     public void TaskOnClick(){
-        menu.SetActive(true);
+        menu.SetActive(false);
         buildcanvas.SetActive(false);	
         stambar.SetActive(false);	
-        healthbar.SetActive(false);	
-
+        healthbar.SetActive(false);
+        drop.SetActive(true);
     }
     public void ExitOnClick(){
         Application.Quit();	
     }
 
-    // public void camOnClick(){
-    //     cameraSettings.HitButton();
-    // }
+     public void CamSwitchOnClick(){
+        drop.SetActive(false);
+        thirdPersonActive = !thirdPersonActive;
+        buildActive = !buildActive;
+        thirdPerson.SetActive(thirdPersonActive);
+        build.SetActive(buildActive);
+        menu.SetActive(true);
+     }
 
     public void ResumeOnClick(){
         menu.SetActive(false);

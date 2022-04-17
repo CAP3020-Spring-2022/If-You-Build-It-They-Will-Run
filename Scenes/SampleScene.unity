@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1743,7 +1743,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &895824695
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2835,7 +2835,7 @@ MonoBehaviour:
   buildphase: 0
   cam1: {fileID: 1472608350}
   cam2: {fileID: 963194225}
-  playerController: {fileID: 0}
+  playerController: {fileID: 1479915415}
   staminaBar: {fileID: 1666213342}
   momentumBar: {fileID: 1963897920}
   buildUI: {fileID: 672778038}
@@ -2870,6 +2870,8 @@ MonoBehaviour:
   healthbar: {fileID: 1494133764}
   drop: {fileID: 248939307}
   buildcanvas: {fileID: 1077675381}
+  thirdPerson: {fileID: 963194225}
+  build: {fileID: 1472608350}
 --- !u!1 &1353629852
 GameObject:
   m_ObjectHideFlags: 0
@@ -2986,6 +2988,8 @@ MonoBehaviour:
   healthbar: {fileID: 1494133764}
   drop: {fileID: 248939307}
   buildcanvas: {fileID: 1077675381}
+  thirdPerson: {fileID: 963194225}
+  build: {fileID: 1472608350}
 --- !u!4 &1357926581
 Transform:
   m_ObjectHideFlags: 0
@@ -8596,7 +8600,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2630928203756506021, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
       propertyPath: vaultHeight
-      value: 85
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 2630928203756506021, guid: e0e28c185cdff664c816d22f19cd770d, type: 3}
       propertyPath: cameraSettings
@@ -9115,6 +9119,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1966822592}
         m_TargetAssemblyTypeName: camswitch, Assembly-CSharp
         m_MethodName: HitButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+      - m_Target: {fileID: 1357926580}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: CamSwitchOnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

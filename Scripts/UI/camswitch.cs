@@ -18,7 +18,8 @@ public class camswitch : MonoBehaviour
 
     public void Start()
     {
-        buildphase = true;
+        buildphase = false;
+        print("Hi");
         /* Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false; */
     }
@@ -37,8 +38,8 @@ public class camswitch : MonoBehaviour
                     momentumBar.gameObject.SetActive(false);
                     playerController.gameObject.SetActive(false);
 
-                    Cursor.lockState = CursorLockMode.None;
-                    Cursor.visible = true;
+               //     Cursor.lockState = CursorLockMode.None;
+               
                     //Player.SetPositionAndRotation(new Vector3(170, 65, 0));
                 }
         else if (!buildphase) // player cam
@@ -51,10 +52,21 @@ public class camswitch : MonoBehaviour
                     momentumBar.gameObject.SetActive(true);
                     playerController.gameObject.SetActive(true);
 
-                    Cursor.lockState = CursorLockMode.Locked;
-                    Cursor.visible = false;
+                //    Cursor.lockState = CursorLockMode.Locked;
+                  
                     //Player.SetPositionAndRotation(new Vector3(170, 65, 0));
-                }        
+                }
+        Cursor.visible = true;
+      //  Cursor.visible = buildphase;
+      // // if(Cursor.visible)
+      //  {
+           // Cursor.lockState = CursorLockMode.Locked;
+      //  }
+      //  else
+      //  {
+       //     Cursor.lockState = CursorLockMode.None;
+            //Cursor.lockState = CursorLockMode.Locked;
+      //  }
         
     }
 }

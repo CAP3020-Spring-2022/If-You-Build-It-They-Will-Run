@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     Vector3 vaultingCastOffset;
     float vaultingCastDistance = 3.2f;
 
-    Vector3 defaultCastOffset = new Vector3(0, 0.5f, 0);
+    Vector3 defaultCastOffset = Vector3.zero;
     float defaultCastDistance = 2.2f;
     //Set on Awake
     float maxRaycastDistance;
@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
     bool isWallRight, isWallLeft;
 
     /** Vault **/
-    public float vaultHeight = 85;
+    public float vaultHeight = 40;
 
     /** World **/
     public LayerMask groundLayer;
@@ -139,7 +139,6 @@ public class PlayerController : MonoBehaviour
             player.ToggleSprinting();
         }
 
-// TODO: Maybe switch GetKey to GetKeyDown and change the WALK_RUN to trigger closer to hitting the ground 
         if(Input.GetKey(KeyCode.Space) && player.stamina >= 15.0f && (jumpCheck 
         || player.onWall)) {
             if(isVaultable)
@@ -223,11 +222,11 @@ public class PlayerController : MonoBehaviour
 
         if(rayTrigger && rayHit.collider.tag == "Vaultable")
             isVaultable = true;
-        else if(backRayTrigger && rayHitBack.collider.tag == "Vaultable")
-        {
-            player.action = ActionHandler.ActionType.WALK_RUN;
+
+        //if isGrounded AND backRay
+        //if(player.grounded && backRayTrigger && rayHitBack.collider.tag == "Vaultable")
+        if(player.grounded || backRayTrigger && rayHitBack.collider.tag == "Vaultable")
             isVaultable = false;
-        }        
     }
     
     void OnDrawGizmos() {
