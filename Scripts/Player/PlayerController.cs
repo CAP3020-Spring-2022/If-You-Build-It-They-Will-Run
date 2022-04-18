@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
     void Awake() {
         rb = GetComponent<Rigidbody>();
         vaultingCastOffset = -1 * transform.forward;
-        maxRaycastDistance = defaultCastDistance;
+        maxRaycastDistance = vaultingCastDistance;
         RaycastOffset = defaultCastOffset;
     }
 
@@ -183,6 +183,7 @@ public class PlayerController : MonoBehaviour
             if(player.IsFalling() || player.IsWallrunning()) {
                 player.action = ActionHandler.ActionType.WALK_RUN;
                 rb.useGravity = true;
+                isVaultable = false;
             }
         }
         
@@ -227,7 +228,7 @@ public class PlayerController : MonoBehaviour
         {
             player.action = ActionHandler.ActionType.WALK_RUN;
             isVaultable = false;
-        }        
+        }
     }
     
     void OnDrawGizmos() {
