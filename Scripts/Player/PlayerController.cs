@@ -400,18 +400,25 @@ public class PlayerController : MonoBehaviour
         switch(player.action) {
             case ActionHandler.ActionType.WALK_RUN:
                 if(normalInput == Vector2.zero) // not moving (horizontal axis)
-                    nm -= 0.001f;
+                    nm -= 0.01f;
                 else
                     if(player.IsSprinting())
-                        nm += 0.002f;
+                    {
+                        if(nm < 1.6f)
+                        nm += 0.00175f;
+                }      
                     else
-                        nm -= 0.001f;
+                        nm -= 0.015f;
                 break;
             case ActionHandler.ActionType.JUMP:
-                nm += 0.0005f;
+                if(nm < 1.6f)
+                nm += 0.015f;
                 break;
             case ActionHandler.ActionType.SLIDE:
-                // keep momentum
+                nm -= 0.0025f;
+                break;
+            case ActionHandler.ActionType.VAULT:
+                nm += 0.0075f;
                 break;
         }
 
@@ -429,18 +436,21 @@ public class PlayerController : MonoBehaviour
         switch(player.action) {
             case ActionHandler.ActionType.WALK_RUN:
                 if(normalInput == Vector2.zero) // not moving (horizontal axis)
-                    ns += 0.5f;
+                    ns += 2.5f;
                 else
                     if(player.IsSprinting())
-                        ns -= 0.02f;
+                        ns -= 0.05f;
                     else
-                        ns += 0.02f;
+                        ns += 0.15f;
                 break;
             case ActionHandler.ActionType.JUMP:
-                ns -= 0.00001f;
+                ns -= 0.7f;
                 break;
             case ActionHandler.ActionType.SLIDE:
-                ns += 0.5f;
+                ns += 0.4f;
+                break;
+            case ActionHandler.ActionType.VAULT:
+                ns -= 0.325f;
                 break;
         }
 
