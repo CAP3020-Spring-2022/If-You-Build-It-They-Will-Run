@@ -69,6 +69,10 @@ namespace PlayerData {
 			return this.action == ActionHandler.ActionType.VAULT;
 		}
 
+		public bool IsRolling() {
+			return this.action == ActionHandler.ActionType.ROLL;
+		}
+
 		public void SetJumping(bool flag) {
 			if(flag && grounded) {
 				action = ActionHandler.ActionType.JUMP;
@@ -96,6 +100,12 @@ namespace PlayerData {
 		public void SetVaulting(bool flag) {
 			if(flag) {
 				action = ActionHandler.ActionType.VAULT;
+			}
+		}
+
+		public void SetRolling(bool flag) {
+			if(flag) {
+				action = ActionHandler.ActionType.ROLL;
 			}
 		}
     }

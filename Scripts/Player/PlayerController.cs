@@ -12,21 +12,18 @@ public class PlayerController : MonoBehaviour
     public bool debugMode = true;
 
     /** Raycast **/
-    bool isVaultable = false;
     RaycastHit rayHit;
-    RaycastHit rayHitBack;
     bool rayTrigger = false;
-    bool backRayTrigger = false;
-    //Set on Awake
-    Vector3 vaultingCastOffset;
-    float vaultingCastDistance = 3.2f;
 
-    Vector3 defaultCastOffset = new Vector3(0, 0.5f, 0);
-    float defaultCastDistance = 2.2f;
-    //Set on Awake
-    float maxRaycastDistance;
-    //Set on Awake
-    Vector3 RaycastOffset;
+    RaycastHit rayHitBack;
+    bool backRayTrigger = false;
+
+    RaycastHit rayHitDown;
+    bool downRayTrigger = false;
+
+    float maxRaycastDistance = 3.2f;
+    float downRaycastDistance = 5f;
+    Vector3 RaycastOffset = new Vector3(0, 0.5f, 0);
 
 
     /** Camera **/
@@ -71,7 +68,12 @@ public class PlayerController : MonoBehaviour
     bool isWallRight, isWallLeft;
 
     /** Vault **/
-    public float vaultHeight = 85;
+    bool isVaultable = false;
+    float vaultHeight = 85;
+
+    /** Roll **/
+    bool isRollable = false;
+
 
     /** World **/
     public LayerMask groundLayer;
@@ -79,18 +81,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake() {
         rb = GetComponent<Rigidbody>();
-        vaultingCastOffset = -1 * transform.forward;
-        maxRaycastDistance = vaultingCastDistance;
-        RaycastOffset = defaultCastOffset;
     }
-
-// TODO(Leo): Adjust vaulting and sliding to feel right
-// PROBLEM WITH VAULT: As soon as the isVaultable Raycast no longer detects a vaulatble object in front of the player, ie. in the middle of the animation when the ray is passing through or
-// over the vaultable object, isVaultable turns false and the player.action state gets set equal to a different state. The change of state here is an issue because it causes the animation to
-// snap quickly instead of transition and it also swaps to the standingCollider too quickly
-
-// SOLUTION: maybe during the vaulting state, set the position of the raycast further back and maybe lower. This might work because the ray would be lower than the capsule collider and wouldn't
-// interact with it, and then when the player is over the object the ray would enter the object and no longer be able to detect it. THIS MAY NOT WORK 
 
     // Start is called before the first frame update
     void Start()
@@ -116,7 +107,7 @@ public class PlayerController : MonoBehaviour
         CheckForWall();
 
         if(debugMode)
-            textBox.text = "debug";
+            textBox.text = "downRayTrigger = " + downRayTrigger + " isRollable = " + isRollable;
         else
             textBox.text = " ";
     }
@@ -134,22 +125,26 @@ public class PlayerController : MonoBehaviour
         }
 
         VaultCheck();
+        RollCheck();
 
         if(Input.GetKeyDown(KeyCode.LeftShift)) {
             player.ToggleSprinting();
         }
 
 // TODO: Maybe switch GetKey to GetKeyDown and change the WALK_RUN to trigger closer to hitting the ground 
-        if(Input.GetKey(KeyCode.Space) && player.stamina >= 15.0f && (jumpCheck 
-        || player.onWall)) {
+        if(Input.GetKey(KeyCode.Space) && player.stamina >= 15.0f && (jumpCheck || player.onWall)) {
             if(isVaultable)
                 player.SetVaulting(true);
             else
                 player.SetJumping(true);
         }
 
-        if(Input.GetKeyDown(KeyCode.LeftControl) && player.momentum >= 0.1f && player.grounded) {
-            player.SetSliding(true);
+//TODO: MAKE THESE TWO IF's, ONE IS KEYDOWN OTHER IS KEY
+        if(Input.GetKeyDown(KeyCode.LeftControl) && player.momentum >= 0.1f) {
+            if(player.grounded)
+                player.SetSliding(true);
+            else if(isRollable)
+            player.SetRolling(true);
         }
 
         if(Input.GetKeyDown(KeyCode.Mouse1) && player.onWall) {
@@ -180,10 +175,11 @@ public class PlayerController : MonoBehaviour
         // reset things if grounded
         if(player.grounded) {
             jumpCheck = true;
-            if(player.IsFalling() || player.IsWallrunning()) {
+            isVaultable = false;
+            //isRollable = false;
+            if(player.IsFalling() || player.IsWallrunning() || player.IsRolling()) {
                 player.action = ActionHandler.ActionType.WALK_RUN;
                 rb.useGravity = true;
-                isVaultable = false;
             }
         }
         
@@ -213,6 +209,9 @@ public class PlayerController : MonoBehaviour
         if(player.IsVaulting()) {
             Vault();
         }
+        if(player.IsRolling()) {
+            Roll();
+        }
     }
 
     private void VaultCheck() {
@@ -229,6 +228,18 @@ public class PlayerController : MonoBehaviour
             player.action = ActionHandler.ActionType.WALK_RUN;
             isVaultable = false;
         }
+    }
+
+    private void RollCheck()
+    {
+        Ray downRay = new Ray(transform.position + RaycastOffset, -2 * RaycastOffset);
+        downRayTrigger = Physics.Raycast(downRay, out rayHitDown, downRaycastDistance);
+
+//YOU CAN'T EXCLUDE ISGROUNDED FROM THE CONDITION BECAUSE IF NOT THE ANIMATION WON'T TRANSITION PROPERLY
+        if(downRayTrigger && rayHitDown.transform.gameObject.layer == 8 && Input.GetKey(KeyCode.LeftControl))
+            isRollable = true;
+        else
+            isRollable = false;
     }
     
     void OnDrawGizmos() {
@@ -247,6 +258,15 @@ public class PlayerController : MonoBehaviour
             Gizmos.color = Color.blue;
             Gizmos.DrawRay(transform.position + RaycastOffset, -1 * transform.forward * maxRaycastDistance);
         }
+
+        if(downRayTrigger)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(transform.position + RaycastOffset, -2 * RaycastOffset * rayHitDown.distance);
+        }else{
+            Gizmos.color = Color.blue;
+            Gizmos.DrawRay(transform.position + RaycastOffset, -2 * RaycastOffset * downRaycastDistance);
+        }
     }
 
     private void ApplyGravity() {
@@ -259,7 +279,8 @@ public class PlayerController : MonoBehaviour
         if(rb.velocity.y >= -1.1f 
           && !player.grounded 
           && !player.IsFalling() 
-          && !player.IsWallrunning()) {
+          && !player.IsWallrunning()
+          && !player.IsRolling()) {
             player.SetFalling(true);
         }
     }
@@ -269,11 +290,12 @@ public class PlayerController : MonoBehaviour
         {
             jumpCheck = false;
             rb.AddForce(Vector3.up * vaultHeight);
-            //rb.AddForce(Vector3.up * vaultHeight * 1.5f);
-            //rb.AddForce(normalVector * vaultHeight * 0.5f);
-            // rb.AddForce(transform.forward * 1000.0f);
-            // transform.Translate(transform.forward);
         }
+    }
+
+    public void Roll() {
+        //stamina boost
+        //momentum lost
     }
     
     void Jump()

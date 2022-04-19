@@ -27,7 +27,8 @@ namespace PlayerData {
             FALLING,
             SLIDE,
             WALLRUN,
-            VAULT
+            VAULT,
+            ROLL
         }
 
         void Start() {
@@ -57,6 +58,7 @@ namespace PlayerData {
                     animator.SetBool("wallrunning", false);
                     animator.SetBool("falling", false);
                     animator.SetBool("vaulting", false);
+                    animator.SetBool("rolling", false);
 
                     standingCollider.enabled = true;
                     slidingCollider.enabled = false;
@@ -72,6 +74,7 @@ namespace PlayerData {
                     animator.SetBool("wallrunning", false);
                     animator.SetBool("falling", false);
                     animator.SetBool("vaulting", false);
+                    animator.SetBool("rolling", false);
 
                     standingCollider.enabled = true;
                     slidingCollider.enabled = false;
@@ -86,6 +89,7 @@ namespace PlayerData {
                     animator.SetBool("wallrunning", false);
                     animator.SetBool("sliding", false);
                     animator.SetBool("vaulting", false);
+                    animator.SetBool("rolling", false);
 
                     standingCollider.enabled = true;
                     slidingCollider.enabled = false;
@@ -100,6 +104,7 @@ namespace PlayerData {
                     animator.SetBool("jumping", false);
                     animator.SetBool("falling", false);
                     animator.SetBool("vaulting", false);
+                    animator.SetBool("rolling", false);
 
                     // No longer needed, figured out animator
                     if(slideTime >= totalSlideTime) {
@@ -123,6 +128,7 @@ namespace PlayerData {
                     animator.SetBool("falling", false);
                     animator.SetBool("sliding", false);
                     animator.SetBool("vaulting", false);
+                    animator.SetBool("rolling", false);
 
                     standingCollider.enabled = true;
                     slidingCollider.enabled = false;
@@ -138,6 +144,7 @@ namespace PlayerData {
                     animator.SetBool("jumping", false);
                     animator.SetBool("falling", false);
                     animator.SetBool("sliding", false);
+                    animator.SetBool("rolling", false);
 
                     standingCollider.enabled = false;
                     slidingCollider.enabled = false;
@@ -148,6 +155,21 @@ namespace PlayerData {
                         vaultTime = 0.0f;
                         player.action = ActionType.WALK_RUN;
                     }
+                    break;
+
+                case ActionType.ROLL:
+
+                    animator.SetBool("vaulting", false);
+                    animator.SetBool("wallrunning", false);
+                    animator.SetBool("jumping", false);
+                    animator.SetBool("falling", false);
+                    animator.SetBool("sliding", false);
+                    animator.SetBool("rolling", true);
+
+                    standingCollider.enabled = true;
+                    slidingCollider.enabled = false;
+                    vaultingCollider.enabled = false;
+
                     break;
 
 
