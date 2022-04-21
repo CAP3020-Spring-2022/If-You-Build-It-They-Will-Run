@@ -70,7 +70,7 @@ namespace PlayerData {
 		}
 
 		public void SetJumping(bool flag) {
-			if(flag && grounded) {
+			if(flag && (grounded || IsWallrunning())) {
 				action = ActionHandler.ActionType.JUMP;
 			}
 		}
