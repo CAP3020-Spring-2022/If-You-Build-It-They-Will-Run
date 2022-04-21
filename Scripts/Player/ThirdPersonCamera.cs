@@ -31,11 +31,15 @@ public class ThirdPersonCamera : MonoBehaviour
         pitch = Mathf.Clamp(pitch, pitchMinMax.x, pitchMinMax.y);
 
         if(Input.mouseScrollDelta.y > 0.0f)
+        {
             dstFromTarget++;
+        }
         else if(Input.mouseScrollDelta.y < 0.0f)
+        {
             dstFromTarget--;
+        }
 
-        Mathf.Clamp(dstFromTarget, 5.0f, 10.0f);
+        dstFromTarget = Mathf.Clamp(dstFromTarget, 5.0f, 10.0f);
 
         currentRotation = Vector3.SmoothDamp(currentRotation, new Vector3(pitch, yaw), ref rotationSmoothVelocity, rotationSmoothTime);
         transform.eulerAngles = currentRotation;

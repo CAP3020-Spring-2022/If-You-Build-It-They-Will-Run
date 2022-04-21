@@ -14,43 +14,50 @@ public class GameController : MonoBehaviour {
     public GameObject healthbar;
     
     public GameObject drop;
+    bool buildCanvasActive = false;
 
     public GameObject buildcanvas;
     void Start()
     {
+ 
+        buildcanvas.SetActive(false);
         // menu.SetActive(false);
     }
 	public void Update () {
         if (Input.GetKey("escape")){
             Application.Quit();}
             
-        /* if (drop.activeSelf){
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        } */ // TODO: Broken
+       if (drop.activeSelf){
+           Cursor.lockState = CursorLockMode.None;
+           Cursor.visible = true;
+            }
 	}
 
 
     public void TaskOnClick(){
         menu.SetActive(true);
-        buildcanvas.SetActive(false);	
-        stambar.SetActive(false);	
-        healthbar.SetActive(false);	
+       // buildcanvas.SetActive(false);	
+      //  stambar.SetActive(false);	
+       // healthbar.SetActive(false);	
 
     }
     public void ExitOnClick(){
         Application.Quit();	
     }
 
-    // public void camOnClick(){
-    //     cameraSettings.HitButton();
-    // }
+     public void camOnClick(){
+        buildCanvasActive = !buildCanvasActive;
+        buildcanvas.SetActive(buildCanvasActive); 
+        stambar.SetActive(true);
+        healthbar.SetActive(true);
+    }
 
     public void ResumeOnClick(){
-        menu.SetActive(false);
-        buildcanvas.SetActive(true);
-        stambar.SetActive(true);	
-        healthbar.SetActive(true);		
+        // menu.SetActive(false);
+        drop.SetActive(false);
+        buildcanvas.SetActive(buildCanvasActive);
+        stambar.SetActive(!buildCanvasActive);	
+        healthbar.SetActive(!buildCanvasActive);		
 
     }
 }

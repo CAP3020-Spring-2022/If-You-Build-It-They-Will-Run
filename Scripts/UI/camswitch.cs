@@ -18,7 +18,7 @@ public class camswitch : MonoBehaviour
 
     public void Start()
     {
-        buildphase = true;
+        buildphase = false;
         /* Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false; */
     }
@@ -44,11 +44,11 @@ public class camswitch : MonoBehaviour
         else if (!buildphase) // player cam
                 {
                     cam1.SetActive(false);
-                    buildUI.gameObject.SetActive(false);
+                   buildUI.gameObject.SetActive(false);
                     
                     cam2.SetActive(true);
                     staminaBar.gameObject.SetActive(true);
-                    momentumBar.gameObject.SetActive(true);
+                   momentumBar.gameObject.SetActive(true);
                     playerController.gameObject.SetActive(true);
 
                     Cursor.lockState = CursorLockMode.Locked;
