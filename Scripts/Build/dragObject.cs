@@ -91,7 +91,7 @@ public class dragObject : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.R) && canRotate)
         {
-            this.gameObject.transform.Rotate(0, 0, 90);
+            this.gameObject.transform.Rotate(0, 90, 0);
             canRotate = false;
         }
         else if (!keyedMove)

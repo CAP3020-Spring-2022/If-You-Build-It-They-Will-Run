@@ -27,7 +27,6 @@ public class camswitch : MonoBehaviour
     public void HitButton()
     {
         buildphase = !buildphase;
-        print("Cam2");
         if (buildphase) // build cam
                 {
                     cam1.SetActive(true);

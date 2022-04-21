@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4876933053422263863}
   - component: {fileID: -7918335002988649766}
   - component: {fileID: 6810617627222560596}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,8 +203,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5601857277592714878}
   - component: {fileID: 8295787077581458017}
-  - component: {fileID: -1667423182403313951}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Slide-Island
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +217,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6348114459673584522}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7, y: 0.4, z: 0.5}
   m_Children:
@@ -226,7 +225,7 @@ Transform:
   - {fileID: -4292154010595695564}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!64 &8295787077581458017
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -240,18 +239,4 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 289301614986012343, guid: 788e228cc3ec7974087c8b0355e80c95, type: 3}
---- !u!64 &-1667423182403313951
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6348114459673584522}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -462981019419857548, guid: 788e228cc3ec7974087c8b0355e80c95, type: 3}
+  m_Mesh: {fileID: 0}

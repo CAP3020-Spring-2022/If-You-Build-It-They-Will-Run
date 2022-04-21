@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour {
     public GameObject buildcanvas;
     void Start()
     {
+ 
         buildcanvas.SetActive(false);
         // menu.SetActive(false);
     }
@@ -27,7 +28,7 @@ public class GameController : MonoBehaviour {
             Application.Quit();}
             
        if (drop.activeSelf){
-            Cursor.lockState = CursorLockMode.None;
+           Cursor.lockState = CursorLockMode.None;
            Cursor.visible = true;
             }
 	}
@@ -45,7 +46,6 @@ public class GameController : MonoBehaviour {
     }
 
      public void camOnClick(){
-        print("Cam");
         buildCanvasActive = !buildCanvasActive;
         buildcanvas.SetActive(buildCanvasActive); 
         stambar.SetActive(true);
@@ -53,12 +53,11 @@ public class GameController : MonoBehaviour {
     }
 
     public void ResumeOnClick(){
-        print("Clicked");
         // menu.SetActive(false);
         drop.SetActive(false);
         buildcanvas.SetActive(buildCanvasActive);
-        stambar.SetActive(true);	
-        healthbar.SetActive(true);		
+        stambar.SetActive(!buildCanvasActive);	
+        healthbar.SetActive(!buildCanvasActive);		
 
     }
 }
