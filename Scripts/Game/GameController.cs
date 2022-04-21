@@ -55,9 +55,9 @@ public class GameController : MonoBehaviour {
     public void ResumeOnClick(){
         // menu.SetActive(false);
         drop.SetActive(false);
-        buildcanvas.SetActive(buildCanvasActive);
-        stambar.SetActive(!buildCanvasActive);	
-        healthbar.SetActive(!buildCanvasActive);		
+        //buildcanvas.SetActive(buildCanvasActive);
+      //  stambar.SetActive(!buildCanvasActive);	
+        //healthbar.SetActive(!buildCanvasActive);		
 
     }
 }
