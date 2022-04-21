@@ -35,12 +35,16 @@ public class LevelGeneration : MonoBehaviour
 				Instantiate(objects[i], new Vector3(positionsX[i], platformHeight - 12f, positionsZ[i]), Quaternion.Euler(0, 0, 0));
 			else if(objects[i].name == "Wall-Run")
 				Instantiate(objects[i], new Vector3(positionsX[i], platformHeight, positionsZ[i]), Quaternion.Euler(0, 90, 0));
+			else if(objects[i].name == "WallRun-Island")
+				Instantiate(objects[i], new Vector3(positionsX[i], platformHeight - 3f, positionsZ[i]), Quaternion.Euler(0, 90, 0));
 			else if(objects[i].name == "Slide-Obstacle")
 				Instantiate(objects[i], new Vector3(positionsX[i], platformHeight - 5f, positionsZ[i]), Quaternion.Euler(0, 90, 0));
 			else if(objects[i].name == "Slide-Island")
 				Instantiate(objects[i], new Vector3(positionsX[i], platformHeight - 2f, positionsZ[i]), Quaternion.Euler(0, 90, 0));
+			else if(objects[i].name == "Vault-Island")
+				Instantiate(objects[i], new Vector3(positionsX[i], platformHeight - 2f, positionsZ[i]), Quaternion.Euler(0, 90, 0));
 			else if(objects[i].name == "Ramp-Island")
-				Instantiate(objects[i], new Vector3(positionsX[i], platformHeight - 2f, positionsZ[i]), Quaternion.Euler(-90, -90, 0));
+				Instantiate(objects[i], new Vector3(positionsX[i], platformHeight - 2f, positionsZ[i]), Quaternion.Euler(0, -90, 0));
 			else if(objects[i].name == "Long-Island")
 				Instantiate(objects[i], new Vector3(positionsX[i], platformHeight - 2f, positionsZ[i]), Quaternion.Euler(-90, -90, 0));
 		}
