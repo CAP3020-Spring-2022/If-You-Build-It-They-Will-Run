@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour
         
 
 // TODO: Maybe switch GetKey to GetKeyDown and change the WALK_RUN to trigger closer to hitting the ground 
-        if(Input.GetKey(KeyCode.Space) && player.stamina >= 15.0f && (jumpCheck || player.onWall)) {
+        if(Input.GetKey(KeyCode.Space) && player.stamina >= 15.0f && jumpCheck) {
             if(isVaultable)
                 player.SetVaulting(true);
             else
@@ -155,6 +155,16 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Mouse1) && player.onWall) {
             player.SetWallrunning(true);
+        }else{
+            player.SetWallrunning(false);
+        }
+
+        // TODO: Maybe switch GetKey to GetKeyDown and change the WALK_RUN to trigger closer to hitting the ground 
+        if(Input.GetKey(KeyCode.Space) && player.stamina >= 15.0f && jumpCheck) {
+            if(isVaultable && !player.IsWallrunning())
+                player.SetVaulting(true);
+            else
+                player.SetJumping(true);
         }
 
         if(Input.GetKey(KeyCode.L)) {
@@ -182,7 +192,6 @@ public class PlayerController : MonoBehaviour
         if(player.grounded) {
             jumpCheck = true;
             isVaultable = false;
-            //isRollable = false;
             if(player.IsFalling() || player.IsWallrunning()) {
                 player.action = ActionHandler.ActionType.WALK_RUN;
                 rb.useGravity = true;
@@ -190,7 +199,7 @@ public class PlayerController : MonoBehaviour
         }
         
         // set velocity of rigidbody
-        player.velocity = transform.TransformDirection(normalInput) * player.speed;
+        player.velocity = transform.TransformDirection(normalInput) * player.speed + rb.velocity;
         Vector3 vel = new Vector3(0, rb.velocity.y, 0);
         rb.velocity = vel + transform.forward * player.speed;
     }
@@ -310,9 +319,18 @@ public class PlayerController : MonoBehaviour
             jumpCheck = false;
             rb.AddForce(Vector3.up * jumpHeight * 1.5f);
             rb.AddForce(normalVector * jumpHeight * 0.5f);
-        }else if(player.onWall) {
-            rb.AddForce(Vector3.up * jumpHeight * 0.5f);
-            rb.AddForce(normalVector * jumpHeight * 1.5f);
+        }else if(player.onWall && !player.grounded) {
+            StopWallrun();
+            if(!player.grounded && jumpCheck) {
+                jumpCheck = false;
+                if(isWallRight) {
+                    rb.AddForce(-(transform.right * wallrunForce / 10 * Time.deltaTime) * 100.0f);
+                }else{
+                    rb.AddForce((transform.right * wallrunForce / 10 * Time.deltaTime) * 100.0f);
+                }
+                rb.AddForce(Vector3.up * jumpHeight * 3.0f);
+                rb.AddForce(normalVector * jumpHeight * 2.0f);
+            }
         }
     }
 
@@ -329,6 +347,7 @@ public class PlayerController : MonoBehaviour
     void Wallrun() {
         rb.AddForce(new Vector3(0.0f, 1.0f, 0.0f));
         rb.useGravity = false;
+        jumpCheck = true;
         // player.action = ActionHandler.ActionType.WALLRUN;
          // Debug.Log("Happens");
         
@@ -342,7 +361,7 @@ public class PlayerController : MonoBehaviour
                 rb.AddForce(-transform.right * wallrunForce / 10 * Time.deltaTime);
         // }
 
-        if(rb.velocity.x == 0.0f && rb.velocity.z == 0.0f)
+        if(input.x == 0.0f && input.z == 0.0f)
             StopWallrun();
     }
 
