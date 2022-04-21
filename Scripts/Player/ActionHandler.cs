@@ -167,6 +167,7 @@ namespace PlayerData {
                     slideTime = 0.0f;
                     vaultTime = 0f;
 
+// TODO: FIGURE OUT HOW TO PROPERLY IMPLEMENT THE ANIMATION TIMER
                     animator.SetFloat("rollTime", rollTime += 0.05f);
                     animator.SetBool("vaulting", false);
                     animator.SetBool("wallrunning", false);
