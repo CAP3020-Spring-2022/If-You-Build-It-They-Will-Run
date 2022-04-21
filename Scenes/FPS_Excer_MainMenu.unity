@@ -148,7 +148,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 267049773}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e548210cb66f44e30b5d4f5443a00a1e, type: 3}
   m_Name: 
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a59b596357a49b081332ded50db5c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToLoad: 1
+  levelToLoad: 7
 --- !u!4 &267049776
 Transform:
   m_ObjectHideFlags: 0
@@ -448,7 +448,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 391442487}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e548210cb66f44e30b5d4f5443a00a1e, type: 3}
   m_Name: 
@@ -537,7 +537,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 525914326}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e548210cb66f44e30b5d4f5443a00a1e, type: 3}
   m_Name: 
@@ -770,8 +770,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 525914327}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 966390377}
+        m_TargetAssemblyTypeName: LoadLevelScript, Assembly-CSharp
         m_MethodName: ApplicationLoadLevel
         m_Mode: 1
         m_Arguments:
@@ -845,7 +845,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 934290654}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e548210cb66f44e30b5d4f5443a00a1e, type: 3}
   m_Name: 
@@ -907,7 +907,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 966390375}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e548210cb66f44e30b5d4f5443a00a1e, type: 3}
   m_Name: 
@@ -929,7 +929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a59b596357a49b081332ded50db5c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToLoad: 1
+  levelToLoad: 10
 --- !u!4 &966390378
 Transform:
   m_ObjectHideFlags: 0
@@ -1158,8 +1158,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 525914327}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 267049775}
+        m_TargetAssemblyTypeName: LoadLevelScript, Assembly-CSharp
         m_MethodName: ApplicationLoadLevel
         m_Mode: 1
         m_Arguments:
