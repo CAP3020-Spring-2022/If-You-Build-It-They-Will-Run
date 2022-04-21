@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6183538799262138535}
   - component: {fileID: -5754084199372789682}
   - component: {fileID: -7511558181221131132}
-  - component: {fileID: 4814181207303870089}
+  - component: {fileID: 761121798548700629}
   m_Layer: 8
   m_Name: Ramp-Island
   m_TagString: Untagged
@@ -26,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3840086890845232460}
-  m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
+  m_LocalRotation: {x: -0.00000008146035, y: 0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 250, y: 341.51038, z: 250}
+  m_LocalScale: {x: 1.8043472, y: 1.8043472, z: 3.4151037}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &-5754084199372789682
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3840086890845232460}
-  m_Mesh: {fileID: 289301614986012343, guid: 7c8adbf1b8cb7e94b984e9c3a482b2fd, type: 3}
+  m_Mesh: {fileID: 289301614986012343, guid: 884bed80f12febf4081f6f0f3b2d22b1, type: 3}
 --- !u!23 &-7511558181221131132
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -60,7 +60,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: -3846018093981099296, guid: 884bed80f12febf4081f6f0f3b2d22b1, type: 3}
+  - {fileID: -6478536213147159724, guid: 884bed80f12febf4081f6f0f3b2d22b1, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82,7 +83,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4814181207303870089
+--- !u!64 &761121798548700629
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,4 +96,4 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 289301614986012343, guid: 7c8adbf1b8cb7e94b984e9c3a482b2fd, type: 3}
+  m_Mesh: {fileID: 289301614986012343, guid: 884bed80f12febf4081f6f0f3b2d22b1, type: 3}
