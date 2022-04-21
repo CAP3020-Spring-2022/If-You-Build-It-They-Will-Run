@@ -31,6 +31,8 @@ public class LevelGeneration : MonoBehaviour
 				Instantiate(objects[i], new Vector3(positionsX[i], platformHeight - 5f, positionsZ[i]), Quaternion.Euler(-90, 0, 90));
 			else if(objects[i].name == "Skull-Pillar")
 				Instantiate(objects[i], new Vector3(positionsX[i], platformHeight - 50f, positionsZ[i]), Quaternion.Euler(-90, 0, 90));
+			else if(objects[i].name == "Tree Pillar")
+				Instantiate(objects[i], new Vector3(positionsX[i], platformHeight - 12f, positionsZ[i]), Quaternion.Euler(0, 0, 0));
 			else if(objects[i].name == "Wall-Run")
 				Instantiate(objects[i], new Vector3(positionsX[i], platformHeight, positionsZ[i]), Quaternion.Euler(0, 90, 0));
 			else if(objects[i].name == "Slide-Obstacle")
