@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     bool downRayTrigger = false;
 
     float maxRaycastDistance = 3.2f;
-    float downRaycastDistance = 5f;
+    float downRaycastDistance = 3f;
     Vector3 RaycastOffset = new Vector3(0, 0.5f, 0);
 
 
@@ -41,13 +41,15 @@ public class PlayerController : MonoBehaviour
     Vector3 input;
     Vector2 normalInput; // normalized x and z movement
 
-    float maxSlopeAngle = 35f;
+    float maxSlopeAngle = 45f;
     float speedSmoothTime = .1f;
     float speedSmoothVelocity;
 
     float walkSpeed = 2f;
     float runSpeed = 5f;
     float gravity = 10f; // now positive because Vector3.down
+
+    float momentumMin = 0.01f;
 
     /** Jump **/
     bool jumpCheck = true;
@@ -56,7 +58,7 @@ public class PlayerController : MonoBehaviour
     float turnSmoothVelocity;
 
     [Range(0,1)]
-    public float airControlPercent;
+    public float airControlPercent = .125f;
 
     /** Slide **/
     float slideForce = 30f;
@@ -120,6 +122,10 @@ public class PlayerController : MonoBehaviour
 
         if(normalInput != Vector2.zero && !player.IsWallrunning()) // change direction of player depending on rotation of camera
         {
+            if(player.action == ActionHandler.ActionType.SLIDE || player.action == ActionHandler.ActionType.VAULT || player.action == ActionHandler.ActionType.ROLL)
+                turnSmoothTime = .5f;
+            else
+                turnSmoothTime = .1f;
             float targetRotation = Mathf.Atan2(normalInput.x, normalInput.y) * Mathf.Rad2Deg + cameraT.eulerAngles.y;
             transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, GetModifiedSmoothTime(turnSmoothTime));
         }
@@ -127,9 +133,11 @@ public class PlayerController : MonoBehaviour
         VaultCheck();
         RollCheck();
 
-        if(Input.GetKeyDown(KeyCode.LeftShift)) {
+        if(Input.GetKeyDown(KeyCode.LeftShift))
             player.ToggleSprinting();
-        }
+        if(player.stamina < 15f)
+            player.SetSprinting(false);
+        
 
 // TODO: Maybe switch GetKey to GetKeyDown and change the WALK_RUN to trigger closer to hitting the ground 
         if(Input.GetKey(KeyCode.Space) && player.stamina >= 15.0f && (jumpCheck || player.onWall)) {
@@ -140,12 +148,10 @@ public class PlayerController : MonoBehaviour
         }
 
 //TODO: MAKE THESE TWO IF's, ONE IS KEYDOWN OTHER IS KEY
-        if(Input.GetKeyDown(KeyCode.LeftControl) && player.momentum >= 0.1f) {
-            if(player.grounded)
-                player.SetSliding(true);
-            else if(isRollable)
+        if(Input.GetKeyDown(KeyCode.LeftControl) && player.momentum >= momentumMin && player.grounded && player.action != ActionHandler.ActionType.ROLL)
+            player.SetSliding(true);
+        else if(Input.GetKeyDown(KeyCode.LeftControl) && player.momentum >= momentumMin && isRollable && player.action != ActionHandler.ActionType.SLIDE)
             player.SetRolling(true);
-        }
 
         if(Input.GetKeyDown(KeyCode.Mouse1) && player.onWall) {
             player.SetWallrunning(true);
@@ -177,7 +183,7 @@ public class PlayerController : MonoBehaviour
             jumpCheck = true;
             isVaultable = false;
             //isRollable = false;
-            if(player.IsFalling() || player.IsWallrunning() || player.IsRolling()) {
+            if(player.IsFalling() || player.IsWallrunning()) {
                 player.action = ActionHandler.ActionType.WALK_RUN;
                 rb.useGravity = true;
             }
@@ -236,7 +242,7 @@ public class PlayerController : MonoBehaviour
         downRayTrigger = Physics.Raycast(downRay, out rayHitDown, downRaycastDistance);
 
 //YOU CAN'T EXCLUDE ISGROUNDED FROM THE CONDITION BECAUSE IF NOT THE ANIMATION WON'T TRANSITION PROPERLY
-        if(downRayTrigger && rayHitDown.transform.gameObject.layer == 8 && Input.GetKey(KeyCode.LeftControl))
+        if(downRayTrigger && rayHitDown.transform.gameObject.layer == 8 && rayHitDown.distance <= downRaycastDistance)
             isRollable = true;
         else
             isRollable = false;
