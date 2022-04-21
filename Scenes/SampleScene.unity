@@ -9593,11 +9593,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e548210cb66f44e30b5d4f5443a00a1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: {fileID: 0}
-  stambar: {fileID: 0}
-  healthbar: {fileID: 0}
-  drop: {fileID: 0}
-  buildcanvas: {fileID: 0}
+  menu: {fileID: 1954507326}
+  stambar: {fileID: 764728332}
+  healthbar: {fileID: 284930668}
+  drop: {fileID: 1333921946}
+  buildcanvas: {fileID: 84139231}
 --- !u!114 &2032365138
 MonoBehaviour:
   m_ObjectHideFlags: 0
