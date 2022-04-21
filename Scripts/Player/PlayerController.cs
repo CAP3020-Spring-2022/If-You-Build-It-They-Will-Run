@@ -107,11 +107,12 @@ public class PlayerController : MonoBehaviour
     {
         Inputs();
         CheckForWall();
-
+/*
         if(debugMode)
             textBox.text = "downRayTrigger = " + downRayTrigger + " isRollable = " + isRollable;
         else
             textBox.text = " ";
+            */
     }
 
     public void Inputs() {

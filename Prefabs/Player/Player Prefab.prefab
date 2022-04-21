@@ -1229,7 +1229,7 @@ Animator:
   m_GameObject: {fileID: 9130636744443246622}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 3fc3a312417442c4fae6617db1f8405e, type: 3}
-  m_Controller: {fileID: 9100000, guid: ade8b48a8c6803244b15cd8529dda2e3, type: 2}
+  m_Controller: {fileID: 9100000, guid: 47584bb827783ba46967d22fccc45bcf, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1254,7 +1254,6 @@ MonoBehaviour:
   debugMode: 1
   cameraSettings: {fileID: 0}
   airControlPercent: 0
-  vaultHeight: 85
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -1273,11 +1272,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dfa5b4466790b249b0899a7769fc649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalSlideTime: 2
-  totalVaultTime: 7
-  standingCollider: {fileID: 0}
-  slidingCollider: {fileID: 0}
-  vaultingCollider: {fileID: 0}
+  standingCollider: {fileID: 7460853404639127177}
+  slidingCollider: {fileID: 1531301616344105209}
+  vaultingCollider: {fileID: 5367050194124999755}
 --- !u!136 &7460853404639127177
 CapsuleCollider:
   m_ObjectHideFlags: 0
